@@ -57,3 +57,72 @@
 .project-item a:hover {
   text-decoration: underline;
 }
+
+
+
+/* AboutMe.css */
+
+.about-me {
+  padding: 2rem;
+  background-color: #e0f7fa;
+}
+
+.about-me-container {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.about-me-container h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  color: #00796b;
+}
+
+.about-me-container p {
+  font-size: 1.2rem;
+  color: #004d40;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+/* Skills.css */
+
+.skills {
+  padding: 2rem;
+  background-color: #f0f4c3;
+}
+
+.skills-container {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.skills-container h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  color: #827717;
+}
+
+.skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.skill-item {
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-size: 1.1rem;
+  color: #33691e;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.skill-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}

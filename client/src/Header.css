@@ -1,0 +1,33 @@
+/* Header.css */
+
+.header {
+    padding: 1rem;
+    background-color: #004d40;
+    color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .header ul {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+  }
+  
+  .header ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+  }
+  
+  .header ul li a:hover {
+    color: #80cbc4;
+  }
