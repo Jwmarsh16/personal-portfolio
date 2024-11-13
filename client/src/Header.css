@@ -1,33 +1,40 @@
 /* Header.css */
 
 .header {
-    padding: 1rem;
-    background-color: #004d40;
-    color: #ffffff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .header nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  
-  .header ul {
-    list-style: none;
-    display: flex;
-    gap: 1.5rem;
-  }
-  
-  .header ul li a {
-    color: #ffffff;
-    text-decoration: none;
-    font-weight: bold;
-    transition: color 0.3s ease;
-  }
-  
-  .header ul li a:hover {
-    color: #80cbc4;
-  }
+  padding: 1rem;
+  background-color: #00695c;
+  color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.header nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header ul {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+}
+
+.header ul li {
+  font-size: 1.2rem;
+}
+
+.header ul li a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.header ul li a:hover {
+  background-color: #004d40;
+  color: #e0f2f1;
+}
