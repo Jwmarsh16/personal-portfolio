@@ -3,14 +3,24 @@ import '../Skills.css';
 
 function Skills() {
   const skills = [
+    'Python',
     'JavaScript',
+    'Node.js',
+    'Flask',
     'React',
+    'Vite',
+    'Flask-JWT-Extended',
+    'SQLAlchemy',
+    'PostgreSQL',
+    'JSON',
+    'JWT',
+    'Bcrypt',
+    'React-Redux',
+    'Axios',
+    'Material-UI',
+    'CRUD Operations',
     'Redux',
     'HTML & CSS',
-    'Flask',
-    'SQLAlchemy',
-    'Python',
-    'Vite',
     'Git & GitHub',
     'REST APIs'
   ];

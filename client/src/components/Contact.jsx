@@ -1,9 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import emailjs from 'emailjs-com';
 import '../Contact.css';
 
 function Contact() {
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [formData, setFormData] = useState({ from_name: '', reply_to: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
+
+  useEffect(() => {
+    // Initialize EmailJS with your User ID
+    emailjs.init('mUITg9eix2eRYCyg3'); // Replace 'YOUR_USER_ID' with your actual User ID from EmailJS
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -12,9 +18,16 @@ function Contact() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Here you would typically handle form submission, e.g., sending data to a server
-    console.log('Form submitted:', formData);
-    setSubmitted(true);
+
+    // Use EmailJS to send the form data
+    emailjs.sendForm('service_muy1ltk', 'template_f0nuyh6', '#myForm')
+      .then((response) => {
+          console.log('SUCCESS!', response.status, response.text);
+          setSubmitted(true);
+      })
+      .catch((error) => {
+          console.log('FAILED...', error);
+      });
   };
 
   return (
@@ -24,14 +37,14 @@ function Contact() {
         {submitted ? (
           <p>Thank you for reaching out! I'll get back to you soon.</p>
         ) : (
-          <form onSubmit={handleSubmit} className="contact-form">
+          <form id="myForm" onSubmit={handleSubmit} className="contact-form">
             <div className="form-group">
               <label htmlFor="name">Name</label>
               <input
                 type="text"
                 id="name"
-                name="name"
-                value={formData.name}
+                name="from_name"
+                value={formData.from_name}
                 onChange={handleChange}
                 required
               />
@@ -41,8 +54,8 @@ function Contact() {
               <input
                 type="email"
                 id="email"
-                name="email"
-                value={formData.email}
+                name="reply_to"
+                value={formData.reply_to}
                 onChange={handleChange}
                 required
               />
