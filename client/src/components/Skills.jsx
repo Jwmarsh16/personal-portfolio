@@ -22,7 +22,9 @@ function Skills() {
     'Redux',
     'HTML & CSS',
     'Git & GitHub',
-    'REST APIs'
+    'REST APIs',
+    'Linux',
+    'Full Stack Development'
   ];
 
   return (
