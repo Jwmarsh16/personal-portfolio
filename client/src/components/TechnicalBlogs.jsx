@@ -39,7 +39,7 @@ const TechnicalBlogs = () => {
   return (
     <section className="technical-blogs">
       <h2>My Writing</h2>
-      <p>Here you'll find my writing on topics ranging from coding and the web industry to linguistics and natural language processing. If you'd like to chat about anything I've written, say hi on <a href="https://bluesky.com" target="_blank" rel="noopener noreferrer">Bluesky</a>.</p>
+      <p>Here you'll find my writing on topics ranging from coding and the web industry to new and exiting technologies in the tech world.</p>
       
       <div className="blog-list">
         {blogs.map((blog, index) => (
