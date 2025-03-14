@@ -1,128 +1,49 @@
-/* Projects.css */
+/* global.css */
+/* Import Google Fonts for consistency */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@300;400;500&display=swap');
 
-.projects {
-  padding: 2rem;
-  background-color: #f9f9f9;
+:root {
+  --primary-color: #0d47a1;   /* Dark Blue for headings, borders, etc. */
+  --secondary-color: #1976d2; /* A slightly lighter blue for hover states */
+  --accent-color: #64b5f6;    /* Accent for borders & highlights */
+  --bg-color: #f5f5f5;        /* Light background for the page */
+  --card-bg: #ffffff;         /* Background for cards/sections */
+  --text-color: #333333;      /* Main text color */
+  --heading-font: 'Montserrat', sans-serif;
+  --body-font: 'Roboto', sans-serif;
+  --transition-speed: 0.3s;
+  --shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  --hover-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
-.projects-container {
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--body-font);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+/* Utility classes */
+.container {
   max-width: 1200px;
   margin: 0 auto;
-  text-align: center;
+  padding: 2rem;
 }
 
-.projects-container h2 {
-  font-size: 2.5rem;
-  margin-bottom: 1.5rem;
-  color: #333;
-}
-
-.projects-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-}
-
-.project-item {
-  background-color: #fff;
-  padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.project-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-}
-
-.project-item h3 {
-  font-size: 1.75rem;
-  margin-bottom: 1rem;
-  color: #007acc;
-}
-
-.project-item p {
-  font-size: 1rem;
-  margin-bottom: 1rem;
-  color: #555;
-}
-
-.project-item a {
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--primary-color);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-family: var(--heading-font);
   text-decoration: none;
-  color: #007acc;
-  font-weight: bold;
+  transition: background-color var(--transition-speed);
 }
 
-.project-item a:hover {
-  text-decoration: underline;
-}
-
-
-
-/* AboutMe.css */
-
-.about-me {
-  padding: 2rem;
-  background-color: #e0f7fa;
-}
-
-.about-me-container {
-  max-width: 800px;
-  margin: 0 auto;
-  text-align: center;
-}
-
-.about-me-container h2 {
-  font-size: 2.5rem;
-  margin-bottom: 1.5rem;
-  color: #00796b;
-}
-
-.about-me-container p {
-  font-size: 1.2rem;
-  color: #004d40;
-  line-height: 1.6;
-  margin-bottom: 1rem;
-}
-
-/* Skills.css */
-
-.skills {
-  padding: 2rem;
-  background-color: #f0f4c3;
-}
-
-.skills-container {
-  max-width: 800px;
-  margin: 0 auto;
-  text-align: center;
-}
-
-.skills-container h2 {
-  font-size: 2.5rem;
-  margin-bottom: 1.5rem;
-  color: #827717;
-}
-
-.skills-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1rem;
-}
-
-.skill-item {
-  background-color: #fff;
-  padding: 1rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  font-size: 1.1rem;
-  color: #33691e;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.skill-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+.btn:hover {
+  background-color: var(--secondary-color);
 }

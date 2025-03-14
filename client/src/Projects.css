@@ -1,8 +1,10 @@
 /* Projects.css */
-
 .projects {
-  padding: 2rem;
-  background-color: #f9f9f9;
+  padding: 3rem 2rem;
+  background: var(--card-bg);
+  margin: 2rem 0;
+  border-left: 5px solid var(--accent-color);
+  border-radius: 8px;
 }
 
 .projects-container {
@@ -12,9 +14,10 @@
 }
 
 .projects-container h2 {
+  font-family: var(--heading-font);
   font-size: 2.5rem;
   margin-bottom: 1.5rem;
-  color: #333;
+  color: var(--primary-color);
 }
 
 .projects-list {
@@ -24,43 +27,47 @@
 }
 
 .project-item {
-  background-color: #fff;
+  background-color: var(--card-bg);
   padding: 1.5rem;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: var(--shadow);
+  transition: transform var(--transition-speed), box-shadow var(--transition-speed);
 }
 
 .project-item:hover {
   transform: translateY(-5px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--hover-shadow);
 }
 
 .project-item h3 {
+  font-family: var(--heading-font);
   font-size: 1.75rem;
   margin-bottom: 1rem;
-  color: #007acc;
+  color: var(--primary-color);
 }
 
 .project-item p {
+  font-family: var(--body-font);
   font-size: 1rem;
   margin-bottom: 1rem;
-  color: #555;
+  color: var(--text-color);
 }
 
-.project-item .project-link, .project-item .github-link {
-  display: block; /* Ensure each link is on its own line */
+.project-item a {
+  display: block;
   text-decoration: none;
-  color: #007acc;
+  color: var(--secondary-color);
   font-weight: bold;
+  transition: color var(--transition-speed);
   margin-top: 0.5rem;
 }
 
-.project-item .project-link {
-  margin-bottom: 0.3rem; /* Adds space between View Project and GitHub Repository */
+.project-item a:first-of-type {
+  margin-bottom: 0.5rem;
 }
 
-.project-item .project-link:hover,
-.project-item .github-link:hover {
+
+.project-item a:hover {
   text-decoration: underline;
+  color: var(--primary-color);
 }

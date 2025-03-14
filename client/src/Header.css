@@ -1,10 +1,9 @@
 /* Header.css */
-
 .header {
   padding: 1rem;
-  background-color: #00695c;
+  background-color: var(--primary-color);
   color: #ffffff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow);
 }
 
 .header nav {
@@ -19,10 +18,13 @@
   list-style: none;
   display: flex;
   gap: 2rem;
+  padding: 0;
+  margin: 0;
 }
 
 .header ul li {
   font-size: 1.2rem;
+  font-family: var(--heading-font);
 }
 
 .header ul li a {
@@ -31,10 +33,10 @@
   font-weight: bold;
   padding: 0.5rem 1rem;
   border-radius: 4px;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color var(--transition-speed), color var(--transition-speed);
 }
 
 .header ul li a:hover {
-  background-color: #004d40;
-  color: #e0f2f1;
+  background-color: var(--secondary-color);
+  color: var(--bg-color);
 }

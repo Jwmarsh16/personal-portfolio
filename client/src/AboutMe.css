@@ -1,25 +1,29 @@
 /* AboutMe.css */
-
 .about-me {
-    padding: 2rem;
-    background-color: #e0f7fa;
-  }
-  
-  .about-me-container {
-    max-width: 800px;
-    margin: 0 auto;
-    text-align: center;
-  }
-  
-  .about-me-container h2 {
-    font-size: 2.5rem;
-    margin-bottom: 1.5rem;
-    color: #00796b;
-  }
-  
-  .about-me-container p {
-    font-size: 1.2rem;
-    color: #004d40;
-    line-height: 1.6;
-    margin-bottom: 1rem;
-  }
+  padding: 3rem 2rem;
+  background: var(--card-bg);
+  border-left: 5px solid var(--accent-color);
+  margin: 2rem 0;
+  border-radius: 8px;
+}
+
+.about-me-container {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.about-me-container h2 {
+  font-family: var(--heading-font);
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  color: var(--primary-color);
+}
+
+.about-me-container p {
+  font-family: var(--body-font);
+  font-size: 1.2rem;
+  color: var(--text-color);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
