@@ -1,7 +1,7 @@
 /* Header.css */
 .header {
   padding: 1rem;
-  background-color: var(--primary-color);
+  background: transparent;
   color: #ffffff;
   box-shadow: var(--shadow);
 }
@@ -24,7 +24,6 @@
 
 .header ul li {
   font-size: 1.2rem;
-  font-family: var(--heading-font);
 }
 
 .header ul li a {
@@ -38,5 +37,5 @@
 
 .header ul li a:hover {
   background-color: var(--secondary-color);
-  color: var(--bg-color);
+  color: var(--text-color);
 }

@@ -1,10 +1,8 @@
 /* Skills.css */
 .skills {
   padding: 3rem 2rem;
-  background: var(--card-bg);
+  background: transparent;
   margin: 2rem 0;
-  border-left: 5px solid var(--accent-color);
-  border-radius: 8px;
 }
 
 .skills-container {
@@ -15,7 +13,7 @@
 
 .skills-container h2 {
   font-family: var(--heading-font);
-  font-size: 2.5rem;
+  font-size: 2.8rem;
   margin-bottom: 1.5rem;
   color: var(--primary-color);
 }
@@ -28,17 +26,16 @@
 }
 
 .skill-item {
-  background-color: var(--card-bg);
+  background: transparent;
   padding: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 8px;
   box-shadow: var(--shadow);
   font-size: 1.1rem;
-  color: var(--text-color);
-  font-family: var(--body-font);
   transition: transform var(--transition-speed), box-shadow var(--transition-speed);
 }
 
 .skill-item:hover {
-  transform: translateY(-5px);
+  transform: translateY(-5px) scale(1.02);
   box-shadow: var(--hover-shadow);
 }

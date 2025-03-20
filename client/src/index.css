@@ -3,89 +3,126 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@300;400;500&display=swap');
 
 :root {
-  --primary-color: #0d47a1;   /* Dark Blue for headings, borders, etc. */
-  --secondary-color: #1976d2; /* A slightly lighter blue for hover states */
-  --accent-color: #64b5f6;    /* Accent for borders & highlights */
-  --bg-color: #f5f5f5;        /* Light background for the page */
-  --card-bg: #ffffff;         /* Background for cards/sections */
-  --text-color: #333333;      /* Main text color */
+  --primary-color: #0d47a1;
+  --secondary-color: #1976d2;
+  --accent-color: #64b5f6;
+  --text-color: #ffffff;
   --heading-font: 'Montserrat', sans-serif;
   --body-font: 'Roboto', sans-serif;
   --transition-speed: 0.3s;
-  --shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  --hover-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  --shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  --hover-shadow: 0 6px 12px rgba(0, 0, 0, 0.7);
 }
 
-/* Outer Space Background */
 body {
-  background-color: #000; /* Fallback dark background */
+  margin: 0;
+  padding: 0;
+  font-family: var(--body-font);
   color: var(--text-color);
+  line-height: 1.6;
+  background: black; /* Solid black background */
   position: relative;
-  z-index: 0;
   overflow-x: hidden;
 }
 
+/* Fixed starry background using your local image */
 body::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 200%;
-  height: 200%;
-  background: url('https://i.imgur.com/6oK1H7G.jpg') repeat; /* Replace with your starry wallpaper URL */
-  background-size: cover;
-  opacity: 0.2;
-  z-index: -2;
-  animation: moveStars 100s linear infinite;
-}
-
-/* Optional twinkle overlay for extra depth */
-body::after {
   content: "";
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(rgba(255,255,255,0.1), transparent 70%);
+  background: url('./images/starry-night.jpg') center center / cover no-repeat fixed;
   z-index: -1;
-  animation: twinkle 3s ease-in-out infinite alternate;
+  opacity: 0.8;
 }
 
-@keyframes moveStars {
-  from {
-    transform: translate(0, 0);
+/* -------------------------------
+   Revised Shooting Star CSS (Decoupled)
+   -------------------------------
+   The shooting star's motion is defined by custom variables:
+   --startX, --startY, --endX, --endY for translation,
+   and --starRotation for the star's facing direction.
+   Defaults move the star horizontally (left to right) with no vertical offset.
+*/
+
+.shooting-star-container {
+  position: fixed;
+  top: var(--top, 20%);
+  left: var(--left, 0%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+@keyframes shootingStar {
+  /* 0% - initial off-screen position, invisible */
+  0% {
+    opacity: 0;
+    transform: translateY(-50%) translate(var(--startX), var(--startY)) rotate(var(--starRotation));
   }
-  to {
-    transform: translate(-1000px, 500px);
+  /* Fade in quickly (over the first 5% ~1.5s) */
+  5% {
+    opacity: 1;
+    transform: translateY(-50%) translate(var(--startX), var(--startY)) rotate(var(--starRotation));
+  }
+  /* Active movement: complete the traverse by 20% (6 seconds) */
+  20% {
+    opacity: 1;
+    transform: translateY(-50%) translate(var(--endX), var(--endY)) rotate(var(--starRotation));
+  }
+  /* Fade out immediately at 21% */
+  21% {
+    opacity: 0;
+    transform: translateY(-50%) translate(var(--endX), var(--endY)) rotate(var(--starRotation));
+  }
+  /* Remain hidden until the cycle restarts */
+  100% {
+    opacity: 0;
+    transform: translateY(-50%) translate(var(--endX), var(--endY)) rotate(var(--starRotation));
   }
 }
 
-@keyframes twinkle {
-  from { opacity: 0.1; }
-  to { opacity: 0.3; }
+.shooting-star {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%) rotate(var(--starRotation, 0deg));
+  transform-origin: left center;
+  width: 2px;
+  height: 150px;
+  background: linear-gradient(white, rgba(255,255,255,0));
+  opacity: 0;
+  animation: shootingStar var(--duration, 30s) ease-out infinite;
+  animation-delay: var(--delay, 0s);
 }
 
 
-/* Utility classes */
+/* Enhance text readability */
+h1, h2, h3, h4, h5, h6, p, a {
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+/* Utility container */
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
 }
 
+/* Button styling */
 .btn {
   display: inline-block;
   padding: 0.75rem 1.5rem;
-  background-color: var(--primary-color);
+  background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
   color: #fff;
   border: none;
   border-radius: 4px;
-  font-family: var(--heading-font);
   text-decoration: none;
-  transition: background-color var(--transition-speed);
+  transition: background var(--transition-speed), transform var(--transition-speed);
 }
 
 .btn:hover {
-  background-color: var(--secondary-color);
+  background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
+  transform: scale(1.05);
 }

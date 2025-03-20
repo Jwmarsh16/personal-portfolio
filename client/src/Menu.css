@@ -5,12 +5,13 @@
   left: 0;
   width: 250px;
   height: 100vh;
-  background-color: var(--card-bg);
+  background: transparent;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
   transform: translateX(-100%);
   transition: transform var(--transition-speed);
   padding-top: 20px;
   z-index: 1000;
+  overflow: hidden;
 }
 
 .menu.open {
@@ -21,7 +22,7 @@
   position: fixed;
   top: 10px;
   left: 10px;
-  background-color: var(--card-bg);
+  background: transparent;
   padding: 10px 15px;
   border: 2px solid var(--primary-color);
   border-radius: 5px;
@@ -29,12 +30,13 @@
   font-size: 1rem;
   color: var(--primary-color);
   z-index: 1100;
-  transition: background-color var(--transition-speed), color var(--transition-speed);
+  transition: background-color var(--transition-speed), color var(--transition-speed), transform var(--transition-speed);
 }
 
 .menu-toggle:hover {
   background-color: var(--primary-color);
   color: #fff;
+  transform: scale(1.1);
 }
 
 .menu-nav {
@@ -50,7 +52,6 @@
 .menu-nav ul li {
   margin: 20px 0;
   font-size: 1.5rem;
-  font-family: var(--heading-font);
 }
 
 .menu-nav ul li a {

@@ -4,25 +4,23 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-  background-color: var(--bg-color);
+  background: transparent;
 }
 
 .logo {
   height: 6em;
   padding: 1.5em;
-  transition: filter var(--transition-speed);
+  transition: filter var(--transition-speed), transform var(--transition-speed);
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em var(--accent-color));
+  transform: rotate(5deg);
 }
 
 @keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -33,12 +31,17 @@
 
 .card {
   padding: 2em;
-  background-color: var(--card-bg);
+  background: transparent;
   border-radius: 8px;
   box-shadow: var(--shadow);
+  transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+.card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: var(--hover-shadow);
 }
 
 .read-the-docs {
   color: var(--text-color);
-  font-family: var(--body-font);
 }
