@@ -6,11 +6,12 @@ function Projects() {
     {
       title: 'Fantasy Football Research Hub',
       description: 'A platform for researching fantasy football statistics, player performance, and trends, built using Flask and React.',
-      technologies: ['Flask', 'React', 'Vite', 'Redux Toolkit',  'Flask-JWT-Extended', 'Flask-CORS', 'Flask RESTful', 'PostgreSQL'],
-      tools: ['JWT Cookies', 'Bcrypt', 'React-Redux', 'Axios',  'SQLAlchemy'],
+      technologies: ['Flask', 'React', 'Vite', 'Redux Toolkit', 'Flask-JWT-Extended', 'Flask-CORS', 'Flask RESTful', 'PostgreSQL'],
+      tools: ['JWT Cookies', 'Bcrypt', 'React-Redux', 'Axios', 'SQLAlchemy'],
       languages: ['Python', 'JavaScript', 'CSS'],
       link: 'https://fantasy-football-research-hub.onrender.com',
       github: 'https://github.com/Jwmarsh16/fantasy-football-research-project',
+      preview: 'https://via.placeholder.com/400x300?text=Fantasy+Football', // Example preview image URL
     },
     {
       title: 'Event Manager Application',
@@ -20,6 +21,7 @@ function Projects() {
       languages: ['Python', 'JavaScript', 'CSS'],
       link: 'https://event-manager-dtae.onrender.com',
       github: 'https://github.com/Jwmarsh16/event-manager',
+      preview: 'https://via.placeholder.com/400x300?text=Event+Manager', // Example preview image URL
     },
     {
       title: 'Portfolio Website',
@@ -29,6 +31,7 @@ function Projects() {
       languages: ['JavaScript', 'CSS'],
       link: 'https://personal-portfolio-qj2c.onrender.com',
       github: 'https://github.com/Jwmarsh16/personal-portfolio',
+      preview: 'https://via.placeholder.com/400x300?text=Portfolio', // Example preview image URL
     }
   ];
 
@@ -38,17 +41,35 @@ function Projects() {
         <h2>My Projects</h2>
         <div className="projects-list">
           {projects.map((project, index) => (
-            <div key={index} className="project-item">
+            <div key={index} className="project-item wow-animate">
+              {project.preview && (
+                <img
+                  src={project.preview}
+                  alt={`${project.title} Preview`}
+                  className="project-image"
+                />
+              )}
               <h3>{project.title}</h3>
               <p>{project.description}</p>
-
-              {/* Displaying each category */}
               <p><strong>Technologies and Frameworks:</strong> {project.technologies.join(', ')}</p>
               <p><strong>Tools:</strong> {project.tools.join(', ')}</p>
               <p><strong>Languages:</strong> {project.languages.join(', ')}</p>
-              
-              <a href={project.link} target="_blank" rel="noopener noreferrer" className="project-link">View Project</a>
-              <a href={project.github} target="_blank" rel="noopener noreferrer" className="github-link">GitHub Repository</a>
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="project-link"
+              >
+                View Project
+              </a>
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="github-link"
+              >
+                GitHub Repository
+              </a>
             </div>
           ))}
         </div>

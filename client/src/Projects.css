@@ -26,16 +26,37 @@
   gap: 2rem;
 }
 
+/* Ensure the project item layout allows for an image preview */
 .project-item {
   background-color: var(--card-bg);
   padding: 1.5rem;
   border-radius: 8px;
   box-shadow: var(--shadow);
   transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .project-item:hover {
-  transform: translateY(-5px);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: var(--hover-shadow);
+}
+
+/* Image preview styling */
+.project-image {
+  width: 100%;
+  max-width: 100%;
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+  margin-bottom: 1rem;
+}
+
+.project-image:hover {
+  transform: scale(1.05);
   box-shadow: var(--hover-shadow);
 }
 
@@ -53,6 +74,7 @@
   color: var(--text-color);
 }
 
+/* Ensure links are on separate lines */
 .project-item a {
   display: block;
   text-decoration: none;
