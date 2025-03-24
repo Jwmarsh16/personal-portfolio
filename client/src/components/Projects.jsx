@@ -11,7 +11,7 @@ function Projects() {
       languages: ['Python', 'JavaScript', 'CSS'],
       link: 'https://fantasy-football-research-hub.onrender.com',
       github: 'https://github.com/Jwmarsh16/fantasy-football-research-project',
-      preview: 'https://via.placeholder.com/400x300?text=Fantasy+Football', // Example preview image URL
+      preview: '/images/fantasy-football1.png', // Example preview image URL
     },
     {
       title: 'Event Manager Application',
@@ -21,7 +21,7 @@ function Projects() {
       languages: ['Python', 'JavaScript', 'CSS'],
       link: 'https://event-manager-dtae.onrender.com',
       github: 'https://github.com/Jwmarsh16/event-manager',
-      preview: 'https://via.placeholder.com/400x300?text=Event+Manager', // Example preview image URL
+      preview: '/images/event-manager1.png', // Example preview image URL
     },
     {
       title: 'Portfolio Website',
@@ -31,7 +31,7 @@ function Projects() {
       languages: ['JavaScript', 'CSS'],
       link: 'https://personal-portfolio-qj2c.onrender.com',
       github: 'https://github.com/Jwmarsh16/personal-portfolio',
-      preview: 'https://via.placeholder.com/400x300?text=Portfolio', // Example preview image URL
+      preview: '/images/portfolio.png', // Example preview image URL
     }
   ];
 
