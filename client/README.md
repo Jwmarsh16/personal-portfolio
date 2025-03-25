@@ -37,7 +37,7 @@ git commit -m "Wrap sections in gray containers, enhance layout for professional
 
 Event Manager Project Page
 git commit -m "Refactor EventManager page to match FantasyFootball layout and styles"
-
+git commit -m "Integrate slideshow, click indicators, and matching gray containers"
 
 
 
