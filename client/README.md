@@ -23,7 +23,7 @@ git commit -m "Add animated shooting stars to background with varied angles and 
 
 SkillsIntro + Skills Section
 git commit -m "Style SkillsIntro with bold name, color highlights, left-aligned summary"
-
+git commit -m "Refactor Skills section into 3 horizontally scrolling rows with synced timing"
 
 
 
