@@ -27,5 +27,6 @@ git commit -m "Refactor Skills section into 3 horizontally scrolling rows with s
 git commit -m "Duplicate skills rows for seamless infinite scrolling effect"
 git commit -m "Adjust scroll timing and position for smooth animation in both directions"
 
-
+AboutMeTabs Experience Enhancements
+git commit -m "Add tab icons, improve layout and spacing of AboutMeTabs"
 
