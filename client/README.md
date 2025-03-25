@@ -15,3 +15,17 @@ Header Navigation Enhancements
 git commit -m "Position navigation links vertically on top right of the screen"
 git commit -m "Convert hash anchors to Link components for About Me page navigation"
 git commit -m "Fix internal navigation from AboutMe page back to homepage sections"
+git commit -m "Style header with color highlights and responsive vertical layout"
+
+
+
+
+
+
+
+
+
+
+
+
+
