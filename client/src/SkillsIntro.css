@@ -13,10 +13,12 @@
   
   /* Center the skills rows independently */
   .skills-wrapper {
-    display: flex;
-    justify-content: center;
+    width: 100vw;
+    overflow: hidden;
     margin-top: 2rem;
+    padding: 0; /* remove padding that could clip the sides */
   }
+  
   
   /* Summary content styling */
   .summary-intro h1 {

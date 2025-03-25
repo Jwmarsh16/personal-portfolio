@@ -80,35 +80,38 @@ function AboutMeTabs() {
 
   return (
     <section className="about-tabs-section">
-      <div className="tabs-title">
-        <h2>About Me</h2>
-        <p className="about-subtext">
-          A meaningful insight into my essence – as every small detail shapes the broader story of my life.
-        </p>
-      </div>
-  
-      <div className="about-tabs-wrapper" style={{ marginLeft: '-10rem' }}>
+      <div className="about-tabs-wrapper" style={{ marginLeft: '-25rem' }}>
         <div className="code-image" style={{ marginRight: '5rem' }}>
           <img src="/images/portfolio-man.jpg" alt="Developer typing" />
         </div>
   
-        <div className="tabs-container" style={{ marginRight: '10rem' }}>
-          <div className="tabs">
-            {['Intro', 'Career', 'Education', 'Resume'].map(tab => (
-              <button
-                key={tab}
-                className={activeTab === tab ? 'active' : ''}
-                onClick={() => setActiveTab(tab)}
-              >
-                {tabIcons[tab]} {tab}
-              </button>
-            ))}
+        <div className="tab-column">
+          <div className="tabs-title">
+            <h2>About Me</h2>
+            <p className="about-subtext">
+              A meaningful insight into my essence – as every small detail shapes the broader story of my life.
+            </p>
           </div>
-          <div className="tab-body fade-in">{renderTabContent()}</div>
+  
+          <div className="tabs-container" style={{ marginRight: '10rem' }}>
+            <div className="tabs">
+              {['Intro', 'Career', 'Education', 'Resume'].map(tab => (
+                <button
+                  key={tab}
+                  className={activeTab === tab ? 'active' : ''}
+                  onClick={() => setActiveTab(tab)}
+                >
+                  {tabIcons[tab]} {tab}
+                </button>
+              ))}
+            </div>
+            <div className="tab-body fade-in">{renderTabContent()}</div>
+          </div>
         </div>
       </div>
     </section>
   );
+  
 }
 
 export default AboutMeTabs;

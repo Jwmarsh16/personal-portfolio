@@ -1,25 +1,35 @@
 import React from 'react';
-import { useLocation, Link } from 'react-router-dom'; // Import useLocation and Link
+import { useLocation, useNavigate, Link } from 'react-router-dom';
 import '../Header.css';
+import { scrollToSection } from '../utils/scrollToSection';
 
 function Header() {
   const location = useLocation();
+  const navigate = useNavigate();
+
+  // Custom handler to navigate to home and scroll to section
+  const handleNavClick = (sectionId) => {
+    if (location.pathname === '/') {
+      scrollToSection(sectionId);
+    } else {
+      navigate('/');
+      setTimeout(() => scrollToSection(sectionId), 100); // Give the DOM time to load
+    }
+  };
 
   return (
     <header className="header">
-      <nav>
-        <ul>
+      <nav className="nav-bar">
+        <ul className="nav-links">
           {location.pathname === '/blogs' ? (
-            // Only show the "Blogs" link if on the /blogs route
             <li><Link to="/blogs">Blogs</Link></li>
           ) : (
-            // Display the full navigation menu on other routes
             <>
-              <li><a href="#about">About Me</a></li>
-              <li><a href="#projects">Projects</a></li>
-              <li><a href="#skills">Skills</a></li>
-              <li><a href="#contact">Contact</a></li>
-              <li><Link to="/blogs">Blogs</Link></li> {/* Link to Blogs page */}
+              <li><Link to="/about">About Me</Link></li>
+              <li><button onClick={() => handleNavClick('projects')}>Projects</button></li>
+              <li><button onClick={() => handleNavClick('skills')}>Skills</button></li>
+              <li><button onClick={() => handleNavClick('contact')}>Contact</button></li>
+              <li><Link to="/blogs">Blogs</Link></li>
             </>
           )}
         </ul>

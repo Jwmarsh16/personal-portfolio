@@ -1,76 +1,186 @@
 .project-detail-container {
     min-height: 100vh;
-    padding: 2rem;
-}
-
-.project-detail {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 2rem;
-    /* no background! */
-}
-
-.project-detail h1 {
+    padding: 3rem 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    background-color: transparent;
+  }
+  
+  .project-detail-card {
+    max-width: 1200px;
+    width: 100%;
+    background-color: rgba(33, 33, 33, 0.8);
+    padding: 3rem;
+    border-radius: 16px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+  }
+  
+  .project-title {
     font-family: var(--heading-font);
+    font-size: 2.8rem;
     margin-bottom: 1rem;
-    color: white;
+    color: #ffffff;
     text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
-}
-
-.brief-description {
-    font-size: 1.1rem;
-    margin-bottom: 2rem;
-    color: #ddd;
-}
-
-.slideshow {
-    position: relative;
+    text-align: center;
+  }
+  
+  .brief-description {
+    font-size: 1.2rem;
+    color: #cccccc;
     text-align: center;
     margin-bottom: 2rem;
-}
-
-.slideshow-image {
+  }
+  
+  /* === SLIDESHOW === */
+  .slideshow-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
     width: 100%;
-    border-radius: 8px;
-    max-height: 400px;
-    object-fit: cover;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-}
-
-.prev-button,
-.next-button {
+    margin: 2rem auto;
+    overflow: visible;
+  }
+  
+  .slideshow-image {
+    width: 92vw;
+    max-width: 1100px;
+    border-radius: 12px;
+    height: auto;
+    object-fit: contain;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+  }
+  
+  .slideshow-image:hover {
+    transform: scale(1.02);
+  }
+  
+  .prev-button,
+  .next-button {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.6);
     color: white;
     border: none;
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
     cursor: pointer;
-}
-
-.prev-button {
-    left: 10px;
-}
-
-.next-button {
-    right: 10px;
-}
-
-.section {
-    margin-bottom: 2rem;
-}
-
-.section h2 {
+    z-index: 2;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+  }
+  
+  .prev-button:hover,
+  .next-button:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-50%) scale(1.1);
+  }
+  
+  .prev-button {
+    left: 1.5rem;
+  }
+  
+  .next-button {
+    right: 1.5rem;
+  }
+  
+  /* === INDICATOR DOTS === */
+  .slide-indicators {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 1rem 0 2.5rem;
+  }
+  
+  .indicator-dot {
+    width: 18px;
+    height: 6px;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .indicator-dot.active {
+    background-color: #61dafb;
+    width: 28px;
+  }
+  
+  /* === SECTION CONTAINERS === */
+  .info-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+  
+  .info-box {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-left: 4px solid #61dafb;
+    padding: 1.5rem 2rem;
+    border-radius: 12px;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .info-box:hover {
+    box-shadow: 0 0 10px rgba(97, 218, 251, 0.4);
+  }
+  
+  .section-header {
+    background-color: rgba(97, 218, 251, 0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+  }
+  
+  .section-header h2 {
     font-family: var(--heading-font);
-    color: white;
-    margin-bottom: 0.5rem;
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
-}
-
-.section p {
+    color: #ffffff;
+    margin: 0;
+    font-size: 1.6rem;
+  }
+  
+  .info-box p {
     color: #ddd;
-    line-height: 1.6;
-}
+    line-height: 1.7;
+    font-size: 1.05rem;
+  }
+  
+  /* === RESPONSIVE === */
+  @media (max-width: 768px) {
+    .project-detail-card {
+      padding: 1.5rem;
+    }
+  
+    .slideshow-image {
+      width: 95vw;
+    }
+  
+    .prev-button,
+    .next-button {
+      width: 40px;
+      height: 40px;
+      font-size: 1.3rem;
+    }
+  
+    .prev-button {
+      left: 1rem;
+    }
+  
+    .next-button {
+      right: 1rem;
+    }
+  
+    .section-header h2 {
+      font-size: 1.4rem;
+    }
+  
+    .info-box p {
+      font-size: 1rem;
+    }
+  }
+  

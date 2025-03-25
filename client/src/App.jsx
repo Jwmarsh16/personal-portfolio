@@ -10,7 +10,8 @@ import TechnicalBlogs from './components/TechnicalBlogs';
 import FantasyFootballResearchHub from './project-details/FantasyFootballResearchHub';
 import EventManager from './project-details/EventManager';
 import Portfolio from './project-details/Portfolio';
-import Resume from './components/Resume'; // ✅ New import
+import Resume from './components/Resume';
+import AboutMe from './components/AboutMe'; // ✅ Added import
 import './global.css';
 
 function App() {
@@ -101,22 +102,12 @@ function App() {
               </main>
             }
           />
+          <Route path="/about" element={<AboutMe />} /> {/* ✅ New route added */}
           <Route path="/blogs" element={<TechnicalBlogs />} />
           <Route path="/resume" element={<Resume />} />
-
-          {/* Project Detail Routes */}
-          <Route
-            path="/project/fantasy-football-research-hub"
-            element={<FantasyFootballResearchHub />}
-          />
-          <Route
-            path="/project/event-manager-application"
-            element={<EventManager />}
-          />
-          <Route
-            path="/project/portfolio-website"
-            element={<Portfolio />}
-          />
+          <Route path="/project/fantasy-football-research-hub" element={<FantasyFootballResearchHub />} />
+          <Route path="/project/event-manager-application" element={<EventManager />} />
+          <Route path="/project/portfolio-website" element={<Portfolio />} />
         </Routes>
       </div>
     </Router>

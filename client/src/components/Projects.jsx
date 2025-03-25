@@ -43,7 +43,7 @@ function Projects() {
       languages: ['Python', 'JavaScript', 'CSS'],
       link: 'https://event-manager-dtae.onrender.com',
       github: 'https://github.com/Jwmarsh16/event-manager',
-      preview: '/images/event-manager1.png'
+      preview: '/images/event-manager-project.png'
     },
     {
       title: 'Portfolio Website',
