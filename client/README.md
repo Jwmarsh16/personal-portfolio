@@ -21,8 +21,8 @@ Shooting Stars + Visual Theme
 git commit -m "Add animated shooting stars to background with varied angles and timing"
 
 
-
-
+SkillsIntro + Skills Section
+git commit -m "Style SkillsIntro with bold name, color highlights, left-aligned summary"
 
 
 
