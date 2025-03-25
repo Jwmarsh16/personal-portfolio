@@ -17,8 +17,8 @@ git commit -m "Convert hash anchors to Link components for About Me page navigat
 git commit -m "Fix internal navigation from AboutMe page back to homepage sections"
 git commit -m "Style header with color highlights and responsive vertical layout"
 
-
-
+Shooting Stars + Visual Theme
+git commit -m "Add animated shooting stars to background with varied angles and timing"
 
 
 
