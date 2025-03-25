@@ -30,3 +30,5 @@ git commit -m "Adjust scroll timing and position for smooth animation in both di
 AboutMeTabs Experience Enhancements
 git commit -m "Add tab icons, improve layout and spacing of AboutMeTabs"
 
+Fantasy Football Project Page
+git commit -m "Build FantasyFootballResearchHub page with image slideshow and full writeup"
