@@ -32,3 +32,8 @@ git commit -m "Add tab icons, improve layout and spacing of AboutMeTabs"
 
 Fantasy Football Project Page
 git commit -m "Build FantasyFootballResearchHub page with image slideshow and full writeup"
+git commit -m "Add responsive slideshow with hover effects, custom arrows, and indicator dots"
+
+
+
+
