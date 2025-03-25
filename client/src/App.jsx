@@ -1,15 +1,16 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
-import AboutMe from './components/AboutMe';
+import SkillsIntro from './components/SkillsIntro';
+import AboutMeTabs from './components/AboutMeTabs';
 import Projects from './components/Projects';
-import Skills from './components/Skills';
 import Contact from './components/Contact';
 import Menu from './components/Menu';
 import TechnicalBlogs from './components/TechnicalBlogs';
 import FantasyFootballResearchHub from './project-details/FantasyFootballResearchHub';
 import EventManager from './project-details/EventManager';
 import Portfolio from './project-details/Portfolio';
+import Resume from './components/Resume'; // ✅ New import
 import './global.css';
 
 function App() {
@@ -19,8 +20,7 @@ function App() {
         <Menu />
         <Header />
 
-        {/* Shooting Star Elements with varied angles */}
-        {/* Star 1: Moving at 62° */}
+        {/* Shooting Star Elements */}
         <div
           className="shooting-star-container"
           style={{
@@ -38,7 +38,6 @@ function App() {
           <div className="shooting-star"></div>
         </div>
 
-        {/* Star 2: Moving at 112° */}
         <div
           className="shooting-star-container"
           style={{
@@ -56,7 +55,6 @@ function App() {
           <div className="shooting-star"></div>
         </div>
 
-        {/* Star 3: Moving at 203° */}
         <div
           className="shooting-star-container"
           style={{
@@ -74,7 +72,6 @@ function App() {
           <div className="shooting-star"></div>
         </div>
 
-        {/* Star 4: Moving at 277° */}
         <div
           className="shooting-star-container"
           style={{
@@ -97,14 +94,16 @@ function App() {
             path="/"
             element={
               <main>
-                <AboutMe />
-                <Skills />
+                <SkillsIntro />
+                <AboutMeTabs />
                 <Projects />
                 <Contact />
               </main>
             }
           />
           <Route path="/blogs" element={<TechnicalBlogs />} />
+          <Route path="/resume" element={<Resume />} />
+
           {/* Project Detail Routes */}
           <Route
             path="/project/fantasy-football-research-hub"

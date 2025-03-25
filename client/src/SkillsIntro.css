@@ -1,0 +1,51 @@
+/* SkillsIntro.css */
+
+.skills-intro-wrapper {
+    padding: 3rem 2rem;
+  }
+  
+  /* Separate wrapper for summary so we can shift only that left */
+  .summary-wrapper {
+    text-align: left;
+    max-width: 900px;
+    margin-left: 3rem;
+  }
+  
+  /* Center the skills rows independently */
+  .skills-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+  
+  /* Summary content styling */
+  .summary-intro h1 {
+    font-size: 3.5rem;
+    color: white;
+    margin-bottom: 1rem;
+  }
+  
+  .name-highlight {
+    color: #00ffd1;
+    font-weight: 900;
+  }
+  
+  .role-highlight {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #61dafb;
+    margin-bottom: 1.5rem;
+  }
+  
+  .summary-intro p {
+    font-size: 1.15rem;
+    color: white;
+    margin-bottom: 1.2rem;
+    line-height: 1.6;
+  }
+  
+  .highlight {
+    color: #94f5ff;
+    font-weight: bold;
+  }
+  
