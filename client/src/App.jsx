@@ -7,7 +7,10 @@ import Skills from './components/Skills';
 import Contact from './components/Contact';
 import Menu from './components/Menu';
 import TechnicalBlogs from './components/TechnicalBlogs';
-import './index.css';
+import FantasyFootballResearchHub from './project-details/FantasyFootballResearchHub';
+import EventManager from './project-details/EventManager';
+import Portfolio from './project-details/Portfolio';
+import './global.css';
 
 function App() {
   return (
@@ -17,21 +20,18 @@ function App() {
         <Header />
 
         {/* Shooting Star Elements with varied angles */}
-
         {/* Star 1: Moving at 62° */}
         <div
           className="shooting-star-container"
           style={{
             '--top': '20%',
             '--left': '5%',
-            // Using an approximate magnitude of 300px:
-            // cos(62°) ~ 0.47, sin(62°) ~ 0.88
-            '--startX': '-141px',   // ~ -300 * 0.47
-            '--startY': '-265px',   // ~ -300 * 0.88
-            '--endX': '90vw',       // end point chosen to cross the screen
+            '--startX': '-141px',
+            '--startY': '-265px',
+            '--endX': '90vw',
             '--endY': '265px',
             '--starRotation': '110deg',
-             '--duration': '24s',
+            '--duration': '24s',
             '--delay': '1s'
           }}
         >
@@ -44,9 +44,8 @@ function App() {
           style={{
             '--top': '35%',
             '--left': '95%',
-            // For 112°: cos(112°) ~ -0.37, sin(112°) ~ 0.93
-            '--startX': '112px',    // opposite sign of deltaX: ~300 * 0.37
-            '--startY': '-278px',   // negative of ~300 * 0.93
+            '--startX': '112px',
+            '--startY': '-278px',
             '--endX': '-90vw',
             '--endY': '278px',
             '--starRotation': '250deg',
@@ -63,9 +62,8 @@ function App() {
           style={{
             '--top': '70%',
             '--left': '95%',
-            // For 203°: cos(203°) ~ -0.92, sin(203°) ~ -0.39
-            '--startX': '276px',   // ~300 * 0.92
-            '--startY': '117px',    // ~300 * 0.39
+            '--startX': '276px',
+            '--startY': '117px',
             '--endX': '-90vw',
             '--endY': '-117px',
             '--starRotation': '280deg',
@@ -82,9 +80,8 @@ function App() {
           style={{
             '--top': '50%',
             '--left': '5%',
-            // For 277°: cos(277°) ~ 0.12, sin(277°) ~ -0.99
-            '--startX': '-36px',    // ~ -300 * 0.12
-            '--startY': '298px',    // ~ 300 * 0.99
+            '--startX': '-36px',
+            '--startY': '298px',
             '--endX': '90vw',
             '--endY': '-298px',
             '--starRotation': '65deg',
@@ -101,13 +98,26 @@ function App() {
             element={
               <main>
                 <AboutMe />
-                <Projects />
                 <Skills />
+                <Projects />
                 <Contact />
               </main>
             }
           />
           <Route path="/blogs" element={<TechnicalBlogs />} />
+          {/* Project Detail Routes */}
+          <Route
+            path="/project/fantasy-football-research-hub"
+            element={<FantasyFootballResearchHub />}
+          />
+          <Route
+            path="/project/event-manager-application"
+            element={<EventManager />}
+          />
+          <Route
+            path="/project/portfolio-website"
+            element={<Portfolio />}
+          />
         </Routes>
       </div>
     </Router>

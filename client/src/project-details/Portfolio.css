@@ -1,0 +1,76 @@
+.project-detail-container {
+    min-height: 100vh;
+    padding: 2rem;
+}
+
+.project-detail {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    /* no background! */
+}
+
+.project-detail h1 {
+    font-family: var(--heading-font);
+    margin-bottom: 1rem;
+    color: white;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+}
+
+.brief-description {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    color: #ddd;
+}
+
+.slideshow {
+    position: relative;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.slideshow-image {
+    width: 100%;
+    border-radius: 8px;
+    max-height: 400px;
+    object-fit: cover;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.prev-button,
+.next-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+}
+
+.prev-button {
+    left: 10px;
+}
+
+.next-button {
+    right: 10px;
+}
+
+.section {
+    margin-bottom: 2rem;
+}
+
+.section h2 {
+    font-family: var(--heading-font);
+    color: white;
+    margin-bottom: 0.5rem;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+}
+
+.section p {
+    color: #ddd;
+    line-height: 1.6;
+}
