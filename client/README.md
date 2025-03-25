@@ -35,5 +35,9 @@ git commit -m "Build FantasyFootballResearchHub page with image slideshow and fu
 git commit -m "Add responsive slideshow with hover effects, custom arrows, and indicator dots"
 git commit -m "Wrap sections in gray containers, enhance layout for professional polish"
 
+Event Manager Project Page
+git commit -m "Refactor EventManager page to match FantasyFootball layout and styles"
+
+
 
 
