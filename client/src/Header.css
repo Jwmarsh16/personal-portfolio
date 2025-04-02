@@ -1,7 +1,7 @@
 /* Header.css */
 .header {
   position: fixed;
-  top: 15%;
+  top: 19%;
   right: 0;
   transform: translateY(-50%);
   background: rgba(0, 0, 0, 0.5);

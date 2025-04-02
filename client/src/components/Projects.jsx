@@ -21,9 +21,8 @@ function Projects() {
       tools: ['JWT Cookies', 'Bcrypt', 'React-Redux', 'Axios', 'SQLAlchemy'],
       languages: ['Python', 'JavaScript', 'CSS'],
       link: 'https://fantasy-football-research-hub.onrender.com',
-      github:
-        'https://github.com/Jwmarsh16/fantasy-football-research-project',
-      preview: '/images/fantasy-football1.png'
+      github: 'https://github.com/Jwmarsh16/fantasy-football-research-project',
+      preview: '/images/fantasy-football.png'
     },
     {
       title: 'Event Manager Application',
@@ -58,7 +57,6 @@ function Projects() {
     }
   ];
 
-  // Create URL-friendly slug from the project title (used for detail page routing)
   const createSlug = (title) =>
     title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 
@@ -70,52 +68,50 @@ function Projects() {
           {projects.map((project, index) => {
             const slug = createSlug(project.title);
             return (
-              <Link
-                key={index}
-                to={`/project/${slug}`}
-                className="project-link-wrapper"
-              >
-                <div className="project-item wow-animate">
-                  {project.preview && (
+              <div key={index} className="project-item wow-animate">
+                {project.preview && (
+                  <Link to={`/project/${slug}`} className="image-link">
                     <img
                       src={project.preview}
                       alt={`${project.title} Preview`}
                       className="project-image"
                     />
-                  )}
-                  <h3>{project.title}</h3>
-                  <p>{project.description}</p>
-                  <p>
-                    <strong>Technologies and Frameworks:</strong>{' '}
-                    {project.technologies.join(', ')}
-                  </p>
-                  <p>
-                    <strong>Tools:</strong> {project.tools.join(', ')}
-                  </p>
-                  <p>
-                    <strong>Languages:</strong>{' '}
-                    {project.languages.join(', ')}
-                  </p>
-                  <div className="project-buttons">
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="project-link"
-                    >
-                      Visit Site
-                    </a>
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="github-link"
-                    >
-                      GitHub Repository
-                    </a>
-                  </div>
+                  </Link>
+                )}
+
+                <h3>{project.title}</h3>
+                <p>{project.description}</p>
+                <p>
+                  <strong>Technologies:</strong> {project.technologies.join(', ')}
+                </p>
+                <p>
+                  <strong>Tools:</strong> {project.tools.join(', ')}
+                </p>
+                <p>
+                  <strong>Languages:</strong> {project.languages.join(', ')}
+                </p>
+                <div className="project-buttons">
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="project-link"
+                  >
+                    Visit Site
+                  </a>
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="github-link"
+                  >
+                    GitHub Repo
+                  </a>
+                  <Link to={`/project/${slug}`} className="details-link">
+                    View Details
+                  </Link>
                 </div>
-              </Link>
+              </div>
             );
           })}
         </div>

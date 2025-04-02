@@ -1,60 +1,91 @@
 /* TechnicalBlogs.css */
 
 .technical-blogs {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    font-family: 'Georgia', serif;
-    color: #4a3d35;
+  max-width: 900px;
+  margin: 100px auto 50px;
+  padding: 2rem;
+  background: rgba(20, 20, 30, 0.7); /* darkened frosted glass */
+  backdrop-filter: blur(12px);
+  border-radius: 12px;
+  box-shadow: 0 0 30px rgba(0, 255, 204, 0.15);
+  color: var(--text-color, #e0f7fa);
+  font-family: var(--body-font, 'Inter', sans-serif);
+  animation: fadeIn 1s ease-in-out;
+}
+
+.technical-blogs h2 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #00ffc3;
+  font-family: var(--heading-font, 'Orbitron', sans-serif);
+  text-align: center;
+  text-shadow: 0 0 5px #00ffc3;
+}
+
+.technical-blogs p.intro {
+  font-size: 1.15rem;
+  color: #cccccc;
+  margin-bottom: 2.5rem;
+  text-align: center;
+  line-height: 1.7;
+}
+
+.blog-list {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.blog-entry {
+  padding: 1.5rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  transition: background 0.3s ease;
+}
+
+.blog-entry:hover {
+  background: rgba(255, 255, 255, 0.03);
+  border-left: 4px solid #00ffc3;
+  padding-left: calc(1.5rem - 4px);
+}
+
+.blog-date {
+  font-size: 0.85rem;
+  color: #999;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.4rem;
+}
+
+.blog-title {
+  display: inline-block;
+  font-size: 1.7rem;
+  font-weight: bold;
+  color: #ffffff;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  text-shadow: 0 0 3px rgba(0, 255, 204, 0.3);
+}
+
+.blog-title:hover {
+  color: #00ffc3;
+  text-shadow: 0 0 8px #00ffc3;
+}
+
+.blog-entry p {
+  font-size: 1rem;
+  line-height: 1.65;
+  color: #c4c4c4;
+  margin-top: 0.6rem;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
   }
-  
-  .technical-blogs h2 {
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: #4a3d35;
-    margin-bottom: 10px;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  .technical-blogs p {
-    font-size: 1rem;
-    color: #4a3d35;
-    margin-bottom: 30px;
-    line-height: 1.6;
-  }
-  
-  .blog-list {
-    border-top: 1px solid #ddd;
-  }
-  
-  .blog-entry {
-    padding: 20px 0;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .blog-date {
-    font-size: 0.9rem;
-    color: var(--secondary-color);
-    font-weight: bold;
-    font-family: var(--body-font);
-  }
-  
-  .blog-title {
-    font-family: var(--heading-font);
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: var(--primary-color);
-    text-decoration: none;
-    transition: color var(--transition-speed);
-  }
-  
-  .blog-title:hover {
-    color: var(--secondary-color);
-  }
-  
-  .blog-entry p {
-    font-size: 1rem;
-    color: var(--text-color);
-    line-height: 1.5;
-    margin-top: 5px;
-  }
-  
+}

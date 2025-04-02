@@ -1,4 +1,3 @@
-/* Projects.css */
 .projects {
   padding: 3rem 2rem;
   background: transparent;
@@ -20,69 +19,77 @@
 
 .projects-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
   gap: 2rem;
 }
 
-/* Force each project card to be exactly the same size */
 .project-item {
-  background: #333;                /* Darker gray background */
-  color: #ddd;                     /* Lighter gray text */
-  height: 670px;                   /* Fixed height for uniformity */
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 16px;
   padding: 2rem;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  transition: transform var(--transition-speed), box-shadow var(--transition-speed);
-  position: relative;
-  overflow: hidden;                /* Hide overflow to keep the card fixed */
+  color: #e0f7fa;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 15px rgba(0, 255, 204, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  justify-content: space-between;
 }
-
-/* Optionally, if you want scrollable content for overflow, you could use:
-.project-item {
-  height: 500px;
-  overflow-y: auto;
-}
-*/
 
 .project-item:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: var(--hover-shadow);
+  transform: translateY(-10px);
+  box-shadow: 0 0 30px rgba(0, 255, 204, 0.4);
 }
 
-/* Image preview styling */
 .project-image {
   width: 100%;
-  border-radius: 8px;
-  box-shadow: var(--shadow);
-  transition: transform var(--transition-speed), box-shadow var(--transition-speed);
-  margin-bottom: 1rem;
-  object-fit: cover; /* Ensure images fill their container area without stretching */
+  height: 220px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 1.2rem;
+  box-shadow: 0 0 8px rgba(0, 255, 204, 0.15);
+  transition: transform 0.3s ease;
 }
 
 .project-image:hover {
-  transform: scale(1.05);
-  box-shadow: var(--hover-shadow);
+  transform: scale(1.04);
 }
 
-/* Buttons and links styling */
-.project-item a {
-  display: block;
-  text-decoration: none;
-  color: #ddd; /* Lighter text for links */
-  font-weight: bold;
-  transition: color var(--transition-speed);
-  margin-top: 0.5rem;
-}
-
-.project-item a:first-of-type {
+.project-item h3 {
+  color: #00ffc3;
   margin-bottom: 0.5rem;
 }
 
-/* Remove default link styling on the full project card wrapper */
-.project-link-wrapper {
-  text-decoration: none;
-  color: inherit;
+.project-item p {
+  font-size: 1rem;
+  color: #c0c0c0;
+  margin: 0.3rem 0;
 }
+
+.project-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.project-buttons a,
+.project-buttons .details-link {
+  display: inline-block;
+  text-align: center;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  color: #1e2a38;
+  background-color: #00ffc3;
+}
+
+.project-buttons a:hover,
+.project-buttons .details-link:hover {
+  background-color: #00cfa4;
+  color: #111;
+}
+
+
