@@ -51,3 +51,20 @@
     font-weight: bold;
   }
   
+  .skills-social-icons {
+    display: flex;
+    gap: 1.2rem;
+    margin-top: 1.5rem;
+  }
+  
+  .skills-social-icons a {
+    font-size: 1.8rem;
+    color: #00ffc8;
+    transition: transform 0.3s ease, color 0.3s ease;
+  }
+  
+  .skills-social-icons a:hover {
+    transform: scale(1.2);
+    color: #ffffff;
+  }
+  

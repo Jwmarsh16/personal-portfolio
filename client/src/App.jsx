@@ -11,7 +11,8 @@ import FantasyFootballResearchHub from './project-details/FantasyFootballResearc
 import EventManager from './project-details/EventManager';
 import Portfolio from './project-details/Portfolio';
 import Resume from './components/Resume';
-import AboutMe from './components/AboutMe'; // ✅ Added import
+import AboutMe from './components/AboutMe';
+import Footer from './components/Footer'; // ✅ Import Footer
 import './global.css';
 
 function App() {
@@ -21,7 +22,7 @@ function App() {
         <Menu />
         <Header />
 
-        {/* Shooting Star Elements */}
+        {/* Shooting Star Effects */}
         <div
           className="shooting-star-container"
           style={{
@@ -102,13 +103,16 @@ function App() {
               </main>
             }
           />
-          <Route path="/about" element={<AboutMe />} /> {/* ✅ New route added */}
+          <Route path="/about" element={<AboutMe />} />
           <Route path="/blogs" element={<TechnicalBlogs />} />
           <Route path="/resume" element={<Resume />} />
           <Route path="/project/fantasy-football-research-hub" element={<FantasyFootballResearchHub />} />
           <Route path="/project/event-manager-application" element={<EventManager />} />
           <Route path="/project/portfolio-website" element={<Portfolio />} />
         </Routes>
+
+        {/* ✅ Footer displayed on all pages */}
+        <Footer />
       </div>
     </Router>
   );

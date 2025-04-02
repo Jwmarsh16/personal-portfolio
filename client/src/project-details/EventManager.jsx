@@ -30,8 +30,7 @@ function EventManager() {
       <div className="project-detail-card">
         <h1 className="project-title">Event Manager Application</h1>
         <p className="brief-description">
-          A fullstack application for managing events, featuring group management, comprehensive CRUD operations,
-          and secure user authentication using Flask, React, and Redux.
+          A fullstack web application that simplifies the event planning process through robust group and invitation management, real-time RSVP tracking, and secure user authentication.
         </p>
 
         <div className="slideshow-wrapper">
@@ -60,8 +59,7 @@ function EventManager() {
               <h2>Project Overview:</h2>
             </div>
             <p>
-              The Event Manager Application provides a robust platform for organizing events, managing user groups,
-              and streamlining communication between organizers and participants. It centralizes event data and facilitates efficient event management.
+              The Event Manager Application is a full-featured event coordination tool designed to streamline how users create, manage, and participate in events. It includes role-based features for hosts and attendees, and an intuitive interface that allows users to quickly interact with upcoming events.
             </p>
           </div>
 
@@ -70,9 +68,7 @@ function EventManager() {
               <h2>Purpose and Objectives:</h2>
             </div>
             <p>
-              The purpose of this project is to simplify event planning by automating processes such as registration,
-              group management, and real-time updates. Objectives include reducing administrative overhead, increasing user engagement,
-              and delivering a secure, scalable solution for event organizers.
+              Built to eliminate the friction in planning events, the platform allows users to send and manage invitations, track RSVPs, and coordinate event logistics with ease. The primary goals were to reduce communication gaps, automate invitation workflows, and offer a secure user experience across devices.
             </p>
           </div>
 
@@ -81,9 +77,13 @@ function EventManager() {
               <h2>Tech Stack:</h2>
             </div>
             <p>
-              The application is built with Flask (backend) and React (frontend), with Redux Toolkit for state management.
-              It utilizes PostgreSQL for database storage, Flask-JWT-Extended for secure authentication, Flask-CORS for handling cross-origin requests,
-              and Vite for a fast development experience.
+              <strong>Languages:</strong> Python, JavaScript, SQL, HTML, CSS<br/>
+              <strong>Frameworks & Libraries:</strong> Flask, React, Redux, Vite, SQLAlchemy<br/>
+              <strong>Tools & Platforms:</strong> Git, GitHub, Visual Studio Code, Bcrypt<br/>
+              <strong>Databases:</strong> PostgreSQL<br/>
+              <strong>Security & Authentication:</strong> JWT Authentication, HTTP-Only Cookies, CSRF Protection<br/>
+              <strong>Cloud & DevOps:</strong> Render (Deployment), AWS S3 (Secure File Storage), CI/CD Pipelines<br/>
+              <strong>Development Practices:</strong> REST API Development, Object-Oriented Programming (OOP), CRUD, Agile Methodology
             </p>
           </div>
 
@@ -92,8 +92,12 @@ function EventManager() {
               <h2>Key Features:</h2>
             </div>
             <p>
-              Key features include dynamic event creation, real-time notifications, secure user authentication, robust CRUD operations,
-              and a responsive design that adapts seamlessly across devices.
+              • Create and manage public or private events with detailed descriptions, dates, and locations<br/>
+              • Invite users to events and monitor real-time RSVP status updates<br/>
+              • View a dedicated dashboard with event-specific attendee lists and statuses<br/>
+              • Automatically update event participant data when invitations are accepted<br/>
+              • Authenticate securely using JWTs with CSRF protection and secure cookies<br/>
+              • Fully responsive UI and clean visual design for modern user experience
             </p>
           </div>
 
@@ -102,9 +106,7 @@ function EventManager() {
               <h2>My Role and Contributions:</h2>
             </div>
             <p>
-              I led the design and development of the application, architecting both the frontend and backend systems.
-              My responsibilities included API integration, implementing secure authentication protocols, and ensuring a smooth user experience
-              through responsive design and rigorous testing.
+              I developed the entire project independently, from backend architecture to frontend design. I designed and implemented the data models, RESTful API, and secure authentication with JWT and CSRF protection. On the frontend, I built interactive components in React and managed global state using Redux Toolkit. I also deployed the application using Render and configured AWS S3 for static file storage.
             </p>
           </div>
 
@@ -113,8 +115,7 @@ function EventManager() {
               <h2>Impact and Value:</h2>
             </div>
             <p>
-              The Event Manager Application has streamlined event operations, reducing planning time by 40% and significantly improving
-              user satisfaction. It demonstrates my ability to deliver comprehensive full-stack solutions that drive efficiency and user engagement.
+              This project showcases my ability to build and deploy full-stack applications with advanced functionality and secure best practices. It demonstrates thoughtful design in both UX and data handling, offering a professional and intuitive platform that solves real-world coordination problems for groups and individuals.
             </p>
           </div>
         </div>
