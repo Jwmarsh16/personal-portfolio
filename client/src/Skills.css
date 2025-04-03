@@ -20,66 +20,39 @@
   color: var(--primary-color);
 }
 
-/* Each row is now a full-width container */
+/* Each row is full-width and hides overflow */
 .skills-row {
   overflow: hidden;
   width: 100vw;
   margin-bottom: 2rem;
+  cursor: grab;
 }
 
-/* The track inside the row that scrolls */
+.skills-row:active {
+  cursor: grabbing;
+}
+
+/* The scroll track holds the duplicated skill cards */
 .scroll-track {
   display: inline-flex;
   gap: 1rem;
   white-space: nowrap;
-  animation-duration: 55s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
 }
 
-/* Leftward scroll (←) */
-.scroll-left .scroll-track {
-  animation-name: scrollLeft;
-}
-
-@keyframes scrollLeft {
-  0% {
-    transform: translateX(50%);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-
-/* Rightward scroll (→) */
-.scroll-right .scroll-track {
-  animation-name: scrollRight;
-}
-
-@keyframes scrollRight {
-  0% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(0%);
-  }
-}
-
-/* Skill card */
+/* Skill card styles */
 .skill-card {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background: rgba(255, 255, 255, 0.07); /* soft gray overlay */
+  background: rgba(255, 255, 255, 0.07);
   padding: 0.5rem 1rem;
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 8px;
   box-shadow: var(--shadow);
   font-size: 1rem;
   transition: transform var(--transition-speed), box-shadow var(--transition-speed);
-  backdrop-filter: blur(4px); /* adds a nice frosted effect over starry bg */
+  backdrop-filter: blur(4px);
 }
-
 
 .skill-card:hover {
   transform: translateY(-3px) scale(1.02);
@@ -110,9 +83,4 @@
 
 .skills-controls button:hover {
   background-color: rgba(0, 255, 204, 0.3);
-}
-
-/* Pause animation when class is active */
-.skills-row.paused .scroll-track {
-  animation-play-state: paused;
 }
