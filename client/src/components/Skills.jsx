@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../Skills.css';
 import {
   FaPython, FaNodeJs, FaReact, FaGithub, FaCloud, FaCubes, FaLayerGroup, FaCogs, FaTasks,
   FaClipboardCheck, FaLock, FaKey, FaHtml5, FaCloudDownloadAlt, FaDatabase, FaEdit,
   FaTerminal, FaLockOpen, FaCookie, FaAws, FaFlask as FaFlaskFA, FaCheckCircle,
-  FaShieldAlt, FaLaptopCode
+  FaShieldAlt, FaLaptopCode, FaPause, FaPlay
 } from 'react-icons/fa';
 import {
   SiJavascript, SiFlask, SiRedux, SiPostgresql, SiVite, SiPostman,
@@ -12,6 +12,8 @@ import {
 } from 'react-icons/si';
 
 function Skills() {
+  const [isPaused, setIsPaused] = useState(false);
+
   const topRow = [
     { name: 'Python', icon: <FaPython />, color: '#306998' },
     { name: 'JavaScript', icon: <SiJavascript />, color: '#F7DF1E' },
@@ -58,7 +60,7 @@ function Skills() {
   ];
 
   const renderRow = (skills, direction, label) => (
-    <div className={`skills-row ${direction}`}>
+    <div className={`skills-row ${direction} ${isPaused ? 'paused' : ''}`}>
       <div className="scroll-track">
         {[...skills, ...skills].map((skill, index) => (
           <div key={`${label}-${index}`} className="skill-card">
@@ -72,10 +74,21 @@ function Skills() {
     </div>
   );
 
+  const handlePausePlay = () => {
+    setIsPaused(!isPaused);
+  };
+
   return (
     <section id="skills" className="skills">
       <div className="skills-container">
         <h2>My Skills</h2>
+
+        <div className="skills-controls">
+          <button onClick={handlePausePlay}>
+            {isPaused ? <FaPlay /> : <FaPause />} {isPaused ? 'Play' : 'Pause'}
+          </button>
+        </div>
+
         {renderRow(topRow, 'scroll-left', 'top')}
         {renderRow(middleRow, 'scroll-right', 'middle')}
         {renderRow(bottomRow, 'scroll-left', 'bottom')}

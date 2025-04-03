@@ -89,3 +89,30 @@
 .skill-icon {
   font-size: 1.2rem;
 }
+
+.skills-controls {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.skills-controls button {
+  background-color: rgba(0, 255, 204, 0.15);
+  color: var(--primary-color);
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.skills-controls button:hover {
+  background-color: rgba(0, 255, 204, 0.3);
+}
+
+/* Pause animation when class is active */
+.skills-row.paused .scroll-track {
+  animation-play-state: paused;
+}

@@ -1,7 +1,10 @@
 /* SkillsIntro.css */
 
-.skills-intro-wrapper {
-    padding: 3rem 2rem;
+  .skills-intro-wrapper {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    overflow-x: hidden;
   }
   
   /* Separate wrapper for summary so we can shift only that left */
@@ -11,13 +14,14 @@
     margin-left: 3rem;
   }
   
-  /* Center the skills rows independently */
   .skills-wrapper {
-    width: 100vw;
-    overflow: hidden;
+    width: 100%;
+    overflow-x: visible;
     margin-top: 2rem;
-    padding: 0; /* remove padding that could clip the sides */
+    padding: 0;
   }
+
+  
   
   
   /* Summary content styling */
