@@ -13,7 +13,7 @@ import Portfolio from './project-details/Portfolio';
 import Resume from './components/Resume';
 import AboutMe from './components/AboutMe';
 import Footer from './components/Footer'; // ✅ Import Footer
-import './global.css';
+import './Global.css';
 
 function App() {
   return (

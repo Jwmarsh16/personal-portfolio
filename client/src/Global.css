@@ -1,4 +1,4 @@
-/* index.css */
+/* Global.css */
 /* Import Google Fonts for consistency */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@300;400;500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Inter:wght@400;600&display=swap');
@@ -21,12 +21,12 @@ body {
   font-family: var(--body-font);
   color: var(--text-color);
   line-height: 1.6;
-  background: black; /* Fallback background */
+  background: black;
   position: relative;
   overflow-x: hidden;
 }
 
-/* Fixed starry background using your local image from the public folder */
+/* Starry background */
 body::before {
   content: "";
   position: fixed;
@@ -39,16 +39,7 @@ body::before {
   opacity: 0.8;
 }
 
-
-/* -------------------------------
-   Revised Shooting Star CSS (Decoupled)
-   -------------------------------
-   The shooting star's motion is defined by custom variables:
-   --startX, --startY, --endX, --endY for translation,
-   and --starRotation for the star's facing direction.
-   Defaults move the star horizontally (left to right) with no vertical offset.
-*/
-
+/* Shooting Star Motion */
 .shooting-star-container {
   position: fixed;
   top: var(--top, 20%);
@@ -121,4 +112,38 @@ h1, h2, h3, h4, h5, h6, p, a {
 .btn:hover {
   background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
   transform: scale(1.05);
+}
+
+/* ----------------------
+   🔽 Mobile Responsive
+------------------------- */
+@media (max-width: 768px) {
+  body {
+    font-size: 0.95rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.75rem;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+  }
+
+  .container {
+    padding: 1.25rem;
+  }
+
+  .btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.95rem;
+  }
+
+  .shooting-star {
+    height: 100px; /* shorter trail on smaller screens */
+  }
 }
