@@ -60,3 +60,59 @@
   background-color: #ffffff;
   color: #1e2a38;
 }
+
+/* Hide hamburger by default on desktop */
+.hamburger {
+  display: none;
+}
+
+/* Mobile styles */
+@media screen and (max-width: 768px) {
+  .header {
+    top: 10%;
+    right: 0;
+    transform: none;
+    padding: 0.5rem 0.3rem;
+    border-radius: 0 0 12px 12px;
+  }
+  
+  /* Hide nav links and show hamburger icon */
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    background: rgba(0, 0, 0, 0.8);
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 100%;
+    padding: 1rem 0;
+    border-radius: 0 0 12px 12px;
+  }
+  
+  /* When header has "open" class, display nav links */
+  .header.open .nav-links {
+    display: flex;
+  }
+  
+  /* Show hamburger menu icon on mobile */
+  .hamburger {
+    display: block;
+    position: absolute;
+    top: -3rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    color: #61dafb;
+    cursor: pointer;
+    z-index: 1001;
+  }
+  
+  .nav-links li {
+    font-size: 1rem;
+  }
+  
+  .nav-links li a,
+  .nav-links li button {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+  }
+}
