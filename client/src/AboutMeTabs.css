@@ -5,6 +5,7 @@
   padding: 2rem;
   flex-wrap: wrap;
   gap: 1.5rem;
+  margin-right: 3rem;
 }
 
 .code-image {
@@ -14,6 +15,7 @@
   justify-content: flex-end;
   align-items: center;
   margin-top: 6rem; /* push image down */
+  margin-right: 5rem;
 }
 
 .code-image img {
@@ -175,7 +177,7 @@
     margin: 0 auto;
     padding: 1rem;
     max-height: 400px;
-    margin-left: -1rem;
+    margin-left: 0.5rem;
   }
 
   .tabs button {
@@ -208,4 +210,3 @@
   }
 }
 
-/*git commit
