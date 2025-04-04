@@ -92,4 +92,39 @@
   color: #111;
 }
 
-
+/* Mobile styles */
+@media screen and (max-width: 768px) {
+  .projects {
+    padding: 2rem 1rem;
+    margin: 1rem 0;
+  }
+  
+  .projects-container h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .projects-list {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .project-item {
+    padding: 1.5rem;
+  }
+  
+  .project-image {
+    height: 180px;
+    margin-bottom: 1rem;
+  }
+  
+  .project-item p {
+    font-size: 0.9rem;
+  }
+  
+  .project-buttons a,
+  .project-buttons .details-link {
+    padding: 0.5rem 0.8rem;
+    font-size: 1rem;
+  }
+}
