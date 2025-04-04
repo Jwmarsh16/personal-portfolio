@@ -83,8 +83,8 @@
     background: rgba(0, 0, 0, 0.8);
     position: absolute;
     top: 100%;
-    right: 0;
-    width: 100%;
+    right: 5rem;
+    width: 90%;
     padding: 1rem 0;
     border-radius: 0 0 12px 12px;
   }
@@ -114,5 +114,6 @@
   .nav-links li button {
     padding: 0.4rem 0.8rem;
     font-size: 0.9rem;
+    white-space: nowrap;
   }
 }
