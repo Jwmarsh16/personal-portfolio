@@ -1,74 +1,99 @@
 /* SkillsIntro.css */
 
-  .skills-intro-wrapper {
-    margin: 0;
-    padding: 0;
-    width: 100vw;
-    overflow-x: hidden;
-  }
-  
-  /* Separate wrapper for summary so we can shift only that left */
-  .summary-wrapper {
-    text-align: left;
-    max-width: 900px;
-    margin-left: 3rem;
-  }
-  
-  .skills-wrapper {
-    width: 100%;
-    overflow-x: visible;
-    margin-top: 2rem;
-    padding: 0;
-  }
+.skills-intro-wrapper {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  overflow-x: hidden;
+}
 
-  
-  
-  
-  /* Summary content styling */
-  .summary-intro h1 {
-    font-size: 3.5rem;
-    color: white;
-    margin-bottom: 1rem;
+/* Separate wrapper for summary so we can shift only that left */
+.summary-wrapper {
+  text-align: left;
+  max-width: 900px;
+  margin-left: 3rem;
+}
+
+.skills-wrapper {
+  width: 100%;
+  overflow-x: visible;
+  margin-top: 2rem;
+  padding: 0;
+}
+
+/* Summary content styling */
+.summary-intro h1 {
+  font-size: 3.5rem;
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.name-highlight {
+  color: #00ffd1;
+  font-weight: 900;
+}
+
+.role-highlight {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #61dafb;
+  margin-bottom: 1.5rem;
+}
+
+.summary-intro p {
+  font-size: 1.15rem;
+  color: white;
+  margin-bottom: 1.2rem;
+  line-height: 1.6;
+}
+
+.highlight {
+  color: #94f5ff;
+  font-weight: bold;
+}
+
+.skills-social-icons {
+  display: flex;
+  gap: 1.2rem;
+  margin-top: 1.5rem;
+}
+
+.skills-social-icons a {
+  font-size: 1.8rem;
+  color: #00ffc8;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.skills-social-icons a:hover {
+  transform: scale(1.2);
+  color: #ffffff;
+}
+
+/* Mobile styles */
+@media screen and (max-width: 768px) {
+  .summary-wrapper {
+    margin-left: 0.5rem;
+    max-width: 100%;
   }
   
-  .name-highlight {
-    color: #00ffd1;
-    font-weight: 900;
+  .summary-intro h1 {
+    font-size: 2.5rem;
   }
   
   .role-highlight {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #61dafb;
-    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
   }
   
   .summary-intro p {
-    font-size: 1.15rem;
-    color: white;
-    margin-bottom: 1.2rem;
-    line-height: 1.6;
-  }
-  
-  .highlight {
-    color: #94f5ff;
-    font-weight: bold;
+    font-size: 1rem;
   }
   
   .skills-social-icons {
-    display: flex;
-    gap: 1.2rem;
-    margin-top: 1.5rem;
+    gap: 0.8rem;
+    margin-top: 1rem;
   }
   
   .skills-social-icons a {
-    font-size: 1.8rem;
-    color: #00ffc8;
-    transition: transform 0.3s ease, color 0.3s ease;
+    font-size: 1.5rem;
   }
-  
-  .skills-social-icons a:hover {
-    transform: scale(1.2);
-    color: #ffffff;
-  }
-  
+}
