@@ -19,7 +19,6 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Menu />
         <Header />
 
         {/* Shooting Star Effects */}
