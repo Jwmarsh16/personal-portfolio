@@ -4,6 +4,7 @@ import Header from './components/Header';
 import SkillsIntro from './components/SkillsIntro';
 import AboutMeTabs from './components/AboutMeTabs';
 import Projects from './components/Projects';
+import ToolsUsedHome from './components/ToolsUsedHome'; // ✅ Added tools section below Projects
 import Contact from './components/Contact';
 import Menu from './components/Menu';
 import TechnicalBlogs from './components/TechnicalBlogs';
@@ -12,12 +13,14 @@ import EventManager from './project-details/EventManager';
 import Portfolio from './project-details/Portfolio';
 import Resume from './components/Resume';
 import AboutMe from './components/AboutMe';
-import Footer from './components/Footer'; // ✅ Import Footer
+import Footer from './components/Footer';
+import ScrollToTop from './components/ScrollToTop'; // ✅ Makes the page scroll to top on route change
 import './Global.css';
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <div className="App">
         <Header />
 
@@ -98,6 +101,7 @@ function App() {
                 <SkillsIntro />
                 <AboutMeTabs />
                 <Projects />
+                <ToolsUsedHome /> {/* ✅ Added component under Projects */}
                 <Contact />
               </main>
             }
@@ -110,7 +114,6 @@ function App() {
           <Route path="/project/portfolio-website" element={<Portfolio />} />
         </Routes>
 
-        {/* ✅ Footer displayed on all pages */}
         <Footer />
       </div>
     </Router>

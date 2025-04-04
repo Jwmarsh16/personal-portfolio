@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import Skills from './Skills';
 import '../AboutMe.css';
 
@@ -39,7 +40,8 @@ function AboutMe() {
         <p className="summary">
           I'm a software engineer with a strong background in project management, passionate about building impactful full-stack applications using modern web technologies. I'm driven by curiosity, creativity, and a constant hunger to learn.
         </p>
-        <a href="/resume" className="resume-link">📄 View My Resume</a>
+        <Link to="/resume" className="resume-link">📄 View My Resume</Link>
+
       </div>
 
       {/* 🛠️ Horizontal Skills */}
