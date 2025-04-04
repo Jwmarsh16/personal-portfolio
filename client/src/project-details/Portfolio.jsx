@@ -1,5 +1,11 @@
 import React, { useState } from 'react';
 import './FantasyFootballResearchHub.css';
+import {
+  FaArrowUp, FaReact, FaCloudDownloadAlt, FaLaptopCode, FaTerminal, FaCodeBranch, FaPaintBrush, FaRocket, FaCloud, FaPalette
+} from 'react-icons/fa';
+import {
+  SiVite, SiJavascript, SiReactrouter, SiCss3
+} from 'react-icons/si';
 
 function Portfolio() {
   const images = [
@@ -11,19 +17,51 @@ function Portfolio() {
   ];
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [expandedCategory, setExpandedCategory] = useState(null);
+  const [visibleTooltips, setVisibleTooltips] = useState({});
 
   const nextImage = () => {
     setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
   };
 
   const prevImage = () => {
-    setCurrentImageIndex((prevIndex) =>
-      (prevIndex - 1 + images.length) % images.length
-    );
+    setCurrentImageIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
   };
 
   const goToImage = (index) => {
     setCurrentImageIndex(index);
+  };
+
+  const toggleCategory = (category) => {
+    setExpandedCategory(expandedCategory === category ? null : category);
+  };
+
+  const toggleTooltip = (index) => {
+    setVisibleTooltips((prev) => ({ ...prev, [index]: !prev[index] }));
+  };
+
+  const techStack = {
+    Frontend: [
+      { name: 'React', icon: <FaReact />, color: '#61DAFB', description: 'Component-based library for building UI' },
+      { name: 'Vite', icon: <SiVite />, color: '#9999FF', description: 'Fast frontend tooling and hot reloading' },
+      { name: 'JavaScript', icon: <SiJavascript />, color: '#F7DF1E', description: 'Dynamic scripting for interactivity' },
+      { name: 'React Router', icon: <SiReactrouter />, color: '#E84D3D', description: 'Client-side routing for SPA navigation' },
+      { name: 'EmailJS', icon: <FaCloudDownloadAlt />, color: '#D44638', description: 'Used to send form submissions via email' },
+      { name: 'React Icons', icon: <FaPalette />, color: '#A8DADC', description: 'Library of UI icons used across the app' }
+    ],
+    Styling: [
+      { name: 'CSS3', icon: <SiCss3 />, color: '#264DE4', description: 'Custom modular stylesheets for layout and effects' },
+      { name: 'Custom Animations', icon: <FaPaintBrush />, color: '#DA70D6', description: 'CSS keyframes and transitions for interactivity' },
+      { name: 'Dark/Neon Theme', icon: <FaRocket />, color: '#00FFC3', description: 'Styled using glowing highlights and glassmorphism' }
+    ],
+    Deployment: [
+      { name: 'Render', icon: <FaCloud />, color: '#00BFFF', description: 'Cloud deployment for static frontend hosting' }
+    ],
+    Development: [
+      { name: 'VS Code', icon: <FaLaptopCode />, color: '#7CAEFF', description: 'Code editor for project development' },
+      { name: 'Git', icon: <FaCodeBranch />, color: '#F1502F', description: 'Version control system used for local commits' },
+      { name: 'GitHub', icon: <FaCodeBranch />, color: '#CCCCCC', description: 'Remote repo for project collaboration and deployment' }
+    ]
   };
 
   return (
@@ -70,23 +108,44 @@ function Portfolio() {
           </div>
 
           <div className="info-box">
-            <div className="section-header"><h2>Tech Stack</h2></div>
-            <p>
-              <strong>Frontend:</strong> React (Vite), React Router, EmailJS, React Icons<br/>
-              <strong>Styling:</strong> Modular CSS, custom animations, neon/dark theme<br/>
-              <strong>Deployment:</strong> Render (static site deployment)<br/>
-              <strong>Design:</strong> Starry night theme, frosted glass UI, mobile responsiveness
-            </p>
+            <div className="tech-stack-container">
+              <h2>Tech Stack</h2>
+              <p>Click each category below to view the technologies used:</p>
+              <div className="tech-categories">
+                {Object.entries(techStack).map(([category, tools]) => (
+                  <div className="tech-category" key={category}>
+                    <h3 onClick={() => toggleCategory(category)} style={{ cursor: 'pointer' }}>{category}</h3>
+                    {expandedCategory === category && (
+                      <div className="tech-items">
+                        {tools.map((tool, index) => (
+                          <div
+                            className="tech-item-pill"
+                            key={index}
+                            onClick={() => toggleTooltip(`${category}-${index}`)}
+                            style={{ color: tool.color || '#fff' }}
+                          >
+                            {tool.icon && <span>{tool.icon}</span>}<span>{tool.name}</span>
+                            {visibleTooltips[`${category}-${index}`] && tool.description && (
+                              <div className="tooltip">{tool.description}</div>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
 
           <div className="info-box">
             <div className="section-header"><h2>Key Features</h2></div>
             <p>
-              - Horizontally scrolling skills section with interactive controls<br/>
-              - Tabbed About Me section and dedicated resume page<br/>
-              - Starry night background with shooting stars<br/>
-              - EmailJS-powered contact form with success feedback<br/>
-              - Project detail pages with animated slideshows<br/>
+              - Horizontally scrolling skills section with interactive controls<br />
+              - Tabbed About Me section and dedicated resume page<br />
+              - Starry night background with shooting stars<br />
+              - EmailJS-powered contact form with success feedback<br />
+              - Project detail pages with animated slideshows<br />
               - Fully mobile-responsive layout and performance optimization via Vite
             </p>
           </div>
@@ -105,6 +164,13 @@ function Portfolio() {
             </p>
           </div>
         </div>
+
+        <button
+          className="back-to-top"
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        >
+          <FaArrowUp />
+        </button>
       </div>
     </div>
   );

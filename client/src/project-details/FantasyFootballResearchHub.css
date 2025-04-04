@@ -1,35 +1,63 @@
+/* FantasyFootballResearchHub.css */
+
+/* Container now transparent to reveal the starry-night background */
 .project-detail-container {
   min-height: 100vh;
   padding: 3rem 1rem;
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  background-color: transparent;
+  background: none;
 }
 
+/* Glassmorphic card with neon accents (no hover pop-up effect) */
 .project-detail-card {
   max-width: 1200px;
   width: 100%;
-  background-color: rgba(33, 33, 33, 0.8);
+  background: rgba(20, 20, 20, 0.85);
+  backdrop-filter: blur(10px);
   padding: 3rem;
   border-radius: 16px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 0 30px rgba(0, 255, 204, 0.3);
+  border: 1px solid rgba(97, 218, 251, 0.3);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease;
 }
 
+/* Remove the pop-up scaling effect on hover */
+.project-detail-card:hover {
+  transform: none;
+}
+
+/* Neon glowing project title with pulsing effect */
 .project-title {
   font-family: var(--heading-font);
   font-size: 2.8rem;
   margin-bottom: 1rem;
   color: #ffffff;
-  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+  text-shadow: 0 0 10px #00ffc3, 0 0 20px #00ffc3;
   text-align: center;
+  position: relative;
+  animation: pulseGlow 2s infinite;
 }
 
+@keyframes pulseGlow {
+  0%, 100% {
+    text-shadow: 0 0 10px #00ffc3, 0 0 20px #00ffc3;
+  }
+  50% {
+    text-shadow: 0 0 20px #00ffc3, 0 0 30px #00ffc3;
+  }
+}
+
+/* Engaging description with refined letter-spacing */
 .brief-description {
   font-size: 1.2rem;
   color: #cccccc;
   text-align: center;
   margin-bottom: 2rem;
+  letter-spacing: 0.5px;
 }
 
 /* === SLIDESHOW === */
@@ -48,22 +76,25 @@
   max-width: 1100px;
   border-radius: 12px;
   height: auto;
-  object-fit: contain;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-  transition: transform 0.3s ease;
+  object-fit: cover;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 2px solid rgba(97, 218, 251, 0.4);
 }
 
 .slideshow-image:hover {
-  transform: scale(1.02);
+  transform: scale(1.03);
+  box-shadow: 0 12px 30px rgba(0, 255, 204, 0.5);
 }
 
+/* Enhanced navigation buttons with neon glow */
 .prev-button,
 .next-button {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.6);
-  color: white;
+  background: rgba(0, 0, 0, 0.7);
+  color: #00ffc3;
   border: none;
   border-radius: 50%;
   width: 50px;
@@ -71,14 +102,15 @@
   font-size: 1.5rem;
   cursor: pointer;
   z-index: 2;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 0 15px rgba(0, 255, 204, 0.4);
 }
 
 .prev-button:hover,
 .next-button:hover {
-  background-color: rgba(255, 255, 255, 0.3);
-  transform: translateY(-50%) scale(1.1);
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-50%) scale(1.15);
+  box-shadow: 0 0 25px rgba(0, 255, 204, 0.6);
 }
 
 .prev-button {
@@ -123,15 +155,19 @@
   border-left: 4px solid #61dafb;
   padding: 1.5rem 2rem;
   border-radius: 12px;
-  transition: box-shadow 0.3s ease;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
 .info-box:hover {
-  box-shadow: 0 0 10px rgba(97, 218, 251, 0.4);
+  box-shadow: 0 0 15px rgba(97, 218, 251, 0.5);
+  transform: scale(1.02);
 }
 
+/* Section header with a gradient border */
 .section-header {
-  background-color: rgba(97, 218, 251, 0.1);
+  background: linear-gradient(90deg, rgba(97,218,251,0.3), rgba(97,218,251,0));
   padding: 0.5rem 1rem;
   border-radius: 6px;
   margin-bottom: 1rem;
@@ -144,10 +180,112 @@
   font-size: 1.6rem;
 }
 
+/* Info text styling with subtle glow */
 .info-box p {
   color: #ddd;
   line-height: 1.7;
   font-size: 1.05rem;
+  text-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+}
+
+/* === TECH STACK SECTION (SIMILAR TO SCREENSHOT) === */
+.tech-stack-container {
+  margin-top: 2rem;
+  color: #ccc;
+}
+
+.tech-stack-container h2 {
+  font-size: 2rem;
+  color: #00ffc3;
+  text-align: left;
+  margin-bottom: 0.5rem;
+}
+
+.tech-stack-container p {
+  font-size: 1rem;
+  color: #aaaaaa;
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.tech-categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: flex-start;
+}
+
+.tech-category {
+  flex: 1 1 300px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tech-category:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 15px rgba(0, 255, 204, 0.2);
+}
+
+.tech-category h3 {
+  color: #00ffc3;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.tech-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tech-item-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 9999px;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.9rem;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.tech-item-pill:hover {
+  background: rgba(0, 255, 204, 0.2);
+  box-shadow: 0 0 8px rgba(0, 255, 204, 0.4);
+  transform: translateY(-2px);
+}
+
+/* === BACK TO TOP BUTTON === */
+/* Use an arrow icon instead of text so it fits neatly inside the circle */
+.back-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: #00ffc3;
+  color: #000;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 1.4rem;
+  cursor: pointer;
+  box-shadow: 0 0 15px rgba(0, 255, 204, 0.4);
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.back-to-top:hover {
+  background: #00ffcc;
+  transform: scale(1.1);
 }
 
 /* === RESPONSIVE === */
@@ -196,8 +334,21 @@
   .info-box p {
     font-size: 1rem;
   }
-  
+
   .info-grid {
     gap: 1.5rem;
+  }
+
+  .tech-stack-container h2 {
+    font-size: 1.5rem;
+  }
+
+  .tech-category h3 {
+    font-size: 1rem;
+  }
+
+  .tech-item-pill {
+    font-size: 0.85rem;
+    padding: 0.3rem 0.6rem;
   }
 }
