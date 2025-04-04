@@ -10,7 +10,7 @@
 .about-header {
   max-width: 1100px;
   margin-left: 4rem;
-  text-align: left; /* top-left alignment */
+  text-align: left;
   padding-left: 1rem;
 }
 
@@ -248,6 +248,11 @@
 
 /* 📱 Responsive */
 @media (max-width: 768px) {
+  .about-header {
+    margin-left: 0;
+    padding-left: 0.5rem;
+  }
+
   .about-header h1 {
     font-size: 2.2rem;
   }
@@ -256,17 +261,48 @@
     font-size: 1.2rem;
   }
 
-  .about-card p,
-  .summary {
+  .tagline,
+  .summary,
+  .about-card p {
     font-size: 1rem;
+  }
+
+  .about-split-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .about-img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 1rem;
+  }
+
+  .resume-link {
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
   }
 
   .pills li {
     font-size: 0.85rem;
   }
 
-  .resume-link {
+  .tools-heading {
+    font-size: 1.5rem;
+  }
+
+  .tools-subtext {
+    font-size: 0.95rem;
+  }
+
+  .tab-buttons button {
     font-size: 0.9rem;
     padding: 0.5rem 1rem;
+  }
+
+  .tool-pill {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.9rem;
   }
 }
