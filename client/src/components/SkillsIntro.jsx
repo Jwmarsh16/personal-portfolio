@@ -14,13 +14,13 @@ function SkillsIntro() {
           </h1>
           <h2 className="role-highlight">Full Stack Developer</h2>
           <p>
-            🚀 A <span className="highlight">passionate Software Developer</span> based in{' '}
+            A <span className="highlight">passionate Software Developer</span> based in{' '}
             <span className="highlight">Austin, Texas</span>. Open to opportunities and freelance projects.
           </p>
           <p>
-            🛠️ My main tech stack currently is <span className="highlight">Flask, React, PostgreSQL, and AWS S3</span>.
-            I specialize in building <span className="highlight">complex, fast, and functional</span> digital products
-            that deliver exceptional user experiences.
+            My main tech stack currently is <span className="highlight">Python, JavaScript, SQL, Flask, React, PostgreSQL, and AWS S3</span>.
+            I specialize in  breaking down complex problems and building practical solutions, whether it’s<span className="highlight"> optimizing a 
+              database query, designing an intuitive user interface, or improving API efficiency.</span>
           </p>
 
           {/* ✅ Social Icons */}

@@ -236,7 +236,7 @@ function Skills() {
   return (
     <section id="skills" className="skills">
       <div className="skills-container">
-        <h2>My Skills</h2>
+        <h2></h2>
         <div className="skills-controls">
           <button onClick={handlePausePlay}>
             {isPaused ? <FaPlay /> : <FaPause />} {isPaused ? 'Play' : 'Pause'}
