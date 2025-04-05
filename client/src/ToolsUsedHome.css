@@ -23,53 +23,54 @@
   .tools-tab-wrapper {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1.5rem;
     transition: all 0.4s ease;
+    padding-left: 20rem; /* ✅ Shifts the whole section right */
+  }
+
+  .tools-heading {
+    padding-left: 20rem; /* shift heading to the right */
   }
   
-  .tools-categories-vertical {
+  .tools-subtext {
+    padding-left: 20rem; /* shift subtext to the right */
+  }
+  
+  
+  .category-with-tools {
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
     gap: 1rem;
   }
   
-  .tools-categories-vertical button {
+  .category-button {
     background-color: rgba(255, 255, 255, 0.08);
     color: #ffffff;
     padding: 0.6rem 1.2rem;
     font-size: 0.95rem;
     border-radius: 9999px;
-    text-align: left;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
     cursor: pointer;
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 0 4px rgba(0, 255, 204, 0.1);
     transition: all 0.3s ease;
+    margin-right: 1rem;
   }
   
-  .tools-categories-vertical button.active {
+  .category-button.active {
     background-color: #00ffc3;
     color: #000;
-    transform: scale(1.05);
     font-weight: bold;
+    transform: scale(1.05);
     border-color: rgba(0, 255, 204, 0.4);
     box-shadow: 0 0 12px rgba(0, 255, 204, 0.5);
-  }
-  
-  .tools-categories-vertical button:hover {
-    background-color: rgba(0, 255, 204, 0.15);
-    box-shadow: 0 0 6px rgba(0, 255, 204, 0.3);
-    transform: translateX(3px);
   }
   
   .tools-list {
     display: flex;
     flex-wrap: wrap;
     gap: 0.8rem;
-    padding-left: 0.5rem;
-    transition: opacity 0.3s ease-in-out;
+    padding-left: 0;
   }
   
   .tool-pill {
@@ -90,19 +91,15 @@
     box-shadow: 0 0 8px rgba(0, 255, 204, 0.4);
   }
   
-  /* Responsive layout for larger screens */
+  /* Responsive layout */
   @media (min-width: 768px) {
     .tools-tab-wrapper {
+      flex-direction: column;
+    }
+  
+    .category-with-tools {
       flex-direction: row;
       align-items: flex-start;
-    }
-  
-    .tools-categories-vertical {
-      min-width: 220px;
-    }
-  
-    .tools-list {
-      flex: 1;
     }
   }
   

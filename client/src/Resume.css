@@ -6,7 +6,11 @@
   margin: 0 auto;
   color: #ffffff;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #111; /* ✅ Solid dark background */
+  border-radius: 16px;     /* ✅ Optional rounded corners */
+  box-shadow: 0 0 20px rgba(0, 255, 204, 0.1); /* ✅ Optional soft glow */
 }
+
 
 .resume-title {
   font-size: 2.8rem;
@@ -85,6 +89,20 @@
   padding-left: 1rem;
   list-style: disc;
 }
+
+/* Softer project links in Technical Projects section */
+.resume-section h3 a {
+  color: #12c4fa; /* Softer blue */
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.resume-section h3 a:hover {
+  color: #00e6d8;
+  border-color: #00e6d8;
+}
+
 
 /* Mobile styles */
 @media (max-width: 768px) {

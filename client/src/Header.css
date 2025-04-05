@@ -1,7 +1,7 @@
 /* Header.css */
 .header {
   position: fixed;
-  top: 19%;
+  top: 29%;
   right: 0;
   transform: translateY(-50%);
   background: rgba(0, 0, 0, 0.5);
@@ -29,24 +29,12 @@
   font-size: 1.1rem;
 }
 
-.nav-links li a {
-  color: #61dafb;
-  text-decoration: none;
-  font-weight: bold;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  transition: background-color var(--transition-speed), color var(--transition-speed);
-}
-
-.nav-links li a:hover {
-  background-color: #ffffff;
-  color: #1e2a38;
-}
-
+/* Shared base styling for both a and button */
+/* Shared base styling for both a and button */
+.nav-links li a,
 .nav-links li button {
-  background: none;
-  border: none;
-  color: #61dafb;
+  all: unset; /* 🚫 Resets all default styles */
+  display: inline-block;
   text-decoration: none;
   font-weight: bold;
   padding: 0.5rem 1rem;
@@ -56,6 +44,22 @@
   transition: background-color var(--transition-speed), color var(--transition-speed);
 }
 
+
+/* Neon green color for page links */
+.nav-links li a.home-link,
+.nav-links li a.about-link,
+.nav-links li a.blog-link,
+.nav-links li a.resume-link {
+  color: #00ffc3;
+}
+
+/* Other internal scroll buttons (Skills, Projects, Contact) */
+.nav-links li button {
+  color: #61dafb;
+}
+
+/* Hover effect for all */
+.nav-links li a:hover,
 .nav-links li button:hover {
   background-color: #ffffff;
   color: #1e2a38;
@@ -75,8 +79,7 @@
     padding: 0.5rem 0.3rem;
     border-radius: 0 0 12px 12px;
   }
-  
-  /* Hide nav links and show hamburger icon */
+
   .nav-links {
     display: none;
     flex-direction: column;
@@ -88,13 +91,11 @@
     padding: 1rem 0;
     border-radius: 0 0 12px 12px;
   }
-  
-  /* When header has "open" class, display nav links */
+
   .header.open .nav-links {
     display: flex;
   }
-  
-  /* Show hamburger menu icon on mobile */
+
   .hamburger {
     display: block;
     position: absolute;
@@ -105,11 +106,11 @@
     cursor: pointer;
     z-index: 1001;
   }
-  
+
   .nav-links li {
     font-size: 1rem;
   }
-  
+
   .nav-links li a,
   .nav-links li button {
     padding: 0.4rem 0.8rem;

@@ -101,7 +101,9 @@ function App() {
                 <SkillsIntro />
                 <AboutMeTabs />
                 <Projects />
-                <ToolsUsedHome /> {/* ✅ Added component under Projects */}
+                <section id="tools">
+                  <ToolsUsedHome />
+                </section>
                 <Contact />
               </main>
             }
@@ -113,6 +115,7 @@ function App() {
           <Route path="/project/event-manager-application" element={<EventManager />} />
           <Route path="/project/portfolio-website" element={<Portfolio />} />
         </Routes>
+
 
         <Footer />
       </div>

@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import {
-  FaPython, FaDatabase, FaCodeBranch, FaTerminal, FaHtml5, FaCss3Alt, FaGit, FaGithub, FaLock, FaKey, FaCloud, FaAws, FaCogs, FaBug, FaUserShield, FaCheckCircle, FaLaptopCode
+  FaPython, FaDatabase, FaCodeBranch, FaTerminal, FaHtml5, FaCss3Alt, FaGit, FaGithub,
+  FaLock, FaKey, FaCloud, FaAws, FaCogs, FaBug, FaUserShield, FaCheckCircle, FaLaptopCode
 } from 'react-icons/fa';
 import {
-  SiJavascript, SiFlask, SiReact, SiRedux, SiVite, SiPostgresql, SiPostman, SiSqlalchemy, SiNodedotjs, SiBabel, SiRender, SiJson
+  SiJavascript, SiFlask, SiReact, SiRedux, SiVite, SiPostgresql, SiPostman,
+  SiSqlalchemy, SiNodedotjs, SiRender
 } from 'react-icons/si';
 import '../ToolsUsedHome.css';
 
@@ -82,26 +84,27 @@ function ToolsUsedHome() {
       </p>
 
       <div className="tools-tab-wrapper">
-        <div className="tools-categories-vertical">
-          {Object.keys(tools).map((category) => (
+        {Object.keys(tools).map((category) => (
+          <div key={category} className="category-with-tools">
             <button
-              key={category}
-              className={activeTab === category ? 'active' : ''}
+              className={`category-button ${activeTab === category ? 'active' : ''}`}
               onClick={() => setActiveTab(category)}
             >
               {categoryLabels[category]}
             </button>
-          ))}
-        </div>
 
-        <div className="tools-list animated">
-          {tools[activeTab].map((tool, index) => (
-            <span key={index} className="tool-pill">
-              <span className="tool-icon">{tool.icon}</span>
-              {tool.name}
-            </span>
-          ))}
-        </div>
+            {activeTab === category && (
+              <div className="tools-list animated">
+                {tools[category].map((tool, index) => (
+                  <span key={index} className="tool-pill">
+                    <span className="tool-icon">{tool.icon}</span>
+                    {tool.name}
+                  </span>
+                ))}
+              </div>
+            )}
+          </div>
+        ))}
       </div>
     </section>
   );

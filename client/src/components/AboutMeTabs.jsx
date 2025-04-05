@@ -41,40 +41,55 @@ function AboutMeTabs() {
             </p>
           </div>
         );
-      case 'Career':
-        return (
-          <div className="tab-content">
-            <ul>
-              <li>
-                <strong>Project Manager – Nuclear Power Inspection</strong>
-                <br />
-                2019 – 2023
-              </li>
-              <li>
-                <strong>Software Engineering Student – Flatiron School</strong>
-                <br />
-                April 2024 – August 2024
-              </li>
-            </ul>
-          </div>
-        );
-      case 'Education':
-        return (
-          <div className="tab-content">
-            <ul>
-              <li>
-                <strong>Flatiron School – Software Engineering Bootcamp</strong>
-                <br />
-                Graduated: August 2024
-              </li>
-              <li>
-                <strong>Other Continuing Education</strong>
-                <br />
-                Online courses in Flask, React, AWS, CI/CD, and more
-              </li>
-            </ul>
-          </div>
-        );
+        case 'Career':
+          return (
+            <div className="tab-content">
+              <div className="job-entry">
+                <h3 className="job-title">Nuclear Project Manager</h3>
+                <p className="job-company">The Merrick Group — West Hazleton, PA</p>
+                <p className="job-dates">Feb 2020 – Apr 2024</p>
+                <ul className="job-details">
+                  <li>Led nuclear eddy current projects, analyzing complex data to enhance reactor safety and performance.</li>
+                  <li>Implemented innovative inspection techniques, improving accuracy and reducing turnaround time.</li>
+                  <li>Managed multiple projects simultaneously, meeting deadlines and maintaining strict quality standards.</li>
+                  <li>Coordinated cross-functional teams of 40+ engineers and technicians with strong communication and leadership.</li>
+                </ul>
+              </div>
+        
+              <div className="job-entry">
+                <h3 className="job-title">Nuclear Technician</h3>
+                <p className="job-company">BWXT — Lynchburg, VA</p>
+                <p className="job-dates">Sept 2012 – Jan 2020</p>
+                <ul className="job-details">
+                  <li>Performed eddy current inspections on nuclear plant equipment including steam generators and reactor components.</li>
+                  <li>Documented and analyzed inspection results, delivering detailed technical reports to support maintenance planning.</li>
+                  <li>Collaborated with engineering teams to improve inspection accuracy and reduce plant downtime.</li>
+                </ul>
+              </div>
+            </div>
+          );
+        
+          case 'Education':
+            return (
+              <div className="tab-content">
+                <div className="education-entry">
+                  <h3 className="education-title">Flatiron School (Remote)</h3>
+                  <p className="education-dates">April 2024 – September 2024</p>
+                  <p className="education-details">
+                    Full-stack Web Development, JavaScript and Python Program
+                  </p>
+                </div>
+          
+                <div className="education-entry">
+                  <h3 className="education-title">Virginia Wesleyan — Norfolk, VA</h3>
+                  <p className="education-dates">September 2011 – June 2012</p>
+                  <p className="education-details">
+                    Completed foundational courses in Computer Science before pursuing a professional opportunity in the nuclear industry.
+                  </p>
+                </div>
+              </div>
+            );
+          
       case 'Resume':
         navigate('/resume');
         return null;

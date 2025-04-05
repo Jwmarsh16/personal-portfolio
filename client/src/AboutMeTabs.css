@@ -146,6 +146,66 @@
   }
 }
 
+.job-entry {
+  margin-bottom: 2rem;
+  padding-left: 0.5rem;
+}
+
+.job-title {
+  color: #00ffc3;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 0.2rem;
+}
+
+.job-company {
+  color: #ffffff;
+  font-style: italic;
+  margin-bottom: 0.2rem;
+}
+
+.job-dates {
+  font-size: 0.9rem;
+  color: #cccccc;
+  margin-bottom: 0.6rem;
+}
+
+.job-details {
+  padding-left: 1.2rem;
+  color: #cce7ff;
+  list-style: disc;
+  line-height: 1.6;
+}
+
+.job-details li {
+  margin-bottom: 0.4rem;
+}
+
+.education-entry {
+  margin-bottom: 2rem;
+  padding-left: 0.5rem;
+}
+
+.education-title {
+  color: #00ffc3;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 0.2rem;
+}
+
+.education-dates {
+  font-size: 0.9rem;
+  color: #cccccc;
+  margin-bottom: 0.4rem;
+}
+
+.education-details {
+  color: #cce7ff;
+  line-height: 1.6;
+}
+
+
+
 /* Mobile styles */
 @media screen and (max-width: 768px) {
   .about-tabs-wrapper {
