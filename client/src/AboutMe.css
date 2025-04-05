@@ -185,12 +185,14 @@
   font-weight: 700;
   color: white;
   margin-bottom: 0.5rem;
+  margin-right: 18rem;
 }
 
 .tools-subtext {
   color: #00ffc8;
   margin-bottom: 2rem;
   font-size: 1rem;
+  margin-right: 17rem;
 }
 
 /* Tabs */
