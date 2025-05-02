@@ -38,7 +38,7 @@ function AboutMe() {
         <h2 className="sub-role">Full Stack Software Engineer</h2>
         <p className="tagline">Problem-solver. Builder. Lifelong learner.</p>
         <p className="summary">
-          I'm a software engineer with a strong background in project management, passionate about building impactful full-stack applications using modern web technologies. I'm driven by curiosity, creativity, and a constant hunger to learn.
+        I’m a software engineer with a background in high-stakes project management, now focused on building scalable full-stack applications. I approach every challenge with curiosity, creativity, and a hunger to learn.
         </p>
         <Link to="/resume" className="resume-link">📄 View My Resume</Link>
 
@@ -62,7 +62,7 @@ function AboutMe() {
               I bring precision, leadership, and adaptability from my time as a <span className="highlight">project manager at nuclear power plants</span>. For four years, I oversaw eddy current inspections in high-stakes environments where fast decision-making and clear communication were essential.
             </p>
             <p>
-              These experiences shaped how I approach software—by building <span className="highlight">robust, scalable, and efficient solutions</span> even under pressure.
+            That experience shaped how I build software today: with a focus on <span className="highlight">efficiency, clarity, and reliability under pressure</span>.
             </p>
           </div>
           <img src="/images/my-journey.png" alt="My Journey" className="about-img" />
@@ -76,7 +76,7 @@ function AboutMe() {
             where I learned <span className="highlight">full-stack development</span>, API design, authentication, and database management.
           </p>
           <p>
-            Since then, I’ve expanded into <span className="highlight">CI/CD pipelines, cloud deployments, and scalable architecture</span>, refining my skills in <span className="highlight">Python, Flask, React, Redux, SQL, and AWS S3</span>.
+            Since then, I’ve expanded into <span className="highlight">CI/CD pipelines, cloud deployments, AI-assisted workflows, and scalable architecture</span>, refining my skills in <span className="highlight">Python, Flask, React, Redux, SQL, and AWS S3</span>—and I’m always looking to level up. 
           </p>
         </div>
 
@@ -139,7 +139,7 @@ function AboutMe() {
             I’m seeking a <span className="highlight">software engineering role</span> where I can apply my technical knowledge, leadership, and growth mindset to real-world challenges.
           </p>
           <p>
-            I’m especially eager to level up in <span className="highlight">TypeScript, Docker, and DevOps tools</span>, and work alongside teams who value <span className="highlight">innovation, collaboration, and curiosity</span>.
+            I’m especially eager to level up in <span className="highlight">TypeScript, Docker, and DevOps tools</span>, and work alongside teams who value <span className="highlight">innovation, collaboration, continuous improvement</span>.
           </p>
         </div>
 
