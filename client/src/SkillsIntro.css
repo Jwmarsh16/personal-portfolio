@@ -1,31 +1,58 @@
-/* SkillsIntro.css */
+/* client/src/SkillsIntro.css */
 
 .skills-intro-wrapper {
-  margin: 0;
-  padding: 0;
-  width: 100vw;
-  overflow-x: hidden;
-}
-
-/* Separate wrapper for summary so we can shift only that left */
-.summary-wrapper {
-  text-align: left;
-  max-width: 900px;
-  margin-left: 3rem;
-}
-
-.skills-wrapper {
   width: 100%;
-  overflow-x: visible;
-  margin-top: 2rem;
-  padding: 0;
+  overflow-x: hidden;
+  padding: 2.75rem 1.25rem 0;
 }
 
-/* Summary content styling */
-.summary-intro h1 {
-  font-size: 3.5rem;
-  color: white;
-  margin-bottom: 1rem;
+/* Hero layout */
+.hero-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.hero-copy {
+  background: rgba(0, 0, 0, 0.42); /* CHANGED: pro surface */
+  border: 1px solid rgba(255, 255, 255, 0.08); /* CHANGED: premium border */
+  border-radius: 18px;
+  padding: 1.6rem 1.6rem 1.35rem;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.35);
+}
+
+.hero-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.35rem 0.65rem;
+  border-radius: 999px;
+  border: 1px solid rgba(100, 181, 246, 0.22);
+  background: rgba(100, 181, 246, 0.10);
+  color: rgba(255, 255, 255, 0.86);
+  font-weight: 650;
+  font-size: 0.95rem;
+}
+
+.hero-status-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #00ffc3;
+  box-shadow: 0 0 12px rgba(0, 255, 195, 0.35);
+}
+
+.hero-name {
+  margin: 0.9rem 0 0.25rem;
+  font-size: 3rem;
+  line-height: 1.05;
+  color: rgba(255, 255, 255, 0.94);
+  font-family: 'Orbitron', var(--heading-font); /* CHANGED: use your stronger hero font */
+  letter-spacing: 0.2px;
 }
 
 .name-highlight {
@@ -33,67 +60,225 @@
   font-weight: 900;
 }
 
-.role-highlight {
-  font-size: 2rem;
-  font-weight: bold;
-  color: #61dafb;
-  margin-bottom: 1.5rem;
+.hero-role {
+  margin: 0;
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.78);
+  font-weight: 650;
 }
 
-.summary-intro p {
-  font-size: 1.15rem;
-  color: white;
-  margin-bottom: 1.2rem;
+.hero-summary {
+  margin: 1rem 0 0;
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.78);
   line-height: 1.6;
 }
 
 .highlight {
-  color: #94f5ff;
-  font-weight: bold;
+  color: rgba(148, 245, 255, 0.95);
+  font-weight: 700;
 }
 
-.skills-social-icons {
+/* CTAs */
+.hero-ctas {
   display: flex;
-  gap: 1.2rem;
-  margin-top: 1.5rem;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1.15rem;
 }
 
-.skills-social-icons a {
-  font-size: 1.8rem;
-  color: #00ffc8;
-  transition: transform 0.3s ease, color 0.3s ease;
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.72rem 0.95rem;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  text-decoration: none;
+  font-weight: 750;
+  font-size: 0.98rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+  color: rgba(255, 255, 255, 0.92);
+  background: transparent;
 }
 
-.skills-social-icons a:hover {
-  transform: scale(1.2);
-  color: #ffffff;
+.hero-cta:hover {
+  transform: translateY(-1px);
+}
+
+.hero-cta:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.hero-cta--primary {
+  background: rgba(100, 181, 246, 0.18);
+  border-color: rgba(100, 181, 246, 0.28);
+}
+
+.hero-cta--secondary {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.hero-cta--ghost {
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+/* Social links */
+.hero-social {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.05rem;
+}
+
+.hero-social-link {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.9);
+
+  transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+  text-decoration: none;
+}
+
+.hero-social-link:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+.hero-social-link:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.hero-social-button {
+  appearance: none;
+  cursor: pointer;
+}
+
+/* Tech chips */
+.hero-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.1rem;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.chip--primary {
+  border-color: rgba(100, 181, 246, 0.22);
+  background: rgba(100, 181, 246, 0.10);
+}
+
+.chip--soft {
+  border-color: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* Proof column */
+.hero-proof {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.proof-card {
+  background: rgba(0, 0, 0, 0.34); /* CHANGED: slightly lighter than hero */
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: 1.25rem 1.25rem 1.1rem;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.28);
+}
+
+.proof-card--subtle {
+  background: rgba(0, 0, 0, 0.28);
+}
+
+.proof-title {
+  font-size: 0.92rem;
+  color: rgba(255, 255, 255, 0.65);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 0.65rem;
+}
+
+.proof-list {
+  margin: 0;
+  padding-left: 1.1rem;
+  color: rgba(255, 255, 255, 0.78);
+  line-height: 1.6;
+}
+
+.proof-value {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.proof-muted {
+  margin-top: 0.25rem;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 0.95rem;
+}
+
+/* Skills marquee wrapper */
+.skills-wrapper {
+  width: 100%;
+  margin-top: 2rem;
+  padding: 0;
 }
 
 /* Mobile styles */
+@media screen and (max-width: 900px) {
+  .hero-container {
+    grid-template-columns: 1fr; /* CHANGED: stack on smaller screens */
+  }
+}
+
 @media screen and (max-width: 768px) {
-  .summary-wrapper {
-    margin-left: 0.5rem;
-    max-width: 100%;
+  .skills-intro-wrapper {
+    padding: 2.1rem 1rem 0;
   }
-  
-  .summary-intro h1 {
-    font-size: 2.5rem;
+
+  .hero-copy {
+    padding: 1.25rem 1.15rem 1.1rem;
   }
-  
-  .role-highlight {
-    font-size: 1.5rem;
+
+  .hero-name {
+    font-size: 2.25rem;
   }
-  
-  .summary-intro p {
+
+  .hero-role {
+    font-size: 1.1rem;
+  }
+
+  .hero-summary {
     font-size: 1rem;
   }
-  
-  .skills-social-icons {
-    gap: 0.8rem;
-    margin-top: 1rem;
-  }
-  
-  .skills-social-icons a {
-    font-size: 1.5rem;
+
+  .hero-cta {
+    width: 100%; /* CHANGED: full-width CTAs on mobile */
   }
 }
