@@ -1,3 +1,5 @@
+# /.gitignore
+
 # Logs
 logs
 *.log
@@ -7,10 +9,26 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Dependencies
 node_modules
+
+# Build output
 dist
 dist-ssr
+
+# Vite cache
+.vite
+
+# Local env files
+.env
+.env.*
 *.local
+
+# Coverage
+coverage
+
+# Windows "downloaded from internet" metadata files
+*:Zone.Identifier
 
 # Editor directories and files
 .vscode/*
@@ -22,3 +40,4 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+*.swp
