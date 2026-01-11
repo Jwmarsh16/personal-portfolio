@@ -1,6 +1,7 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import '../Projects.css';
+// client/src/components/Projects.jsx
+import React from 'react'
+import { Link } from 'react-router-dom'
+import '../Projects.css'
 
 function Projects() {
   const projects = [
@@ -55,69 +56,127 @@ function Projects() {
       github: 'https://github.com/Jwmarsh16/personal-portfolio',
       preview: '/images/portfolio.png'
     }
-  ];
+  ]
 
   const createSlug = (title) =>
-    title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+    title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
+
+  const renderChips = (items, variant = 'default') => (
+    <div className="project-chips">
+      {items.map((item) => (
+        <span key={item} className={`chip chip--${variant}`}>
+          {item}
+        </span>
+      ))}
+    </div>
+  )
 
   return (
     <section id="projects" className="projects">
       <div className="projects-container">
-        <h2>Featured Projects</h2>
+        <div className="projects-header">
+          <h2>Featured Projects</h2>
+          <p className="projects-subtitle">
+            Case-study style write-ups with live demos and source code.
+            {/* CHANGED: adds a professional “why this section matters” line */}
+          </p>
+        </div>
+
         <div className="projects-list">
           {projects.map((project, index) => {
-            const slug = createSlug(project.title);
+            const slug = createSlug(project.title)
+            const primaryTech = project.technologies.slice(0, 6) // CHANGED: show top tech as chips (reduces clutter)
+
             return (
-              <div key={index} className="project-item wow-animate">
+              <article key={index} className="project-item wow-animate">
                 {project.preview && (
-                  <Link to={`/project/${slug}`} className="image-link">
+                  <Link
+                    to={`/project/${slug}`}
+                    className="image-link"
+                    aria-label={`View details for ${project.title}`}
+                  >
                     <img
                       src={project.preview}
-                      alt={`${project.title} Preview`}
+                      alt={`${project.title} preview`}
                       className="project-image"
+                      loading="lazy" // CHANGED: improves performance on initial load
                     />
                   </Link>
                 )}
 
-                <h3>{project.title}</h3>
-                <p>{project.description}</p>
-                <p>
-                  <strong>Technologies:</strong> {project.technologies.join(', ')}
-                </p>
-                <p>
-                  <strong>Tools:</strong> {project.tools.join(', ')}
-                </p>
-                <p>
-                  <strong>Languages:</strong> {project.languages.join(', ')}
-                </p>
-                <div className="project-buttons">
-                  <a
-                    href={project.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="project-link"
-                  >
-                    Visit Site
-                  </a>
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="github-link"
-                  >
-                    GitHub Repo
-                  </a>
-                  <Link to={`/project/${slug}`} className="details-link">
-                    View Details
-                  </Link>
+                <div className="project-body">
+                  <header className="project-top">
+                    <h3 className="project-title">{project.title}</h3>
+                    <p className="project-description">{project.description}</p>
+                  </header>
+
+                  <div className="project-stack">
+                    <div className="project-stack-label">Primary stack</div>
+                    {renderChips(primaryTech, 'primary')}{' '}
+                    {/* CHANGED: modern chip UI instead of long comma lists */}
+                  </div>
+
+                  <details className="project-more">
+                    <summary className="project-more-summary">
+                      View full tech details
+                      {/* CHANGED: keeps page scannable while preserving full info */}
+                    </summary>
+
+                    <div className="project-more-grid">
+                      <div className="project-more-block">
+                        <div className="project-more-title">Technologies</div>
+                        {renderChips(project.technologies)}
+                      </div>
+
+                      <div className="project-more-block">
+                        <div className="project-more-title">Tools</div>
+                        {renderChips(project.tools, 'soft')}
+                      </div>
+
+                      <div className="project-more-block">
+                        <div className="project-more-title">Languages</div>
+                        {renderChips(project.languages, 'soft')}
+                      </div>
+                    </div>
+                  </details>
+
+                  <div className="project-actions">
+                    <a
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="project-action project-action--primary"
+                      aria-label={`Open live site for ${project.title}`}
+                    >
+                      Live
+                    </a>
+
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="project-action project-action--secondary"
+                      aria-label={`Open GitHub repository for ${project.title}`}
+                    >
+                      Code
+                    </a>
+
+                    <Link
+                      to={`/project/${slug}`}
+                      className="project-action project-action--ghost"
+                      aria-label={`Open case study for ${project.title}`}
+                    >
+                      Case study
+                    </Link>
+                  </div>
                 </div>
-              </div>
-            );
+              </article>
+            )
           })}
         </div>
       </div>
     </section>
-  );
+  )
 }
 
-export default Projects;
+export default Projects
