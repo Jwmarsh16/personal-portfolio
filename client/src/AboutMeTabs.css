@@ -1,29 +1,32 @@
+/* client/src/AboutMeTabs.css */
+.about-tabs-section {
+  padding: 4rem 1.25rem; /* CHANGED: consistent section rhythm */
+}
+
 .about-tabs-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 2rem;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  margin-right: 3rem;
+  max-width: 1200px; /* CHANGED: align with header/container rhythm */
+  margin: 0 auto;
+  display: grid; /* CHANGED: grid > margin hacks for pro layout */
+  grid-template-columns: minmax(260px, 420px) 1fr; /* CHANGED: stable 2-col layout */
+  gap: 2rem;
+  align-items: start;
 }
 
 .code-image {
-  flex: 1;
-  max-width: 45%;
   display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  margin-top: 6rem; /* push image down */
-  margin-right: 5rem;
+  justify-content: center;
+  align-items: flex-start;
+  margin: 0; /* CHANGED: remove large offsets */
 }
 
 .code-image img {
   width: 100%;
   max-width: 420px;
   height: auto;
+  border-radius: 16px; /* CHANGED: more modern radius */
+  border: 1px solid rgba(255, 255, 255, 0.10); /* CHANGED: subtle edge for glass UI */
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.45); /* CHANGED: premium depth */
   animation: float 6s ease-in-out infinite;
-  border-radius: 12px;
 }
 
 @keyframes float {
@@ -32,113 +35,128 @@
   100% { transform: translateY(0px); }
 }
 
+/* CHANGED: respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .code-image img {
+    animation: none; /* CHANGED */
+  }
+}
+
 .tab-column {
   display: flex;
   flex-direction: column;
-  flex: 1;
-  max-width: 50%;
+  gap: 1rem;
 }
 
 /* TITLE & SUBTEXT */
 .tabs-title {
   text-align: left;
-  padding-left: 0;
-  margin-left: 3rem;
-  margin-bottom: 0.5rem;
-  transform: translateY(10px);
+  margin: 0; /* CHANGED: remove translate/margin hacks */
 }
 
 .tabs-title h2 {
-  font-size: 1.25rem;
-  color: white;
-  margin-bottom: -1rem;
+  font-size: 2rem; /* CHANGED: clearer hierarchy */
+  color: rgba(255, 255, 255, 0.95);
+  margin: 0 0 0.25rem 0;
 }
 
 .about-subtext {
-  font-size: 1rem;
-  color: #99ccff;
-  max-width: 100%;
-  font-style: italic;
-  opacity: 0.9;
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.72);
+  max-width: 60ch; /* CHANGED: readable line length */
+  margin: 0;
 }
 
-/* TABS CONTAINER */
-.tabs-container {
-  background-color: rgba(51, 51, 51, 0.9);
-  color: white;
-  padding: 1.5rem;
-  border-radius: 12px;
-  max-height: 500px;
-  overflow-y: auto;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  margin: 0 auto;
-  width: 90%;
+/* TABS CONTAINER (namespaced to avoid collisions) */
+.about-tabs-container {
+  background: rgba(255, 255, 255, 0.06); /* CHANGED: match global glass direction */
+  border: 1px solid rgba(255, 255, 255, 0.08); /* CHANGED */
+  border-radius: 16px; /* CHANGED */
+  padding: 1.25rem;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35); /* CHANGED */
 }
 
-.tabs {
+/* Tabs row (namespaced) */
+.about-tabs {
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 1rem;
   gap: 0.5rem;
   flex-wrap: wrap;
+  margin-bottom: 1rem;
 }
 
-.tabs button {
-  background-color: #1e2a38;
-  border: 1px solid #61dafb;
-  padding: 0.6rem 1.2rem;
-  color: #61dafb;
-  font-weight: bold;
+.about-tabs button {
+  background: rgba(255, 255, 255, 0.04); /* CHANGED */
+  border: 1px solid rgba(255, 255, 255, 0.10); /* CHANGED */
+  padding: 0.6rem 0.9rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 700;
   cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  border-radius: 6px;
-  flex: 1;
-  display: flex;
+  border-radius: 12px; /* CHANGED */
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  transition:
+    background-color var(--transition-speed),
+    border-color var(--transition-speed),
+    transform var(--transition-speed),
+    color var(--transition-speed);
 }
 
-.tabs button:hover,
-.tabs button.active {
-  background-color: #61dafb;
-  color: #1e2a38;
+.about-tabs button:hover {
+  background: rgba(255, 255, 255, 0.08); /* CHANGED */
+  border-color: rgba(255, 255, 255, 0.16); /* CHANGED */
+  transform: translateY(-1px); /* CHANGED */
 }
 
-.tab-body {
-  max-height: 400px;
-  overflow-y: auto;
+.about-tabs button.active {
+  background: rgba(100, 181, 246, 0.16); /* CHANGED: ties into global accent */
+  border-color: rgba(100, 181, 246, 0.35); /* CHANGED */
+  color: rgba(255, 255, 255, 0.95);
 }
 
-.tab-content p,
-.tab-content ul {
-  margin-bottom: 1rem;
-  line-height: 1.6;
-  color: #cce7ff;
+.about-tabs button:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring); /* CHANGED: consistent focus ring */
 }
 
-.tab-content ul {
-  padding-left: 1rem;
+.about-tab-body {
+  text-align: left;
 }
 
-.tab-icon {
+/* Content typography (namespaced) */
+.about-tab-content p,
+.about-tab-content ul {
+  margin: 0 0 0.9rem 0;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.78); /* CHANGED: softer than pure white */
+}
+
+.about-tab-content ul {
+  padding-left: 1.1rem;
+}
+
+.about-tab-icon {
   font-size: 1rem;
 }
 
-.highlight {
+/* CHANGED: avoid global .highlight collisions */
+.about-highlight {
   color: #00ffcc;
-  font-weight: bold;
+  font-weight: 700;
 }
 
 /* Fade animation */
 .fade-in {
-  animation: fadeIn 0.6s ease-in-out;
+  animation: fadeIn 0.5s ease-in-out;
 }
 
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateY(6px);
   }
   to {
     opacity: 1;
@@ -146,127 +164,83 @@
   }
 }
 
-.job-entry {
-  margin-bottom: 2rem;
-  padding-left: 0.5rem;
+/* Entries */
+.job-entry,
+.education-entry {
+  margin-bottom: 1.25rem;
 }
 
-.job-title {
-  color: #00ffc3;
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin-bottom: 0.2rem;
+.job-title,
+.education-title {
+  color: rgba(255, 255, 255, 0.92); /* CHANGED: cleaner hierarchy */
+  font-size: 1.15rem;
+  font-weight: 800;
+  margin: 0 0 0.15rem 0;
 }
 
 .job-company {
-  color: #ffffff;
+  color: rgba(255, 255, 255, 0.8);
   font-style: italic;
-  margin-bottom: 0.2rem;
+  margin: 0 0 0.1rem 0;
 }
 
-.job-dates {
-  font-size: 0.9rem;
-  color: #cccccc;
-  margin-bottom: 0.6rem;
+.job-dates,
+.education-dates {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0 0 0.6rem 0;
 }
 
 .job-details {
-  padding-left: 1.2rem;
-  color: #cce7ff;
+  color: rgba(255, 255, 255, 0.78);
   list-style: disc;
-  line-height: 1.6;
+  line-height: 1.65;
+  margin: 0;
 }
 
 .job-details li {
-  margin-bottom: 0.4rem;
-}
-
-.education-entry {
-  margin-bottom: 2rem;
-  padding-left: 0.5rem;
-}
-
-.education-title {
-  color: #00ffc3;
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin-bottom: 0.2rem;
-}
-
-.education-dates {
-  font-size: 0.9rem;
-  color: #cccccc;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.35rem;
 }
 
 .education-details {
-  color: #cce7ff;
-  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.78);
+  line-height: 1.65;
+  margin: 0;
 }
 
-
-
-/* Mobile styles */
+/* ----------------------
+   🔽 Mobile Responsive
+------------------------- */
 @media screen and (max-width: 768px) {
+  .about-tabs-section {
+    padding: 2.5rem 1rem; /* CHANGED */
+  }
+
   .about-tabs-wrapper {
-    flex-direction: column;
-    padding: 1rem;
-    gap: 1rem;
+    grid-template-columns: 1fr; /* CHANGED: stack */
+    gap: 1.25rem;
   }
 
-  .code-image {
-    max-width: 100%;
-    justify-content: center;
-    margin: 2rem auto 0 auto;
-  }
-
-  .tab-column {
-    max-width: 100%;
+  .code-image img {
+    max-width: 360px; /* CHANGED */
   }
 
   .tabs-title h2 {
-    font-size: 1.1rem;
+    font-size: 1.7rem; /* CHANGED */
   }
 
   .about-subtext {
-    font-size: 0.9rem;
+    font-size: 1rem; /* CHANGED */
   }
 
-  .tabs-container {
-    width: 100%;
-    margin: 0 auto;
-    padding: 1rem;
-    max-height: 400px;
-    margin-left: 0.5rem;
+  .about-tabs-container {
+    padding: 1rem; /* CHANGED */
   }
 
-  .tabs button {
-    padding: 0.5rem 1rem;
-    font-size: 0.9rem;
-  }
-
-  .tab-body {
-    max-height: 300px;
-  }
-
-  .tab-content p,
-  .tab-content ul {
-    font-size: 0.9rem;
-  }
-  .tabs-title {
-    margin-left: 1rem;
+  .about-tabs button {
+    flex: 1; /* CHANGED: nice wrap behavior */
+    min-width: 140px; /* CHANGED */
+    padding: 0.55rem 0.75rem;
+    font-size: 0.95rem;
   }
 }
-
-/* Desktop adjustments */
-@media screen and (min-width: 769px) {
-  .code-image {
-    /* Shift image slightly to the left */
-    margin-left: -20rem;
-  }
-  .tabs-container {
-    /* Shift tabs container to the left */
-    margin-left: 2rem;
-  }
-}
-

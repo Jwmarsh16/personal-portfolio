@@ -1,12 +1,24 @@
 /* client/src/App.css */
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  width: 100%; /* CHANGED: remove Vite scaffold max-width constraint */
+  margin: 0; /* CHANGED */
+  padding: 0; /* CHANGED */
+  min-height: 100vh; /* CHANGED */
   background: transparent;
 }
 
+.App {
+  min-height: 100vh; /* CHANGED: footer can sit at bottom */
+  display: flex; /* CHANGED */
+  flex-direction: column; /* CHANGED */
+}
+
+/* CHANGED: target any routed <main> (it's not a direct child of .App) */
+.App main {
+  flex: 1;
+}
+
+/* (kept) legacy scaffold styles below in case you still use them somewhere */
 .logo {
   height: 6em;
   padding: 1.5em;

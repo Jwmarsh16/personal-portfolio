@@ -1,5 +1,5 @@
 // client/src/components/Skills.jsx
-import React, { useEffect, useMemo, useRef, useState } from 'react' // CHANGED: useMemo + refs for pro-grade animation perf
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import '../Skills.css'
 import {
   FaPython,
@@ -29,10 +29,19 @@ import {
   FaPause,
   FaPlay
 } from 'react-icons/fa'
-import { SiJavascript, SiFlask, SiRedux, SiPostgresql, SiVite, SiPostman, SiGnubash, SiJson, SiMui } from 'react-icons/si'
+import {
+  SiJavascript,
+  SiFlask,
+  SiRedux,
+  SiPostgresql,
+  SiVite,
+  SiPostman,
+  SiGnubash,
+  SiJson,
+  SiMui
+} from 'react-icons/si'
 
 function Skills() {
-  // CHANGED: memoize rows to avoid re-creating large arrays each render
   const topRow = useMemo(
     () => [
       { name: 'Python', icon: <FaPython />, color: '#306998' },
@@ -88,41 +97,38 @@ function Skills() {
   )
 
   const [isPaused, setIsPaused] = useState(false)
-  const [isDragging, setIsDragging] = useState(false) // CHANGED: used for UI cursor state
+  const [isDragging, setIsDragging] = useState(false)
 
-  // Refs for DOM nodes (we apply transforms directly for smoother animation)
-  const containerRef = useRef(null) // CHANGED: measure width safely
-  const topTrackRef = useRef(null) // CHANGED: direct transform updates
+  const containerRef = useRef(null)
+  const topTrackRef = useRef(null)
   const middleTrackRef = useRef(null)
   const bottomTrackRef = useRef(null)
 
-  // Runtime state stored in refs (prevents 60fps React re-renders)
   const dimsRef = useRef({
     containerWidth: 0,
     commonContentWidth: 0,
     cycleDistance: 0
-  }) // CHANGED: professional animation approach
+  })
 
   const offsetsRef = useRef({
     top: null,
     middle: null
-  }) // CHANGED: persisted offsets without re-render
+  })
 
   const dragRef = useRef({
     pointerId: null,
     startX: 0,
     deltaX: 0
-  }) // CHANGED: pointer drag state in a ref
+  })
 
   const rafRef = useRef(null)
   const prevTimeRef = useRef(null)
-  const speed = 100 // px/sec (same as before)
+  const speed = 100
 
   const normalizeOffset = (raw) => {
     const { commonContentWidth: w, cycleDistance: d } = dimsRef.current
     if (!w || !d) return raw
-    // Normalize into [-2w, -2w + d) which maps cleanly to the same loop
-    return ((((raw + 2 * w) % d) + d) % d) - 2 * w // CHANGED: stable wrap math
+    return ((((raw + 2 * w) % d) + d) % d) - 2 * w
   }
 
   const applyTransforms = (deltaX = 0) => {
@@ -131,23 +137,16 @@ function Skills() {
     if (top == null || mid == null) return
 
     const topX = top + deltaX
-    const midX = mid - deltaX // middle moves opposite
+    const midX = mid - deltaX
 
-    if (topTrackRef.current) {
-      topTrackRef.current.style.transform = `translateX(${topX}px)` // CHANGED: direct DOM transform for perf
-    }
-    if (bottomTrackRef.current) {
-      bottomTrackRef.current.style.transform = `translateX(${topX}px)` // CHANGED: bottom locked to top
-    }
-    if (middleTrackRef.current) {
-      middleTrackRef.current.style.transform = `translateX(${midX}px)` // CHANGED: opposite direction
-    }
+    if (topTrackRef.current) topTrackRef.current.style.transform = `translateX(${topX}px)`
+    if (bottomTrackRef.current) bottomTrackRef.current.style.transform = `translateX(${topX}px)`
+    if (middleTrackRef.current) middleTrackRef.current.style.transform = `translateX(${midX}px)`
   }
 
   const measure = () => {
     const containerWidth = containerRef.current?.clientWidth || window.innerWidth
 
-    // One “copy width” = scrollWidth / 2 because we render [...skills, ...skills]
     const topW = topTrackRef.current ? topTrackRef.current.scrollWidth / 2 : 0
     const midW = middleTrackRef.current ? middleTrackRef.current.scrollWidth / 2 : 0
     const botW = bottomTrackRef.current ? bottomTrackRef.current.scrollWidth / 2 : 0
@@ -157,33 +156,26 @@ function Skills() {
     const commonContentWidth = Math.max(topW, midW, botW)
     const cycleDistance = containerWidth + 2 * commonContentWidth
 
-    dimsRef.current = { containerWidth, commonContentWidth, cycleDistance } // CHANGED: store in ref (no re-render)
+    dimsRef.current = { containerWidth, commonContentWidth, cycleDistance }
 
-    // Initialize offsets only once
-    if (offsetsRef.current.top == null) {
-      offsetsRef.current.top = containerWidth // CHANGED: start off-screen right
-    }
-    if (offsetsRef.current.middle == null) {
-      offsetsRef.current.middle = -2 * commonContentWidth // CHANGED: start off-screen left
-    }
+    if (offsetsRef.current.top == null) offsetsRef.current.top = containerWidth
+    if (offsetsRef.current.middle == null) offsetsRef.current.middle = -2 * commonContentWidth
 
-    applyTransforms(0) // CHANGED: ensure correct initial paint
+    applyTransforms(0)
   }
 
-  // CHANGED: prefer reduced motion => start paused (still user-controllable)
   useEffect(() => {
     const media = window.matchMedia('(prefers-reduced-motion: reduce)')
-    if (media.matches) setIsPaused(true) // CHANGED: professional accessibility default
+    if (media.matches) setIsPaused(true)
   }, [])
 
-  // Measure on mount + on resize using ResizeObserver (industry standard)
   useEffect(() => {
-    measure() // CHANGED: initial measure
+    measure()
 
     const onResize = () => measure()
     window.addEventListener('resize', onResize)
 
-    const ro = new ResizeObserver(() => measure()) // CHANGED: responsive to font/layout changes
+    const ro = new ResizeObserver(() => measure())
     if (containerRef.current) ro.observe(containerRef.current)
 
     return () => {
@@ -192,7 +184,6 @@ function Skills() {
     }
   }, [])
 
-  // Animation loop (DOM transforms; no per-frame React state)
   useEffect(() => {
     const animate = (time) => {
       if (prevTimeRef.current != null && !isPaused && !isDragging) {
@@ -200,12 +191,10 @@ function Skills() {
         const { containerWidth, commonContentWidth, cycleDistance } = dimsRef.current
 
         if (cycleDistance && commonContentWidth) {
-          // top/bottom: scroll left
           const nextTop = offsetsRef.current.top - speed * dt
           offsetsRef.current.top =
             nextTop <= -2 * commonContentWidth ? nextTop + cycleDistance : nextTop
 
-          // middle: scroll right
           const nextMid = offsetsRef.current.middle + speed * dt
           offsetsRef.current.middle =
             nextMid >= containerWidth ? nextMid - cycleDistance : nextMid
@@ -225,15 +214,14 @@ function Skills() {
   }, [isPaused, isDragging])
 
   const beginDrag = (e) => {
-    // Only left click / primary pointer
-    if (e.button != null && e.button !== 0) return // CHANGED: ignore right/middle clicks
+    if (e.button != null && e.button !== 0) return
 
     setIsDragging(true)
     dragRef.current.pointerId = e.pointerId
     dragRef.current.startX = e.clientX
     dragRef.current.deltaX = 0
 
-    e.currentTarget.setPointerCapture(e.pointerId) // CHANGED: reliable drag even if cursor leaves row
+    e.currentTarget.setPointerCapture(e.pointerId)
   }
 
   const moveDrag = (e) => {
@@ -242,8 +230,7 @@ function Skills() {
 
     const deltaX = e.clientX - dragRef.current.startX
     dragRef.current.deltaX = deltaX
-
-    applyTransforms(deltaX) // CHANGED: immediate visual feedback while dragging
+    applyTransforms(deltaX)
   }
 
   const endDrag = (e) => {
@@ -252,8 +239,7 @@ function Skills() {
 
     const deltaX = dragRef.current.deltaX
 
-    // Commit offsets with wrap normalization
-    offsetsRef.current.top = normalizeOffset(offsetsRef.current.top + deltaX) // CHANGED: commit drag
+    offsetsRef.current.top = normalizeOffset(offsetsRef.current.top + deltaX)
     offsetsRef.current.middle = normalizeOffset(offsetsRef.current.middle - deltaX)
 
     dragRef.current.pointerId = null
@@ -261,20 +247,20 @@ function Skills() {
     dragRef.current.deltaX = 0
 
     setIsDragging(false)
-    applyTransforms(0) // CHANGED: snap to committed offsets
+    applyTransforms(0)
   }
 
   const handlePausePlay = () => {
-    setIsPaused((v) => !v) // CHANGED: functional setState
+    setIsPaused((v) => !v)
   }
 
   const renderRow = (skills, label, trackRef) => (
     <div
       className={`skills-row ${isDragging ? 'is-dragging' : ''}`}
-      onPointerDown={beginDrag} // CHANGED: pointer events support mouse + touch
-      onPointerMove={moveDrag} // CHANGED
-      onPointerUp={endDrag} // CHANGED
-      onPointerCancel={endDrag} // CHANGED: handle OS/browser cancel
+      onPointerDown={beginDrag}
+      onPointerMove={moveDrag}
+      onPointerUp={endDrag}
+      onPointerCancel={endDrag}
       role="group"
       aria-label={`${label} skills row (drag to scroll)`}
     >
@@ -292,13 +278,13 @@ function Skills() {
   )
 
   return (
-    // CHANGED: remove id="skills" here to avoid duplicate IDs (Home page wraps the section)
-    <section className="skills" aria-label="Skills">
+    // NOTE: Home.jsx owns id="skills" so we do NOT set it here.
+    <div className="skills" aria-label="Skills">
       <div className="skills-container" ref={containerRef}>
         <div className="skills-header">
           <div className="skills-title-wrap">
-            <h2 className="skills-title">Skills</h2> {/* CHANGED: real heading (was empty) */}
-            <p className="skills-hint">Drag a row to scroll • Pause to inspect</p> {/* CHANGED: micro UX */}
+            <h2 className="skills-title">Skills</h2>
+            <p className="skills-hint">Drag a row to scroll • Pause to inspect</p>
           </div>
 
           <div className="skills-controls">
@@ -318,7 +304,7 @@ function Skills() {
         {renderRow(middleRow, 'Middle', middleTrackRef)}
         {renderRow(bottomRow, 'Bottom', bottomTrackRef)}
       </div>
-    </section>
+    </div>
   )
 }
 

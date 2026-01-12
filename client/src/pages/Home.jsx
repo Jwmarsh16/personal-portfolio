@@ -9,26 +9,26 @@ import Contact from '../components/Contact'
 export default function Home() {
   return (
     <main>
+      {/* CHANGED: Home owns the #skills anchor (Skills.jsx does NOT). */}
       <section id="skills">
-        {/* CHANGED: wrap in stable id so header scrolling always works */}
         <SkillsIntro />
       </section>
 
-      <AboutMeTabs />
-
-      <section id="projects">
-        {/* CHANGED: wrap in stable id so header scrolling always works */}
-        <Projects />
+      {/* Stable About anchor for footer/linking */}
+      <section id="about">
+        <AboutMeTabs />
       </section>
 
+      {/* Projects.jsx already owns id="projects" */}
+      <Projects />
+
+      {/* Home owns #tools */}
       <section id="tools">
         <ToolsUsedHome />
       </section>
 
-      <section id="contact">
-        {/* CHANGED: wrap in stable id so header scrolling always works */}
-        <Contact />
-      </section>
+      {/* Contact.jsx already owns id="contact" */}
+      <Contact />
     </main>
   )
 }

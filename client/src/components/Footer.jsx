@@ -1,20 +1,23 @@
 // client/src/components/Footer.jsx
 import React from 'react'
-import { Link, useLocation, useNavigate } from 'react-router-dom' // CHANGED: use router-friendly navigation
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa'
 import '../Footer.css'
-import { scrollToSection } from '../utils/scrollToSection' // CHANGED: consistent smooth scrolling like Header
+import { scrollToSection } from '../utils/scrollToSection'
 
 function Footer() {
   const location = useLocation()
   const navigate = useNavigate()
 
   const handleSectionNav = (sectionId) => {
+    // CHANGED: focus the destination section for accessibility (uses your helper)
+    const scrollOptions = { focus: true } // CHANGED: consistent behavior with Header
+
     if (location.pathname === '/') {
-      scrollToSection(sectionId)
+      scrollToSection(sectionId, scrollOptions) // CHANGED: pass focus option
     } else {
       navigate('/')
-      setTimeout(() => scrollToSection(sectionId), 100) // CHANGED: wait for home content to mount
+      setTimeout(() => scrollToSection(sectionId, scrollOptions), 100) // CHANGED: pass focus option
     }
   }
 
@@ -37,6 +40,7 @@ function Footer() {
             >
               <FaGithub aria-hidden="true" />
             </a>
+
             <a
               href="https://www.linkedin.com/in/jonathan-marshall-a2a833257/"
               target="_blank"
@@ -45,6 +49,7 @@ function Footer() {
             >
               <FaLinkedin aria-hidden="true" />
             </a>
+
             <button
               type="button"
               onClick={() => handleSectionNav('contact')}
@@ -57,16 +62,32 @@ function Footer() {
         </div>
 
         <nav className="footer-links" aria-label="Footer navigation">
-          <button type="button" onClick={() => handleSectionNav('projects')} className="footer-link">
+          <button
+            type="button"
+            onClick={() => handleSectionNav('projects')}
+            className="footer-link"
+          >
             Projects
           </button>
-          <button type="button" onClick={() => handleSectionNav('skills')} className="footer-link">
+          <button
+            type="button"
+            onClick={() => handleSectionNav('skills')}
+            className="footer-link"
+          >
             Skills
           </button>
-          <button type="button" onClick={() => handleSectionNav('tools')} className="footer-link">
+          <button
+            type="button"
+            onClick={() => handleSectionNav('tools')}
+            className="footer-link"
+          >
             Tools
           </button>
-          <button type="button" onClick={() => handleSectionNav('contact')} className="footer-link">
+          <button
+            type="button"
+            onClick={() => handleSectionNav('contact')}
+            className="footer-link"
+          >
             Contact
           </button>
 

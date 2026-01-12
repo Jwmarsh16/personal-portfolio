@@ -12,7 +12,7 @@ import Footer from './components/Footer'
 import ScrollToTop from './components/ScrollToTop'
 import ShootingStars from './components/ShootingStars' // CHANGED: extract shooting stars into a component
 import Home from './pages/Home' // CHANGED: extract home route to a page component
-import './Global.css'
+import './App.css' // CHANGED: make App-level layout styles actually apply
 
 function App() {
   return (

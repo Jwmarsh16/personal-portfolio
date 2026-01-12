@@ -1,151 +1,209 @@
-/* ToolsUsedHome.css */
+/* client/src/ToolsUsedHome.css */
 
 .tools-used-section {
-  margin-top: 4rem;
-  padding: 2rem 1rem;
-  animation: fadeInUp 0.6s ease both;
+  padding: 3rem 1.25rem;
+  background: transparent;
 }
 
-.tools-used-section h2 {
-  font-size: 1.8rem;
-  color: #ffffff;
-  margin-bottom: 0.5rem;
-  text-shadow: 0 0 10px #00ffc3;
+.tools-used-container {
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.tools-used-section p {
-  color: #00ffc3;
-  font-size: 0.95rem;
-  margin-bottom: 2rem;
-  max-width: 700px;
-}
-
-.tools-tab-wrapper {
+.tools-used-header {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  transition: all 0.4s ease;
-  padding-left: 20rem; /* Shifts the whole section right */
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
 }
 
 .tools-heading {
-  padding-left: 20rem;
+  margin: 0;
+  font-family: var(--heading-font);
+  font-size: 2rem;
+  color: rgba(255, 255, 255, 0.92);
+  letter-spacing: 0.2px;
 }
 
 .tools-subtext {
-  padding-left: 20rem;
+  margin: 0;
+  max-width: 70ch;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 1.05rem;
+  line-height: 1.55;
 }
 
-.category-with-tools {
+.tools-surface {
+  background: rgba(0, 0, 0, 0.36);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: 1.25rem;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.35);
+}
+
+/* Tabs */
+.tools-tabs {
   display: flex;
-  align-items: center;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
 }
 
 .category-button {
-  background-color: rgba(255, 255, 255, 0.08);
-  color: #ffffff;
-  padding: 0.6rem 1.2rem;
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.9);
+  padding: 0.6rem 0.9rem;
   font-size: 0.95rem;
-  border-radius: 9999px;
+  font-weight: 750;
+  border-radius: 999px;
   cursor: pointer;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 0 4px rgba(0, 255, 204, 0.1);
-  transition: all 0.3s ease;
-  margin-right: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  transition:
+    background-color var(--transition-speed),
+    border-color var(--transition-speed),
+    transform var(--transition-speed),
+    color var(--transition-speed);
+}
+
+.category-button:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.16);
+  transform: translateY(-1px);
 }
 
 .category-button.active {
-  background-color: #00ffc3;
-  color: #000;
-  font-weight: bold;
-  transform: scale(1.05);
-  border-color: rgba(0, 255, 204, 0.4);
-  box-shadow: 0 0 12px rgba(0, 255, 204, 0.5);
+  background: rgba(100, 181, 246, 0.18);
+  border-color: rgba(100, 181, 246, 0.28);
+  color: rgba(255, 255, 255, 0.95);
 }
 
+.category-button:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+/* Panel */
+.tools-panel-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.9rem;
+}
+
+.tools-panel-title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.92);
+  letter-spacing: 0.2px;
+}
+
+.tools-panel-subtitle {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 0.92rem;
+}
+
+/* Pills */
 .tools-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.8rem;
+  gap: 0.75rem;
   padding-left: 0;
 }
 
 .tool-pill {
-  background-color: #2e2e2e;
-  color: #fff;
+  background: rgba(0, 0, 0, 0.28);
+
+  /* CHANGED: harden text visibility (some global rule is overriding on hover) */
+  color: rgba(255, 255, 255, 0.92) !important;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0.92) !important;
+
   border-radius: 999px;
-  padding: 0.5rem 1rem;
-  font-size: 0.9rem;
+  padding: 0.55rem 0.85rem;
+  font-size: 0.95rem;
+
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  transition: background 0.3s ease, transform 0.3s ease;
+  gap: 0.55rem;
+
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  transition:
+    transform var(--transition-speed),
+    border-color var(--transition-speed),
+    background-color var(--transition-speed),
+    box-shadow var(--transition-speed);
+
+  /* CHANGED: prevent weird blend/filter interactions from other styles */
+  opacity: 1;
+  filter: none;
+  mix-blend-mode: normal;
 }
 
+.tool-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  pointer-events: none;
+  color: rgba(148, 245, 255, 0.95);
+}
+
+/* If you have the wrapper span from our JSX update, this locks it in */
+.tool-name {
+  color: inherit !important; /* CHANGED: ensure label stays visible */
+  -webkit-text-fill-color: currentColor !important; /* CHANGED */
+  font-weight: 700;
+  opacity: 1;
+}
+
+/* CHANGED: explicitly re-assert text color on hover (beats conflicting CSS) */
 .tool-pill:hover {
-  background-color: rgba(0, 255, 204, 0.2);
-  transform: translateY(-2px);
-  box-shadow: 0 0 8px rgba(0, 255, 204, 0.4);
+  background: rgba(0, 0, 0, 0.34);
+  transform: translateY(-1px);
+  border-color: rgba(100, 181, 246, 0.22);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.3);
+
+  color: rgba(255, 255, 255, 0.92) !important;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0.92) !important;
 }
 
-/* Desktop-specific layout */
-@media (min-width: 768px) {
-  .tools-tab-wrapper {
-    flex-direction: column;
-  }
-
-  .category-with-tools {
-    flex-direction: row;
-    align-items: flex-start;
-  }
+.tool-pill:hover .tool-name {
+  color: rgba(255, 255, 255, 0.92) !important; /* CHANGED */
+  -webkit-text-fill-color: rgba(255, 255, 255, 0.92) !important; /* CHANGED */
 }
 
-/* Mobile-friendly adjustments */
-@media (max-width: 768px) {
+/* Keep icon accent on hover */
+.tool-pill:hover .tool-icon {
+  color: rgba(148, 245, 255, 0.95);
+}
+
+/* Mobile */
+@media screen and (max-width: 900px) {
   .tools-used-section {
-    margin-top: 2rem;
-    padding: 1rem 0.5rem;
+    padding: 2.25rem 1rem;
   }
 
-  .tools-used-section h2 {
-    font-size: 1.5rem;
+  .tools-surface {
+    padding: 1rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .tools-heading {
+    font-size: 1.7rem;
   }
 
-  .tools-used-section p {
-    font-size: 0.9rem;
-    max-width: 100%;
-  }
-
-  .tools-tab-wrapper {
-    padding-left: 0;
-  }
-
-  .tools-heading,
   .tools-subtext {
-    padding-left: 0;
+    font-size: 1rem;
   }
 
   .category-button {
-    padding: 0.5rem 1rem;
-    font-size: 0.9rem;
-    margin-right: 0.5rem;
-  }
-
-  .tool-pill {
-    padding: 0.4rem 0.8rem;
-    font-size: 0.8rem;
-  }
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+    flex: 1;
+    min-width: 160px;
+    justify-content: center;
   }
 }

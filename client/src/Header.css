@@ -19,6 +19,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
+  position: relative; /* CHANGED: anchor mobile dropdown to this container */
 }
 
 .brand {
@@ -121,10 +122,9 @@
   .nav-links {
     display: none; /* CHANGED: closed by default on mobile */
     position: absolute; /* CHANGED: dropdown panel */
-    top: 100%;
-    right: 0.75rem;
-    left: 0.75rem;
-    margin-top: 0.5rem;
+    top: calc(100% + 0.5rem); /* CHANGED: consistent spacing under header */
+    right: 0;
+    left: 0;
 
     flex-direction: column;
     align-items: stretch;

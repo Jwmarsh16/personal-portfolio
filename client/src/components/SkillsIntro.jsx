@@ -1,9 +1,10 @@
 // client/src/components/SkillsIntro.jsx
 import React from 'react'
+import { Link } from 'react-router-dom' // CHANGED: SPA navigation for Resume
 import Skills from './Skills'
 import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa'
 import '../SkillsIntro.css'
-import { scrollToSection } from '../utils/scrollToSection' // CHANGED: use smooth scrolling for CTAs + contact
+import { scrollToSection } from '../utils/scrollToSection'
 
 function SkillsIntro() {
   return (
@@ -29,14 +30,13 @@ function SkillsIntro() {
             shipping LLM features like <span className="highlight">SSE streaming</span>,{' '}
             <span className="highlight">session memory</span>, and{' '}
             <span className="highlight">mini-RAG</span>.
-            {/* CHANGED: tighten copy + emphasize AI proof points */}
           </p>
 
           <div className="hero-ctas">
             <button
               type="button"
               className="hero-cta hero-cta--primary"
-              onClick={() => scrollToSection('projects')} // CHANGED: recruiter-first CTA
+              onClick={() => scrollToSection('projects')}
             >
               View projects
             </button>
@@ -44,19 +44,18 @@ function SkillsIntro() {
             <button
               type="button"
               className="hero-cta hero-cta--secondary"
-              onClick={() => scrollToSection('contact')} // CHANGED: direct path to contact
+              onClick={() => scrollToSection('contact')}
             >
               Contact
             </button>
 
-            <a
-              href="/resume"
+            <Link
+              to="/resume"
               className="hero-cta hero-cta--ghost"
               aria-label="View resume"
             >
               Resume
-              {/* CHANGED: explicit resume CTA (route-based) */}
-            </a>
+            </Link>
           </div>
 
           <div className="hero-social" aria-label="Social links">
@@ -87,7 +86,6 @@ function SkillsIntro() {
               className="hero-social-link hero-social-button"
             >
               <FaEnvelope aria-hidden="true" />
-              {/* CHANGED: use button + smooth scroll instead of anchor jump */}
             </button>
           </div>
 
@@ -100,7 +98,6 @@ function SkillsIntro() {
             <span className="chip chip--soft">RAG</span>
             <span className="chip chip--soft">SQLAlchemy</span>
             <span className="chip chip--soft">Render</span>
-            {/* CHANGED: scannable chips instead of long sentence lists */}
           </div>
         </div>
 
@@ -111,7 +108,6 @@ function SkillsIntro() {
               <li>Clean UX with practical, shippable features</li>
               <li>Secure + reliable APIs (validation, rate limits, headers)</li>
               <li>Readable architecture with testing and iteration</li>
-              {/* CHANGED: senior-sounding priorities */}
             </ul>
           </div>
 
@@ -119,7 +115,6 @@ function SkillsIntro() {
             <div className="proof-title">Based in</div>
             <div className="proof-value">Austin, TX</div>
             <div className="proof-muted">Open to remote / hybrid</div>
-            {/* CHANGED: concise location block */}
           </div>
         </div>
       </div>
