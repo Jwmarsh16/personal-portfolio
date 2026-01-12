@@ -1,165 +1,379 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import Skills from './Skills';
-import '../AboutMe.css';
+// client/src/components/AboutMe.jsx
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
+import Skills from './Skills'
+import '../AboutMe.css'
 
 function AboutMe() {
-  const [activeTab, setActiveTab] = useState('frontend');
+  const [activeTab, setActiveTab] = useState('frontend')
+
+  // CHANGED: pick 3 headline strengths that map to your most impressive AI product work
+  const headlineHighlights = [
+    'SSE streaming chat UX',
+    'Pinned memory + context management',
+    'RAG (Embeddings + FAISS)'
+  ] // CHANGED
 
   const tools = {
     frontend: [
-      'HTML', 'CSS', 'SCSS', 'JavaScript', 'TypeScript', 'C++', 'EJS', 'React',
-      'Redux', 'Tailwind CSS', 'Next.js', 'Vue.js', 'GSAP', 'Redux Toolkit', 'Ant Design'
+      'HTML',
+      'CSS',
+      'JavaScript (ES6+)',
+      'React',
+      'React Router',
+      'Redux Toolkit',
+      'Vite',
+      'Markdown (react-markdown)',
+      'PrismJS'
     ],
     backend: [
-      'Node.js', 'Express', 'Flask', 'Django', 'Flask-JWT-Extended', 'JWT', 'bcrypt', 'OAuth', 'CI/CD', 'Linux'
+      'Python',
+      'Flask',
+      'REST APIs',
+      'SQLAlchemy',
+      'Pydantic',
+      'SSE streaming',
+      'OpenAI API',
+      'JWT (HTTP-only cookies)',
+      'Gunicorn',
+      'Rate limiting (Flask-Limiter)'
     ],
-    database: [
-      'PostgreSQL', 'MySQL', 'SQLite', 'SQLAlchemy', 'AWS S3', 'Render', 'Prisma'
-    ],
+    database: ['PostgreSQL', 'SQLite', 'Alembic', 'Render', 'AWS S3'],
     others: [
-      'GitHub', 'Git', 'Material UI', 'Bootstrap', 'Shadcn', 'Next UI', 'JSON', 'Postman', 'Vite'
+      'Git',
+      'GitHub',
+      'GitHub Actions',
+      'Pytest',
+      'Vitest',
+      'Postman/Insomnia',
+      'Linux',
+      'VS Code'
     ]
-  };
+  }
 
   const renderTools = (category) => (
     <div className="tool-tags">
-      {tools[category].map((tool, index) => (
-        <span key={index} className="tool-pill">{tool}</span>
+      {tools[category].map((tool) => (
+        <span key={tool} className="tool-pill">
+          {tool}
+        </span>
       ))}
     </div>
-  );
+  )
 
   return (
-    <section id="about" className="about-me fade-in">
-      {/* 🧠 About Header - top-left aligned */}
-      <div className="about-header top-left">
-        <h1>Jonathan Marshall</h1>
-        <h2 className="sub-role">Full Stack Software Engineer</h2>
-        <p className="tagline">Problem-solver. Builder. Lifelong learner.</p>
-        <p className="summary">
-        I’m a software engineer with a background in high-stakes project management, now focused on building scalable full-stack applications. I approach every challenge with curiosity, creativity, and a hunger to learn.
-        </p>
-        <Link to="/resume" className="resume-link">📄 View My Resume</Link>
-
-      </div>
-
-      {/* 🛠️ Horizontal Skills */}
-      <div className="about-skills-wrapper">
-        <Skills />
-      </div>
-
-      <div className="about-content-container">
-        {/* 👨‍💻 My Journey (image on right) */}
-        <div className="about-split-card reverse">
-          <div className="about-card">
-            <h3>👨‍💻 My Journey</h3>
-            <p>
-              Hi, I’m Jon—a <span className="highlight">full-stack software engineer</span> passionate about solving complex problems and building impactful applications.
-              I thrive at the intersection of <span className="highlight">technology, creativity, and problem-solving</span>, bringing a <span className="highlight">relentless drive for learning</span> and a knack for tackling tough challenges head-on.
-            </p>
-            <p>
-              I bring precision, leadership, and adaptability from my time as a <span className="highlight">project manager at nuclear power plants</span>. For four years, I oversaw eddy current inspections in high-stakes environments where fast decision-making and clear communication were essential.
-            </p>
-            <p>
-            That experience shaped how I build software today: with a focus on <span className="highlight">efficiency, clarity, and reliability under pressure</span>.
-            </p>
-          </div>
-          <img src="/images/my-journey.png" alt="My Journey" className="about-img" />
-        </div>
-
-        {/* 🚀 Tech Transition */}
-        <div className="about-card">
-          <h3>🚀 Breaking into Tech</h3>
-          <p>
-            My transition into tech was fueled by an <span className="highlight">unshakable passion for coding</span> and continuous learning. I completed an intensive <span className="highlight">software engineering bootcamp at Flatiron School</span>,
-            where I learned <span className="highlight">full-stack development</span>, API design, authentication, and database management.
-          </p>
-          <p>
-            Since then, I’ve expanded into <span className="highlight">CI/CD pipelines, cloud deployments, AI-assisted workflows, and scalable architecture</span>, refining my skills in <span className="highlight">Python, Flask, React, Redux, SQL, and AWS S3</span>—and I’m always looking to level up. 
-          </p>
-        </div>
-
-        {/* 🛠️ Projects */}
-        <div className="about-card">
-          <h3>🛠️ What I've Built</h3>
-          <p>
-            <strong>Fantasy Football Research Hub</strong> – A full-stack fantasy football platform where users create rankings, submit reviews, and analyze player data. Built with <span className="highlight">React, Flask, PostgreSQL, and AWS S3</span>, it highlights my ability to <span className="highlight">design scalable systems</span> and optimize performance.
-          </p>
-          <p>
-            <strong>Event Manager</strong> – A group-based event coordination tool featuring full CRUD, authentication, and secure backend logic.
-          </p>
-          <p>
-            <strong>Portfolio Website</strong> – A responsive, animated personal portfolio that reflects my personality, design sensibility, and engineering strengths.
-          </p>
-        </div>
-
-        {/* 🔧 Tools Section (moved here) */}
-        <div className="about-tools-section">
-          <h2 className="tools-heading">Tools that I have used.</h2>
-          <p className="tools-subtext">
-            Here's a curated list of tools and technologies that I have utilized in my projects to build innovative solutions.
-          </p>
-
-          <div className="tab-buttons">
-            <button className={activeTab === 'frontend' ? 'active' : ''} onClick={() => setActiveTab('frontend')}>
-              🖥️ Frontend Development
-            </button>
-            <button className={activeTab === 'backend' ? 'active' : ''} onClick={() => setActiveTab('backend')}>
-              🔧 Backend Development
-            </button>
-            <button className={activeTab === 'database' ? 'active' : ''} onClick={() => setActiveTab('database')}>
-              🗄️ Database Management
-            </button>
-            <button className={activeTab === 'others' ? 'active' : ''} onClick={() => setActiveTab('others')}>
-              🧩 Others
-            </button>
+    <section id="about" className="about-me fade-in" aria-label="About page">
+      <div className="about-page-container">
+        <header className="about-hero">
+          <div className="about-hero-title">
+            <h1 className="about-name">Jonathan Marshall</h1>
+            <h2 className="about-role">AI Software Developer</h2>
+            <p className="about-tagline">Builder. Problem-solver. Lifelong learner.</p>
           </div>
 
-          {renderTools(activeTab)}
-        </div>
-
-        {/* 🧠 Strengths */}
-        <div className="about-card">
-          <h3>🧠 Core Strengths</h3>
-          <ul className="pills">
-            <li>Creative Problem Solving</li>
-            <li>Fast Learner</li>
-            <li>Frontend + Backend Mastery</li>
-            <li>Clean Code Architecture</li>
-            <li>Strong Communication</li>
-            <li>UI/UX Oriented</li>
-          </ul>
-        </div>
-
-        {/* 🎯 Goals */}
-        <div className="about-card">
-          <h3>🎯 What I'm Looking For</h3>
-          <p>
-            I’m seeking a <span className="highlight">software engineering role</span> where I can apply my technical knowledge, leadership, and growth mindset to real-world challenges.
+          {/* CHANGED: tighten hero copy to read like a case study headline */}
+          <p className="about-summary">
+            I build production-style AI web apps with{' '}
+            <span className="about-highlight">React, Flask, and PostgreSQL</span>.
+            My signature strengths are shipping{' '}
+            <span className="about-highlight">streaming chat UX (SSE)</span>, managing
+            long-running conversations with{' '}
+            <span className="about-highlight">pinned memory + context strategy</span>, and
+            extending assistants with{' '}
+            <span className="about-highlight">RAG (embeddings + FAISS)</span>.
           </p>
-          <p>
-            I’m especially eager to level up in <span className="highlight">TypeScript, Docker, and DevOps tools</span>, and work alongside teams who value <span className="highlight">innovation, collaboration, continuous improvement</span>.
-          </p>
+
+          {/* CHANGED: add scannable “headline highlights” chips in the hero */}
+          <div className="about-signature" aria-label="Signature strengths">
+            <p className="about-signature-label">Signature strengths</p> {/* CHANGED */}
+            <div className="about-signature-chips">
+              {headlineHighlights.map((h) => (
+                <span key={h} className="chip chip--primary">
+                  {h}
+                </span> // CHANGED: uses global chip styles for a premium “case-study” look
+              ))}
+            </div>
+          </div>
+
+          <div className="about-hero-cta">
+            <Link to="/resume" className="resume-link">
+              📄 View My Resume
+            </Link>
+            <p className="about-cta-note">Open to AI/full-stack roles • Austin, TX</p>
+          </div>
+        </header>
+
+        <div className="about-skills-wrapper">
+          <Skills />
         </div>
 
-        {/* 🏈 Beyond Tech (image on left) */}
-        <div className="about-split-card reverse">
-          <img src="/images/beyond-tech.png" alt="Beyond Tech" className="about-img" />
+        <div className="about-content-container">
+          <div className="about-split-card">
+            <div className="about-card">
+              <h3>My Journey</h3>
+              <p>
+                I’m Jon—a <span className="about-highlight">full-stack developer</span>{' '}
+                who likes owning problems end-to-end: designing an API, building the UI,
+                tightening edge cases, and shipping.
+              </p>
+              <p>
+                I bring leadership and adaptability from four years as a{' '}
+                <span className="about-highlight">nuclear project manager</span>, where I
+                coordinated cross-functional teams, managed strict standards, and made
+                fast decisions under pressure.
+              </p>
+              <p>
+                That experience shaped how I build software now: with a focus on{' '}
+                <span className="about-highlight">clarity, reliability, and momentum</span>.
+              </p>
+            </div>
+
+            <img
+              src="/images/my-journey.png"
+              alt="My Journey"
+              className="about-img"
+              loading="lazy"
+            />
+          </div>
+
           <div className="about-card">
-            <h3>🏈 Beyond Tech</h3>
+            <h3>Breaking into Tech</h3>
             <p>
-              More than just writing code, I want to <span className="highlight">build products that matter</span>, <span className="highlight">contribute to impactful work</span>, and <span className="highlight">push myself to grow every day</span>.
+              I graduated from <span className="about-highlight">Flatiron School</span>{' '}
+              and immediately started building portfolio-grade products with real
+              constraints: authentication, data modeling, deployments, and performance
+              tuning.
             </p>
             <p>
-              Outside of coding, I’m passionate about <span className="highlight">sports, video games, fitness, hiking, and concerts</span>.
-              I enjoy working with people who are <span className="highlight">driven, curious, and excited about technology</span>—if that’s you, let’s connect!
+              Recently, I’ve been focused on AI product engineering, including{' '}
+              <span className="about-highlight">LLM UX patterns</span>, streaming
+              experiences, and building features like pinned memory and small RAG
+              prototypes.
             </p>
+          </div>
+
+          {/* CHANGED: tighten “What I’ve Built” to emphasize the 2–3 headline strengths */}
+          <div className="about-card">
+            <h3>What I’ve Built</h3>
+            <p>
+              <strong>Ask-Flask</strong> – An AI chat app where I shipped a fast,
+              production-feeling experience using{' '}
+              <span className="about-highlight">SSE streaming</span>,{' '}
+              <span className="about-highlight">pinned session memory</span>, and a{' '}
+              <span className="about-highlight">mini-RAG module (embeddings + FAISS)</span>.
+              Built with <span className="about-highlight">React (Vite)</span>,{' '}
+              <span className="about-highlight">Flask</span>, and{' '}
+              <span className="about-highlight">SQLAlchemy</span> using the{' '}
+              <span className="about-highlight">OpenAI API</span>.
+            </p>
+            <p>
+              <strong>Fantasy Football Research Hub</strong> – A full-stack platform for
+              rankings, reviews, and player analysis. Built with{' '}
+              <span className="about-highlight">React, Flask, PostgreSQL</span>, and{' '}
+              <span className="about-highlight">AWS S3</span>.
+            </p>
+            <p>
+              <strong>Event Manager</strong> – A group-based event coordination tool with
+              CRUD flows, authentication, and secure backend logic.
+            </p>
+          </div>
+
+          <div className="about-card">
+            <h3>Engineering Highlights</h3>
+            <p className="about-card-subtext">
+              The four areas I lead with, because they show up in real product work.
+            </p>
+
+            <div className="about-highlights-grid">
+              {/* CHANGED: make the first 3 highlight cards match your headline strengths */}
+              <div className="about-highlight-card">
+                <h4 className="about-highlight-title">Streaming Chat UX (SSE)</h4> {/* CHANGED */}
+                <ul className="about-highlight-list">
+                  <li>Token streaming for instant feedback and “alive” chat UI</li> {/* CHANGED */}
+                  <li>Markdown + code blocks with Prism highlighting</li>
+                  <li>Unified error handling that works in stream and non-stream paths</li> {/* CHANGED */}
+                </ul>
+              </div>
+
+              <div className="about-highlight-card">
+                <h4 className="about-highlight-title">Pinned Memory + Context Strategy</h4> {/* CHANGED */}
+                <ul className="about-highlight-list">
+                  <li>Durable session memory that stays compact and useful</li> {/* CHANGED */}
+                  <li>Context window management (what to keep, trim, summarize)</li> {/* CHANGED */}
+                  <li>Designing UX around long-running sessions, not one-off prompts</li> {/* CHANGED */}
+                </ul>
+              </div>
+
+              <div className="about-highlight-card">
+                <h4 className="about-highlight-title">RAG (Embeddings + FAISS)</h4> {/* CHANGED */}
+                <ul className="about-highlight-list">
+                  <li>Text chunking + embeddings for retrieval</li> {/* CHANGED */}
+                  <li>FAISS index for fast similarity search</li> {/* CHANGED */}
+                  <li>Light evals and “why this answer” transparency patterns</li> {/* CHANGED */}
+                </ul>
+              </div>
+
+              <div className="about-highlight-card">
+                <h4 className="about-highlight-title">Production Mindset</h4> {/* CHANGED */}
+                <ul className="about-highlight-list">
+                  <li>Security headers, auth patterns, and rate limiting</li> {/* CHANGED */}
+                  <li>Structured logs + request IDs for debugging</li> {/* CHANGED */}
+                  <li>CI checks and tests to protect shipped behavior</li> {/* CHANGED */}
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div className="about-card">
+            <h3>Timeline</h3>
+            <ol className="about-timeline">
+              <li className="about-timeline-item">
+                <div className="about-timeline-meta">
+                  <span className="about-timeline-date">2012–2020</span>
+                  <span className="about-timeline-title">Nuclear Technician • BWXT</span>
+                </div>
+                <p className="about-timeline-body">
+                  Built a foundation in quality, documentation, and precision work in
+                  high-standard environments.
+                </p>
+              </li>
+
+              <li className="about-timeline-item">
+                <div className="about-timeline-meta">
+                  <span className="about-timeline-date">2020–2024</span>
+                  <span className="about-timeline-title">
+                    Nuclear Project Manager • The Merrick Group
+                  </span>
+                </div>
+                <p className="about-timeline-body">
+                  Led cross-functional teams and delivered under strict deadlines and
+                  constraints—skills I now apply to shipping software.
+                </p>
+              </li>
+
+              <li className="about-timeline-item">
+                <div className="about-timeline-meta">
+                  <span className="about-timeline-date">2024</span>
+                  <span className="about-timeline-title">Flatiron School • Full-stack</span>
+                </div>
+                <p className="about-timeline-body">
+                  Transitioned into software and started building full-stack projects with
+                  real deployments and end-to-end ownership.
+                </p>
+              </li>
+
+              <li className="about-timeline-item">
+                <div className="about-timeline-meta">
+                  <span className="about-timeline-date">2025–Now</span>
+                  <span className="about-timeline-title">AI Product Engineering</span>
+                </div>
+                <p className="about-timeline-body">
+                  Building production-style AI apps (streaming chat UX, session memory,
+                  reliability and security patterns) and leveling up quickly.
+                </p>
+              </li>
+            </ol>
+          </div>
+
+          <div className="about-card about-tools-section">
+            <h3 className="tools-heading">Toolbox</h3>
+            <p className="tools-subtext">Tools and technologies I’ve used in shipped projects.</p>
+
+            <div className="tab-buttons" role="tablist" aria-label="Tool categories">
+              <button
+                type="button"
+                className={activeTab === 'frontend' ? 'active' : ''}
+                onClick={() => setActiveTab('frontend')}
+                role="tab"
+                aria-selected={activeTab === 'frontend'}
+              >
+                Frontend
+              </button>
+              <button
+                type="button"
+                className={activeTab === 'backend' ? 'active' : ''}
+                onClick={() => setActiveTab('backend')}
+                role="tab"
+                aria-selected={activeTab === 'backend'}
+              >
+                Backend
+              </button>
+              <button
+                type="button"
+                className={activeTab === 'database' ? 'active' : ''}
+                onClick={() => setActiveTab('database')}
+                role="tab"
+                aria-selected={activeTab === 'database'}
+              >
+                Data & Cloud
+              </button>
+              <button
+                type="button"
+                className={activeTab === 'others' ? 'active' : ''}
+                onClick={() => setActiveTab('others')}
+                role="tab"
+                aria-selected={activeTab === 'others'}
+              >
+                Workflow
+              </button>
+            </div>
+
+            {renderTools(activeTab)}
+          </div>
+
+          <div className="about-card">
+            <h3>Core Strengths</h3>
+            <ul className="pills">
+              <li>End-to-end ownership</li>
+              <li>Fast learner</li>
+              <li>Clean UI + strong APIs</li>
+              <li>Performance-minded</li>
+              <li>Security & reliability mindset</li>
+              <li>Clear communication</li>
+            </ul>
+          </div>
+
+          <div className="about-card">
+            <h3>What I’m Looking For</h3>
+            <p>
+              I’m seeking a <span className="about-highlight">software engineering role</span>{' '}
+              where I can build real products, collaborate with strong teammates, and keep
+              leveling up.
+            </p>
+            <p>
+              I’m actively improving in{' '}
+              <span className="about-highlight">TypeScript, Docker, and DevOps</span>, and
+              I’m excited to work on teams that value{' '}
+              <span className="about-highlight">shipping, iteration, and quality</span>.
+            </p>
+          </div>
+
+          <div className="about-split-card">
+            <img
+              src="/images/beyond-tech.png"
+              alt="Beyond Tech"
+              className="about-img"
+              loading="lazy"
+            />
+
+            <div className="about-card">
+              <h3>Beyond Tech</h3>
+              <p>
+                Outside of coding, I’m into{' '}
+                <span className="about-highlight">sports, fitness, hiking, games</span>, and
+                live music.
+              </p>
+              <p>
+                I enjoy building with people who are{' '}
+                <span className="about-highlight">curious, driven, and collaborative</span>.
+                If that’s you, let’s connect.
+              </p>
+            </div>
           </div>
         </div>
       </div>
     </section>
-  );
+  )
 }
 
-export default AboutMe;
+export default AboutMe

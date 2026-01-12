@@ -1,163 +1,328 @@
-/* AboutMe.css */
+/* client/src/AboutMe.css */
 
 .about-me {
-  padding: 4rem 2rem;
+  padding: 4rem 1.25rem;
   background: transparent;
   color: #ffffff;
 }
 
-/* 🧠 Top-Left Aligned Header */
-.about-header {
-  max-width: 1100px;
-  margin-left: 4rem;
-  text-align: left;
-  padding-left: 1rem;
-}
-
-.about-header h1 {
-  font-size: 3rem;
-  font-weight: 800;
-  color: white;
-  margin-bottom: 0.25rem;
-}
-
-.sub-role {
-  font-size: 1.5rem;
-  color: #00ffcc;
-  margin-bottom: 0.5rem;
-}
-
-.tagline {
-  font-size: 1.1rem;
-  font-style: italic;
-  color: #ccc;
-  margin-bottom: 1rem;
-}
-
-.summary {
-  color: #dddddd;
-  font-size: 1.1rem;
-  margin-bottom: 1rem;
-  max-width: 600px;
-  line-height: 1.6;
-}
-
-.resume-link {
-  display: inline-block;
-  font-size: 1rem;
-  background-color: #00ffcc;
-  color: #000;
-  padding: 0.6rem 1.4rem;
-  border-radius: 9999px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
-  box-shadow: 0 0 10px rgba(0, 255, 204, 0.3);
-}
-
-.resume-link:hover {
-  background-color: #00e6b2;
-  box-shadow: 0 0 15px rgba(0, 255, 204, 0.5);
-}
-
-.about-content-container {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  max-width: 1000px;
+.about-page-container {
+  max-width: 1200px;
   margin: 0 auto;
 }
 
-.about-card {
-  background-color: rgba(255, 255, 255, 0.05);
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 0 15px rgba(0, 255, 204, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+/* -----------------------
+   Hero (new era / glass)
+------------------------ */
+.about-hero {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 1.75rem;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  margin-bottom: 2rem;
 }
 
-.about-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 0 25px rgba(0, 255, 204, 0.15);
+.about-hero-title {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
 }
 
-.about-card h3 {
-  font-size: 1.6rem;
-  color: #61dafb;
-  margin-bottom: 1rem;
-  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+.about-name {
+  font-size: 2.4rem;
+  font-weight: 800;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.95);
 }
 
-.about-card p {
-  font-size: 1.1rem;
-  color: #dddddd;
+.about-role {
+  font-size: 1.25rem;
+  margin: 0;
+  color: rgba(100, 181, 246, 0.95);
+}
+
+.about-tagline {
+  margin: 0.35rem 0 0;
+  font-size: 1.05rem;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.about-summary {
+  margin: 1rem 0 0;
+  max-width: 72ch;
+  color: rgba(255, 255, 255, 0.78);
   line-height: 1.7;
 }
 
-.about-card strong {
-  color: #ffffff;
-  font-weight: bold;
+/* CHANGED: “signature strengths” row under the hero copy */
+.about-signature {
+  margin-top: 1rem; /* CHANGED */
+  display: flex; /* CHANGED */
+  flex-direction: column; /* CHANGED */
+  gap: 0.5rem; /* CHANGED */
 }
 
-/* 👥 Split Card Layout */
-.about-split-card {
+.about-signature-label {
+  margin: 0; /* CHANGED */
+  font-size: 0.95rem; /* CHANGED */
+  font-weight: 800; /* CHANGED */
+  color: rgba(255, 255, 255, 0.72); /* CHANGED */
+}
+
+.about-signature-chips {
+  display: flex; /* CHANGED */
+  flex-wrap: wrap; /* CHANGED */
+  gap: 0.5rem; /* CHANGED */
+}
+
+/* CHANGED: small, safe override so chips look good even if globals change */
+.about-signature-chips .chip {
+  font-weight: 800; /* CHANGED */
+}
+
+.about-hero-cta {
+  margin-top: 1.25rem;
   display: flex;
   align-items: center;
-  gap: 2rem;
-  margin-bottom: 3rem;
+  gap: 1rem;
   flex-wrap: wrap;
 }
 
-.about-split-card.reverse {
-  flex-direction: row-reverse;
+.about-cta-note {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 0.95rem;
 }
 
-.about-split-card .about-card {
-  flex: 1;
+.resume-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  background: rgba(100, 181, 246, 0.16);
+  color: rgba(255, 255, 255, 0.92);
+  padding: 0.65rem 1.1rem;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 800;
+  border: 1px solid rgba(100, 181, 246, 0.35);
+  transition:
+    background-color var(--transition-speed),
+    border-color var(--transition-speed),
+    transform var(--transition-speed);
+}
+
+.resume-link:hover {
+  background: rgba(100, 181, 246, 0.22);
+  border-color: rgba(100, 181, 246, 0.45);
+  transform: translateY(-1px);
+}
+
+.resume-link:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+/* -----------------------
+   Content stack
+------------------------ */
+.about-content-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+/* Card base (glass) */
+.about-card {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  transition:
+    transform var(--transition-speed),
+    border-color var(--transition-speed),
+    background-color var(--transition-speed);
+}
+
+.about-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.about-card h3 {
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.92);
+  margin: 0 0 0.75rem 0;
+}
+
+.about-card p {
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.78);
+  line-height: 1.7;
+  margin: 0 0 0.9rem 0;
+}
+
+.about-card p:last-child {
+  margin-bottom: 0;
+}
+
+.about-card strong {
+  color: rgba(255, 255, 255, 0.92);
+  font-weight: 800;
+}
+
+.about-card-subtext {
+  margin: -0.35rem 0 1rem 0;
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 1rem;
+}
+
+/* 👥 Split Card Layout (grid, stable) */
+.about-split-card {
+  display: grid;
+  grid-template-columns: 1fr minmax(260px, 420px);
+  gap: 1.5rem;
+  align-items: start;
 }
 
 .about-img {
-  width: 400px;
-  max-width: 100%;
-  border-radius: 12px;
-  box-shadow: 0 0 15px rgba(0, 255, 204, 0.1);
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.45);
 }
 
-/* 💡 Highlighted Phrases */
-.highlight {
-  color: #00ffc8;
-  font-weight: 600;
+.about-highlight {
+  color: #00ffcc;
+  font-weight: 800;
+}
+
+/* -----------------------
+   Engineering highlights
+------------------------ */
+.about-highlights-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+  margin-top: 0.75rem;
+}
+
+.about-highlight-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 1rem;
+}
+
+.about-highlight-title {
+  margin: 0 0 0.6rem 0;
+  font-size: 1rem;
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.about-highlight-list {
+  margin: 0;
+  padding-left: 1.1rem;
+  color: rgba(255, 255, 255, 0.78);
+  line-height: 1.65;
+}
+
+.about-highlight-list li {
+  margin-bottom: 0.35rem;
+}
+
+.about-highlight-list li:last-child {
+  margin-bottom: 0;
+}
+
+/* -----------------------
+   Timeline
+------------------------ */
+.about-timeline {
+  margin: 0.75rem 0 0;
+  padding-left: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.about-timeline-item {
+  position: relative;
+  padding-left: 1.1rem;
+}
+
+.about-timeline-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55rem;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(100, 181, 246, 0.85);
+  box-shadow: 0 0 0 3px rgba(100, 181, 246, 0.18);
+}
+
+.about-timeline-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.75rem;
+  align-items: baseline;
+}
+
+.about-timeline-date {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.62);
+  font-weight: 800;
+}
+
+.about-timeline-title {
+  font-size: 1.02rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 900;
+}
+
+.about-timeline-body {
+  margin: 0.35rem 0 0;
+  color: rgba(255, 255, 255, 0.76);
 }
 
 /* 🧠 Skills/Strength Pills */
 .pills {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem;
-  margin-top: 1rem;
+  gap: 0.6rem;
+  margin: 0.75rem 0 0;
   list-style: none;
   padding-left: 0;
 }
 
 .pills li {
-  background-color: #111;
-  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  padding: 0.45rem 0.75rem;
   border-radius: 9999px;
-  font-size: 0.95rem;
-  color: #00ffcc;
-  border: 1px solid #00ffc8;
-  box-shadow: 0 0 6px rgba(0, 255, 204, 0.3);
+  font-size: 0.92rem;
+  color: rgba(255, 255, 255, 0.86);
 }
 
 /* 🌀 Fade-in Animation */
 .fade-in {
-  animation: fadeInUp 1s ease-out both;
+  animation: fadeInUp 0.6s ease-out both;
 }
 
 @keyframes fadeInUp {
   0% {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(10px);
   }
   100% {
     opacity: 1;
@@ -167,144 +332,158 @@
 
 /* 🚀 Skills Row */
 .about-skills-wrapper {
-  margin: 2rem auto 4rem auto;
-  max-width: 1100px;
-  padding: 0 1rem;
+  margin: 1.5rem 0 2.25rem 0;
+  padding: 0;
   display: flex;
   justify-content: center;
 }
 
-/* 🛠️ Tools Section */
+/* -----------------------
+   Tools (tabs + pills)
+------------------------ */
 .about-tools-section {
-  margin-top: 4rem;
-  text-align: center;
+  text-align: left;
 }
 
 .tools-heading {
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: white;
-  margin-bottom: 0.5rem;
-  margin-right: 18rem;
+  margin: 0;
 }
 
 .tools-subtext {
-  color: #00ffc8;
-  margin-bottom: 2rem;
+  margin: -0.25rem 0 1rem 0;
+  color: rgba(255, 255, 255, 0.68);
   font-size: 1rem;
-  margin-right: 17rem;
 }
 
-/* Tabs */
 .tab-buttons {
   display: flex;
-  justify-content: center;
+  gap: 0.5rem;
   flex-wrap: wrap;
-  gap: 1rem;
-  margin-bottom: 2rem;
+  margin: 0.75rem 0 1rem 0;
 }
 
 .tab-buttons button {
-  padding: 0.6rem 1.4rem;
-  border-radius: 9999px;
-  font-size: 0.95rem;
-  background-color: #222;
-  color: #ccc;
-  border: 1px solid #333;
-  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  padding: 0.6rem 0.9rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 800;
   cursor: pointer;
+  border-radius: 12px;
+  transition:
+    background-color var(--transition-speed),
+    border-color var(--transition-speed),
+    transform var(--transition-speed);
+}
+
+.tab-buttons button:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.16);
+  transform: translateY(-1px);
 }
 
 .tab-buttons button.active {
-  background-color: #00ffcc;
-  color: #000;
-  font-weight: bold;
-  box-shadow: 0 0 10px rgba(0, 255, 204, 0.4);
+  background: rgba(100, 181, 246, 0.16);
+  border-color: rgba(100, 181, 246, 0.35);
 }
 
-/* Tool Tags Grid */
+.tab-buttons button:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
 .tool-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem;
-  justify-content: center;
+  gap: 0.55rem;
 }
 
 .tool-pill {
-  background-color: #111;
-  color: #ffffff;
-  border: 1px solid #00ffc8;
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.86);
+  border: 1px solid rgba(255, 255, 255, 0.10);
   border-radius: 9999px;
-  padding: 0.5rem 1.1rem;
-  font-size: 0.9rem;
-  box-shadow: 0 0 6px rgba(0, 255, 204, 0.2);
+  padding: 0.45rem 0.75rem;
+  font-size: 0.92rem;
   white-space: nowrap;
-  transition: transform 0.2s ease;
+  transition:
+    transform var(--transition-speed),
+    background-color var(--transition-speed),
+    border-color var(--transition-speed);
 }
 
 .tool-pill:hover {
-  transform: scale(1.05);
-  background-color: #00ffcc;
-  color: #000;
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.14);
 }
 
-/* 📱 Responsive */
+/* -----------------------
+   Reduced motion support
+------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  .fade-in {
+    animation: none;
+  }
+
+  .about-card,
+  .resume-link,
+  .tab-buttons button,
+  .tool-pill {
+    transition: none;
+  }
+
+  .about-card:hover,
+  .resume-link:hover,
+  .tab-buttons button:hover,
+  .tool-pill:hover {
+    transform: none;
+  }
+}
+
+/* -----------------------
+   Mobile Responsive
+------------------------ */
+@media (max-width: 900px) {
+  .about-split-card {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 768px) {
-  .about-header {
-    margin-left: 0;
-    padding-left: 0.5rem;
+  .about-me {
+    padding: 2.5rem 1rem;
   }
 
-  .about-header h1 {
-    font-size: 2.2rem;
+  .about-hero {
+    padding: 1.25rem;
   }
 
-  .sub-role {
-    font-size: 1.2rem;
+  .about-name {
+    font-size: 2rem;
   }
 
-  .tagline,
-  .summary,
+  .about-role {
+    font-size: 1.1rem;
+  }
+
+  .about-summary,
   .about-card p {
     font-size: 1rem;
   }
 
-  .about-split-card {
-    flex-direction: column;
-    align-items: flex-start;
+  .tab-buttons button {
+    flex: 1;
+    min-width: 140px;
   }
+}
 
-  .about-img {
-    width: 100%;
-    max-width: 100%;
-    height: auto;
-    margin-bottom: 1rem;
+@media (max-width: 420px) {
+  .about-hero-cta {
+    gap: 0.75rem;
   }
 
   .resume-link {
-    font-size: 0.9rem;
-    padding: 0.5rem 1rem;
-  }
-
-  .pills li {
-    font-size: 0.85rem;
-  }
-
-  .tools-heading {
-    font-size: 1.5rem;
-  }
-
-  .tools-subtext {
-    font-size: 0.95rem;
-  }
-
-  .tab-buttons button {
-    font-size: 0.9rem;
-    padding: 0.5rem 1rem;
-  }
-
-  .tool-pill {
-    font-size: 0.85rem;
-    padding: 0.4rem 0.9rem;
+    width: 100%;
   }
 }

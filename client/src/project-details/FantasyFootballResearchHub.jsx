@@ -1,211 +1,401 @@
-import React, { useState } from 'react';
-import './FantasyFootballResearchHub.css';
+// client/src/project-details/FantasyFootballResearchHub.jsx
+import React, { useMemo, useState } from 'react' // CHANGED: useMemo for stable derived lists
+import './FantasyFootballResearchHub.css'
 import {
-  FaArrowUp, FaReact, FaNodeJs, FaGithub, FaAws, FaPython, FaGitAlt, FaLinux, FaDatabase, FaCloud, FaCubes, FaLayerGroup, FaCogs, FaTasks, FaClipboardCheck, FaLock, FaKey, FaHtml5, FaCloudDownloadAlt, FaEdit, FaTerminal, FaCookie, FaCheckCircle, FaLaptopCode, FaFlask as FaFlaskFA
-} from 'react-icons/fa';
-import {
-  SiJavascript, SiFlask, SiRedux, SiPostgresql, SiVite, SiSqlalchemy, SiFormik, SiAxios, SiPostman, SiGnubash, SiJson, SiMui
-} from 'react-icons/si';
+  FaArrowLeft,
+  FaArrowUp,
+  FaChevronLeft,
+  FaChevronRight,
+  FaExternalLinkAlt,
+  FaGithub
+} from 'react-icons/fa' // CHANGED: remove unused icon imports
+import { useNavigate } from 'react-router-dom' // CHANGED: back to projects (home) navigation
+import { scrollToSection } from '../utils/scrollToSection' // CHANGED: navigate home then scroll
 
 function FantasyFootballResearchHub() {
-  const images = [
-    '/images/fantasy-football-1.png',
-    '/images/fantasy-football-2.png',
-    '/images/fantasy-football-3.png',
-    '/images/fantasy-football-4.png',
-    '/images/fantasy-football-5.png'
-  ];
+  const navigate = useNavigate() // CHANGED: used for cross-route “back to projects”
 
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [expandedCategory, setExpandedCategory] = useState(null);
-  const [activeTooltip, setActiveTooltip] = useState(null);
+  const images = useMemo(
+    () => [
+      '/images/fantasy-football-1.png',
+      '/images/fantasy-football-2.png',
+      '/images/fantasy-football-3.png',
+      '/images/fantasy-football-4.png',
+      '/images/fantasy-football-5.png'
+    ],
+    []
+  ) // CHANGED: memoize array to avoid re-allocations
+
+  const liveUrl = 'https://fantasy-football-research-hub.onrender.com' // CHANGED: replace with real live URL
+  const codeUrl = 'https://github.com/Jwmarsh16/fantasy-football-research-project' // CHANGED: replace with real repo URL
+
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  const [expandedCategory, setExpandedCategory] = useState('Core') // CHANGED: default open category
+  const [activeTooltip, setActiveTooltip] = useState(null)
 
   const nextImage = () => {
-    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-  };
+    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length)
+  }
 
   const prevImage = () => {
-    setCurrentImageIndex((prevIndex) =>
-      (prevIndex - 1 + images.length) % images.length
-    );
-  };
+    setCurrentImageIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length)
+  }
 
   const goToImage = (index) => {
-    setCurrentImageIndex(index);
-  };
+    setCurrentImageIndex(index)
+  }
 
   const toggleCategory = (category) => {
-    setExpandedCategory(expandedCategory === category ? null : category);
-  };
+    setExpandedCategory(expandedCategory === category ? null : category)
+    setActiveTooltip(null) // CHANGED: close any open tooltip when switching categories
+  }
 
-  const toggleTooltip = (index) => {
-    setActiveTooltip(activeTooltip === index ? null : index);
-  };
+  const toggleTooltip = (id) => {
+    setActiveTooltip(activeTooltip === id ? null : id)
+  }
 
-  const techStack = {
-    Languages: [
-      { name: 'Python', icon: <FaPython />, color: '#4B8BBE', description: 'Used for backend logic and API development with Flask' },
-      { name: 'JavaScript', icon: <SiJavascript />, color: '#F7DF1E', description: 'Used to build dynamic and interactive frontend components' },
-      { name: 'SQL', icon: <FaDatabase />, color: '#61DAFB', description: 'Used for querying and managing PostgreSQL database' },
-      { name: 'HTML & CSS', icon: <FaHtml5 />, color: '#E34F26', description: 'Used to structure and style the application UI' }
+  const handleBackToProjects = () => {
+    navigate('/') // CHANGED: projects live on Home
+    window.setTimeout(() => scrollToSection('projects', { focus: true }), 120) // CHANGED: scroll after route mounts
+  }
+
+  const techStack = useMemo(
+    () => ({
+      Core: [
+        {
+          name: 'React (Vite)',
+          description: 'Component-based UI with fast dev server and optimized builds.'
+        },
+        {
+          name: 'Redux Toolkit',
+          description:
+            'Predictable state management for rankings, reviews, and user session state.'
+        },
+        {
+          name: 'Flask',
+          description: 'REST API backend for auth, rankings, reviews, and app data.'
+        },
+        {
+          name: 'PostgreSQL',
+          description: 'Primary relational database for users, players, rankings, and reviews.'
+        }
+      ],
+      'Data + Models': [
+        {
+          name: 'SQLAlchemy',
+          description:
+            'ORM models and query layer for relational data and ranking relationships.'
+        },
+        {
+          name: 'Many-to-many relationships',
+          description:
+            'Models user ↔ player ranking relationships without duplicating player data.'
+        }
+      ],
+      'Auth + Security': [
+        {
+          name: 'JWT (HTTP-only cookies)',
+          description:
+            'Authentication via secure cookies to reduce token exposure in the browser.'
+        },
+        {
+          name: 'bcrypt',
+          description: 'Password hashing before persistence.'
+        }
+      ],
+      'Cloud + Deploy': [
+        {
+          name: 'AWS S3 (presigned URLs)',
+          description:
+            'Secure profile image upload and access without exposing long-lived credentials.'
+        },
+        {
+          name: 'Render',
+          description:
+            'Cloud deployment with environment-based configuration for production.'
+        }
+      ],
+      'Quality + Tooling': [
+        {
+          name: 'Postman',
+          description: 'API testing during development.'
+        },
+        {
+          name: 'Pytest',
+          description: 'Unit tests for backend behavior and stability.'
+        }
+      ]
+    }),
+    []
+  ) // CHANGED: case-study friendly stack presentation (no icon bloat)
+
+  const signatureHighlights = useMemo(
+    () => [
+      {
+        title: 'Virtualized review lists',
+        detail:
+          'Uses list virtualization to keep UI fast even with large review volumes.'
+      },
+      {
+        title: 'Secure S3 uploads',
+        detail: 'Presigned URLs for profile images with a clean backend handoff.'
+      },
+      {
+        title: 'Relational ranking model',
+        detail: 'Many-to-many ranking relationships designed for scale and clarity.'
+      }
     ],
-    "Frameworks & Libraries": [
-      { name: 'Flask', icon: <SiFlask />, color: '#CCCCCC', description: 'Backend microframework used to build RESTful API endpoints' },
-      { name: 'React', icon: <FaReact />, color: '#61DAFB', description: 'Frontend framework used to create reusable UI components' },
-      { name: 'Redux', icon: <SiRedux />, color: '#A17ACC', description: 'Global state management for frontend data and user sessions' },
-      { name: 'Vite', icon: <SiVite />, color: '#9999FF', description: 'Frontend build tool for fast development and hot module replacement' },
-      { name: 'SQLAlchemy', icon: <FaDatabase />, color: '#FF6B6B', description: 'ORM used for database models and queries in Python' },
-      { name: 'Formik', icon: <SiFormik />, color: '#8A6DFF', description: 'Used for managing form state and handling form submissions' },
-      { name: 'Axios', icon: <FaCloudDownloadAlt />, color: '#7A42F4', description: 'HTTP client used for making API requests from React to Flask backend' }
-    ],
-    "Tools & Platforms": [
-      { name: 'Git & GitHub', icon: <FaGithub />, color: '#CCCCCC', description: 'Version control system and remote code repository' },
-      { name: 'Postman', icon: <SiPostman />, color: '#FF6C37', description: 'Used to test and document API endpoints during development' },
-      { name: 'Pytest', icon: <FaFlaskFA />, color: '#5E9FDF', description: 'Used to write and run unit tests for backend logic' },
-      { name: 'VS Code', icon: <FaLaptopCode />, color: '#7CAEFF', description: 'Primary development environment for writing and debugging code' }
-    ],
-    "Operating Systems": [
-      { name: 'Linux', icon: <FaTerminal />, color: '#BBBBBB', description: 'Development environment for local testing and deployment scripts' }
-    ],
-    "Cloud & DevOps": [
-      { name: 'AWS S3', icon: <FaAws />, color: '#FFB347', description: 'Used for storing and serving profile pictures via secure pre-signed URLs' },
-      { name: 'Render', icon: <FaCloud />, color: '#00BFFF', description: 'Cloud platform used to deploy both frontend and backend services' },
-      { name: 'CI/CD Pipelines', icon: <FaCogs />, color: '#FFD700', description: 'Automated deployment pipelines to push changes live' }
-    ],
-    Databases: [
-      { name: 'PostgreSQL', icon: <SiPostgresql />, color: '#66A3D2', description: 'Relational database used to store user, player, review, and ranking data' }
-    ],
-    "Security & Authentication": [
-      { name: 'JWT', icon: <FaKey />, color: '#FF69B4', description: 'Used for secure user authentication and session management' },
-      { name: 'HTTP-Only Cookies', icon: <FaCookie />, color: '#F4A460', description: 'Enhances security by preventing client-side access to session tokens' },
-      { name: 'Input Validation', icon: <FaCheckCircle />, color: '#00FF7F', description: 'Ensures only valid data is accepted in forms and API calls' },
-      { name: 'Bcrypt', icon: <FaLock />, color: '#BBBBBB', description: 'Used for hashing user passwords before storing them in the database' }
-    ],
-    "Development Practices": [
-      { name: 'OOP', icon: <FaCubes />, color: '#FF69B4', description: 'Organized code using object-oriented programming principles' },
-      { name: 'REST APIs', icon: <FaCloud />, color: '#66CCCC', description: 'RESTful routes for handling frontend/backend communication' },
-      { name: 'CRUD Ops', icon: <FaEdit />, color: '#FFD700', description: 'Create, Read, Update, Delete functionality across all models' },
-      { name: 'Unit Testing', icon: <FaClipboardCheck />, color: '#B0C4DE', description: 'Automated tests for backend functionality using Pytest' },
-      { name: 'Agile Methodology', icon: <FaTasks />, color: '#4682B4', description: 'Iterative development focused on MVP delivery and feedback' }
-    ]
-  };
+    []
+  ) // CHANGED: concise “headline” strengths for this project page
 
   return (
     <div className="project-detail-container">
-      <div className="project-detail-card">
-        <h1 className="project-title">Fantasy Football Research Hub</h1>
-        <p className="brief-description">
-          A full-stack web application that empowers fantasy football players with actionable insights, peer-driven rankings, and comprehensive player research tools. Built with Flask, React, Redux, PostgreSQL, and AWS S3.
-        </p>
+      <div className="project-detail-card ffrh-card">
+        {/* HERO */}
+        <header className="ffrh-hero">
+          <button
+            type="button"
+            className="ffrh-back"
+            onClick={handleBackToProjects}
+            aria-label="Back to projects"
+          >
+            <FaArrowLeft aria-hidden="true" /> Back to projects
+          </button>
 
-        <div className="slideshow-wrapper">
-          <button className="prev-button" onClick={prevImage}>&lt;</button>
-          <img
-            src={images[currentImageIndex]}
-            alt={`Screenshot ${currentImageIndex + 1}`}
-            className="slideshow-image"
-          />
-          <button className="next-button" onClick={nextImage}>&gt;</button>
-        </div>
+          <p className="ffrh-kicker">Case study</p>
 
-        <div className="slide-indicators">
-          {images.map((_, index) => (
-            <span
-              key={index}
-              className={`indicator-dot ${index === currentImageIndex ? 'active' : ''}`}
-              onClick={() => goToImage(index)}
-            ></span>
-          ))}
-        </div>
+          <h1 className="ffrh-title">Fantasy Football Research Hub</h1>
 
-        <div className="info-grid">
-          <div className="info-box">
-            <div className="section-header"><h2>Project Overview</h2></div>
-            <p>
-              Fantasy Football Research Hub (FFRH) is a modern, community-centric platform that simplifies the research process for fantasy football managers. Users can rank players, leave and read reviews, and analyze stats in one streamlined experience. The project merges traditional analytics with social input, helping users make better, more informed decisions each week.
-            </p>
+          <p className="ffrh-subtitle">
+            A community-driven fantasy research platform with rankings, reviews, and
+            streamlined player discovery—built with React, Flask, PostgreSQL, and AWS S3.
+          </p>
+
+          <div className="ffrh-hero-actions" aria-label="Project links">
+            <a
+              className="ffrh-btn ffrh-btn--primary"
+              href={liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Live <FaExternalLinkAlt aria-hidden="true" />
+            </a>
+
+            <a
+              className="ffrh-btn"
+              href={codeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Code <FaGithub aria-hidden="true" />
+            </a>
           </div>
 
-          <div className="info-box">
-            <div className="section-header"><h2>Purpose and Objectives</h2></div>
-            <p>
-              The app was designed to fill the gap between traditional stats websites and real-world fantasy football decision-making. Objectives included enabling crowd-sourced player reviews and rankings, streamlining data access, and providing a mobile-friendly, responsive interface. Stretch goals include live player data from third-party APIs, YouTube integration for player breakdowns, and an AI-powered draft assistant.
-            </p>
+          <div className="ffrh-chips" aria-label="At-a-glance stack">
+            <span className="chip chip--primary">React</span>
+            <span className="chip chip--primary">Flask</span>
+            <span className="chip chip--primary">PostgreSQL</span>
+            <span className="chip chip--soft">Redux Toolkit</span>
+            <span className="chip chip--soft">AWS S3</span>
+            <span className="chip chip--soft">JWT Cookies</span>
           </div>
+        </header>
 
-          <div className="info-box">
-            <div className="tech-stack-container">
-              <h2>Tech Stack</h2>
-              <p>Click each category below to view the technologies used:</p>
-              <div className="tech-categories">
-                {Object.entries(techStack).map(([category, tools]) => (
-                  <div className="tech-category" key={category}>
-                    <h3 onClick={() => toggleCategory(category)} style={{ cursor: 'pointer' }}>{category}</h3>
-                    {expandedCategory === category && (
-                      <div className="tech-items">
-                        {tools.map((tool, index) => (
-                          <div
-                            className="tech-item-pill"
-                            key={index}
-                            style={{ color: tool.color || '#fff', position: 'relative' }}
-                            onClick={() => toggleTooltip(`${category}-${index}`)}
-                          >
-                            {tool.icon && <span>{tool.icon}</span>}
-                            <span>{tool.name}</span>
-                            {activeTooltip === `${category}-${index}` && tool.description && (
-                              <div className="tooltip-popup">
-                                {tool.description}
-                              </div>
-                            )}
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
+        {/* TOP GRID: proof + highlights */}
+        <section className="ffrh-top-grid" aria-label="Project summary">
+          <aside className="ffrh-proof">
+            <div className="ffrh-proof-title">What this project proves</div>
+            <ul className="ffrh-proof-list">
+              <li>End-to-end full-stack ownership (API, DB, UX, deploy)</li>
+              <li>Security-minded auth and safe file upload patterns</li>
+              <li>Performance awareness with practical UI optimization</li>
+            </ul>
+          </aside>
+
+          <div className="ffrh-highlights">
+            <div className="ffrh-proof-title">Signature highlights</div>
+            <div className="ffrh-highlight-cards">
+              {signatureHighlights.map((h) => (
+                <div key={h.title} className="ffrh-highlight-card">
+                  <div className="ffrh-highlight-title">{h.title}</div>
+                  <div className="ffrh-highlight-detail">{h.detail}</div>
+                </div>
+              ))}
             </div>
           </div>
+        </section>
 
-          <div className="info-box">
-            <div className="section-header"><h2>Key Features</h2></div>
-            <p>
-              - JWT-based authentication and secure route protection<br />
-              - Fully functional CRUD for player reviews and rankings<br />
-              - Many-to-many user-player relationships for rankings<br />
-              - Real-time frontend state sync using Redux Toolkit<br />
-              - Profile page with sortable, filterable review list<br />
-              - Virtualized review rendering using react-window for performance<br />
-              - Secure AWS S3 image upload with pre-signed URLs<br />
-              - Deployed on Render with .env-based config management<br />
-              - Responsive design with a focus on user-friendly UI/UX
+        {/* GALLERY */}
+        <section className="ffrh-section" aria-label="Screenshots">
+          <div className="ffrh-section-head">
+            <h2 className="ffrh-h2">Screenshots</h2>
+            <p className="ffrh-muted">A quick tour of the UI and core flows.</p>
+          </div>
+
+          <div className="ffrh-slideshow" aria-label="Screenshot carousel">
+            <button
+              type="button"
+              className="ffrh-slide-btn ffrh-slide-btn--left"
+              onClick={prevImage}
+              aria-label="Previous screenshot"
+            >
+              <FaChevronLeft aria-hidden="true" />
+            </button>
+
+            <img
+              src={images[currentImageIndex]}
+              alt={`Fantasy Football Research Hub screenshot ${currentImageIndex + 1}`}
+              className="ffrh-slide-image"
+              loading="lazy"
+            />
+
+            <button
+              type="button"
+              className="ffrh-slide-btn ffrh-slide-btn--right"
+              onClick={nextImage}
+              aria-label="Next screenshot"
+            >
+              <FaChevronRight aria-hidden="true" />
+            </button>
+          </div>
+
+          <div className="ffrh-indicators" aria-label="Select screenshot">
+            {images.map((_, index) => (
+              <button
+                key={index}
+                type="button"
+                className={`ffrh-indicator ${index === currentImageIndex ? 'is-active' : ''}`}
+                onClick={() => goToImage(index)}
+                aria-label={`Go to screenshot ${index + 1}`}
+                aria-pressed={index === currentImageIndex}
+              />
+            ))}
+          </div>
+        </section>
+
+        {/* CASE STUDY BODY */}
+        <section className="ffrh-section" aria-label="Case study details">
+          <div className="ffrh-section-head">
+            <h2 className="ffrh-h2">Overview</h2>
+            <p className="ffrh-muted">
+              Why I built it, what it does, and the engineering decisions behind it.
             </p>
           </div>
 
-          <div className="info-box">
-            <div className="section-header"><h2>My Role and Contributions</h2></div>
-            <p>
-              As the sole developer, I led the design and implementation of the entire codebase. I architected the backend using Flask and SQLAlchemy, built secure RESTful APIs with JWT authentication, and configured deployment using Render and AWS S3. On the frontend, I built reusable components, implemented Redux-based state logic, and optimized UX with performance enhancements like virtualized lists and modal-driven interactions. I also wrote all custom CSS and handled environment configuration for production.
+          <div className="ffrh-grid">
+            <article className="ffrh-panel">
+              <h3 className="ffrh-h3">Problem</h3>
+              <p>
+                Fantasy research often lives across disconnected sources: stats sites for
+                numbers, YouTube for context, and group chats for “real opinions.” It’s
+                hard to combine analytics with community signal in one place.
+              </p>
+            </article>
+
+            <article className="ffrh-panel">
+              <h3 className="ffrh-h3">Solution</h3>
+              <p>
+                A community-centric platform that centralizes player research by combining
+                rankings and reviews with a clean UI and scalable backend.
+              </p>
+            </article>
+
+            <article className="ffrh-panel">
+              <h3 className="ffrh-h3">Key features</h3>
+              <ul className="ffrh-list">
+                <li>Authentication + protected flows (JWT via HTTP-only cookies)</li>
+                <li>CRUD for rankings and player reviews</li>
+                <li>Many-to-many ranking relationships for flexible user rankings</li>
+                <li>Performance-minded UI patterns (virtualized lists)</li>
+                <li>AWS S3 profile image upload via presigned URLs</li>
+                <li>Render deployment with environment-based configuration</li>
+              </ul>
+            </article>
+
+            <article className="ffrh-panel">
+              <h3 className="ffrh-h3">My role</h3>
+              <p>
+                Sole developer. I designed the data model, built the Flask REST API,
+                implemented auth and secure uploads, and shipped the React + Redux UI with
+                production-style deployment practices.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        {/* TECH STACK (accordion) */}
+        <section className="ffrh-section" aria-label="Tech stack">
+          <div className="ffrh-section-head">
+            <h2 className="ffrh-h2">Tech stack</h2>
+            <p className="ffrh-muted">
+              Click a category to see the tools and the “why” behind each choice.
             </p>
           </div>
 
-          <div className="info-box">
-            <div className="section-header"><h2>Impact and Value</h2></div>
-            <p>
-              FFRH stands as a strong representation of my full-stack capabilities — from REST API design and secure authentication to advanced state management and UI interactivity. It demonstrates my ability to solve real-world problems with clean, scalable architecture and emphasizes my commitment to delivering thoughtful, user-centric solutions in modern web development.
-            </p>
-          </div>
-        </div>
+          <div className="ffrh-accordion" aria-label="Tech stack categories">
+            {Object.entries(techStack).map(([category, tools]) => {
+              const isOpen = expandedCategory === category
+              return (
+                <div key={category} className="ffrh-accordion-item">
+                  <button
+                    type="button"
+                    className="ffrh-accordion-trigger"
+                    onClick={() => toggleCategory(category)}
+                    aria-expanded={isOpen}
+                  >
+                    <span className="ffrh-accordion-title">{category}</span>
+                    <span className="ffrh-accordion-icon" aria-hidden="true">
+                      {isOpen ? '−' : '+'}
+                    </span>
+                  </button>
 
+                  {isOpen && (
+                    <div className="ffrh-accordion-panel">
+                      <div className="ffrh-pill-row">
+                        {tools.map((tool) => {
+                          const tooltipId = `${category}:${tool.name}`
+                          const tooltipOpen = activeTooltip === tooltipId
+
+                          return (
+                            <div key={tool.name} className="ffrh-pill-wrap">
+                              <button
+                                type="button"
+                                className="ffrh-pill"
+                                onClick={() => toggleTooltip(tooltipId)}
+                                aria-expanded={tooltipOpen}
+                                aria-label={`${tool.name} details`}
+                              >
+                                {tool.name}
+                              </button>
+
+                              {tooltipOpen && (
+                                <div className="ffrh-tooltip" role="note">
+                                  {tool.description}
+                                </div>
+                              )}
+                            </div>
+                          )
+                        })}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )
+            })}
+          </div>
+        </section>
+
+        {/* BACK TO TOP */}
         <button
           className="back-to-top"
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          aria-label="Back to top"
         >
-          <FaArrowUp />
+          <FaArrowUp aria-hidden="true" />
         </button>
       </div>
     </div>
-  );
+  )
 }
 
-export default FantasyFootballResearchHub;
+export default FantasyFootballResearchHub

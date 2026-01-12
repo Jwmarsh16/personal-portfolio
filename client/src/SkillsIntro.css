@@ -127,6 +127,28 @@
   border-color: rgba(255, 255, 255, 0.12);
 }
 
+/* CHANGED: signature strengths row */
+.hero-signature {
+  margin-top: 0.9rem; /* CHANGED */
+  display: flex; /* CHANGED */
+  flex-direction: column; /* CHANGED */
+  gap: 0.55rem; /* CHANGED */
+}
+
+.hero-signature-label {
+  font-size: 0.92rem; /* CHANGED */
+  color: rgba(255, 255, 255, 0.68); /* CHANGED */
+  text-transform: uppercase; /* CHANGED */
+  letter-spacing: 0.12em; /* CHANGED */
+  font-weight: 800; /* CHANGED */
+}
+
+.hero-signature-chips {
+  display: flex; /* CHANGED */
+  flex-wrap: wrap; /* CHANGED */
+  gap: 0.5rem; /* CHANGED */
+}
+
 /* Social links */
 .hero-social {
   display: flex;
@@ -261,5 +283,9 @@
 
   .hero-cta {
     width: 100%; /* CHANGED: full-width CTAs on mobile */
+  }
+
+  .hero-signature {
+    margin-top: 0.75rem; /* CHANGED: tighter on mobile */
   }
 }

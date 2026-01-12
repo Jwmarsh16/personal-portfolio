@@ -7,6 +7,12 @@ import '../SkillsIntro.css'
 import { scrollToSection } from '../utils/scrollToSection'
 
 function SkillsIntro() {
+  const signatureHighlights = [
+    'SSE streaming chat UX', // CHANGED: headline strength
+    'Pinned memory + context strategy', // CHANGED: headline strength
+    'RAG (Embeddings + FAISS)' // CHANGED: headline strength
+  ] // CHANGED
+
   return (
     <div className="skills-intro-wrapper">
       <div className="hero-container">
@@ -28,8 +34,8 @@ function SkillsIntro() {
             <span className="highlight">Flask</span>, and{' '}
             <span className="highlight">PostgreSQL</span>—with hands-on experience
             shipping LLM features like <span className="highlight">SSE streaming</span>,{' '}
-            <span className="highlight">session memory</span>, and{' '}
-            <span className="highlight">mini-RAG</span>.
+            <span className="highlight">pinned memory + context strategy</span>, and{' '}
+            <span className="highlight">RAG (embeddings + FAISS)</span>. {/* CHANGED: tighten to signature strengths */}
           </p>
 
           <div className="hero-ctas">
@@ -56,6 +62,18 @@ function SkillsIntro() {
             >
               Resume
             </Link>
+          </div>
+
+          {/* CHANGED: add signature strengths directly under CTAs for case-study scanability */}
+          <div className="hero-signature" aria-label="Signature strengths">
+            <div className="hero-signature-label">Signature strengths</div> {/* CHANGED */}
+            <div className="hero-signature-chips">
+              {signatureHighlights.map((h) => (
+                <span key={h} className="chip chip--primary">
+                  {h}
+                </span> // CHANGED: re-use global chip styles for consistent design language
+              ))}
+            </div>
           </div>
 
           <div className="hero-social" aria-label="Social links">

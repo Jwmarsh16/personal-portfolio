@@ -1,126 +1,335 @@
-/* TechnicalBlogs.css */
+/* client/src/TechnicalBlogs.css */
 
 .technical-blogs {
-  max-width: 900px;
-  margin: 100px auto 50px;
-  padding: 2rem;
-  background: rgba(20, 20, 30, 0.7); /* darkened frosted glass */
-  backdrop-filter: blur(12px);
-  border-radius: 12px;
-  box-shadow: 0 0 30px rgba(0, 255, 204, 0.15);
-  color: var(--text-color, #e0f7fa);
-  font-family: var(--body-font, 'Inter', sans-serif);
-  animation: fadeIn 1s ease-in-out;
+  padding: 4rem 1.25rem; /* CHANGED: align with new section rhythm */
 }
 
-.technical-blogs h2 {
-  font-size: 2.8rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  color: #00ffc3;
-  font-family: var(--heading-font, 'Orbitron', sans-serif);
-  text-align: center;
-  text-shadow: 0 0 5px #00ffc3;
+.technical-blogs-container {
+  max-width: 1200px; /* CHANGED: consistent container width */
+  margin: 0 auto; /* CHANGED */
+  display: flex; /* CHANGED */
+  flex-direction: column; /* CHANGED */
+  gap: 1.5rem; /* CHANGED */
 }
 
-.technical-blogs p.intro {
-  font-size: 1.15rem;
-  color: #cccccc;
-  margin-bottom: 2.5rem;
-  text-align: center;
+/* -----------------------
+   Hero
+------------------------ */
+.blogs-hero {
+  background: rgba(0, 0, 0, 0.34); /* CHANGED: match glass surfaces */
+  border: 1px solid rgba(255, 255, 255, 0.08); /* CHANGED */
+  border-radius: 18px; /* CHANGED */
+  padding: 1.6rem; /* CHANGED */
+  backdrop-filter: blur(10px);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.28);
+}
+
+.blogs-kicker {
+  margin: 0;
+  font-size: 0.92rem;
+  color: rgba(255, 255, 255, 0.65);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 800;
+}
+
+.blogs-title {
+  margin: 0.6rem 0 0.25rem;
+  font-size: 2.25rem;
+  line-height: 1.1;
+  color: rgba(255, 255, 255, 0.94);
+  font-family: 'Orbitron', var(--heading-font, sans-serif);
+}
+
+.blogs-intro {
+  margin: 0.6rem 0 0;
+  max-width: 70ch;
+  color: rgba(255, 255, 255, 0.78);
   line-height: 1.7;
 }
 
-.blog-list {
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+/* -----------------------
+   Top grid (proof + featured)
+------------------------ */
+.blogs-top-grid {
+  display: grid; /* CHANGED */
+  grid-template-columns: 0.9fr 1.1fr; /* CHANGED */
+  gap: 1.25rem; /* CHANGED */
+  align-items: start; /* CHANGED */
 }
 
-.blog-entry {
-  padding: 1.5rem 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  transition: background 0.3s ease;
+.blogs-proof-card {
+  background: rgba(0, 0, 0, 0.28); /* CHANGED */
+  border: 1px solid rgba(255, 255, 255, 0.08); /* CHANGED */
+  border-radius: 18px; /* CHANGED */
+  padding: 1.25rem; /* CHANGED */
+  backdrop-filter: blur(10px);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.22);
 }
 
-.blog-entry:hover {
-  background: rgba(255, 255, 255, 0.03);
-  border-left: 4px solid #00ffc3;
-  padding-left: calc(1.5rem - 4px);
-}
-
-.blog-date {
-  font-size: 0.85rem;
-  color: #999;
-  font-weight: 500;
+.blogs-proof-title {
+  font-size: 0.92rem;
+  color: rgba(255, 255, 255, 0.65);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-bottom: 0.4rem;
+  letter-spacing: 0.12em;
+  margin-bottom: 0.65rem;
+  font-weight: 800;
 }
 
-.blog-title {
-  display: inline-block;
-  font-size: 1.7rem;
-  font-weight: bold;
-  color: #ffffff;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  text-shadow: 0 0 3px rgba(0, 255, 204, 0.3);
-}
-
-.blog-title:hover {
-  color: #00ffc3;
-  text-shadow: 0 0 8px #00ffc3;
-}
-
-.blog-entry p {
-  font-size: 1rem;
+.blogs-proof-list {
+  margin: 0;
+  padding-left: 1.1rem;
+  color: rgba(255, 255, 255, 0.78);
   line-height: 1.65;
-  color: #c4c4c4;
-  margin-top: 0.6rem;
 }
 
-/* Fade-in animation */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
+.blogs-proof-list li {
+  margin-bottom: 0.35rem;
+}
+
+.blogs-proof-list li:last-child {
+  margin-bottom: 0;
+}
+
+.blogs-featured {
+  background: rgba(0, 0, 0, 0.34); /* CHANGED */
+  border: 1px solid rgba(255, 255, 255, 0.08); /* CHANGED */
+  border-radius: 18px; /* CHANGED */
+  padding: 1.25rem; /* CHANGED */
+  backdrop-filter: blur(10px);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.28);
+}
+
+.blogs-featured-label {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid rgba(100, 181, 246, 0.22);
+  background: rgba(100, 181, 246, 0.10);
+  color: rgba(255, 255, 255, 0.86);
+  font-weight: 800;
+  font-size: 0.9rem;
+  margin-bottom: 0.75rem;
+}
+
+/* -----------------------
+   Cards / meta / links
+------------------------ */
+.blogs-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 0.92rem;
+  font-weight: 650;
+}
+
+.blogs-meta-sep {
+  opacity: 0.8;
+}
+
+.blogs-card-title {
+  margin: 0.7rem 0 0.4rem 0;
+  color: rgba(255, 255, 255, 0.94);
+}
+
+.blogs-link {
+  color: rgba(255, 255, 255, 0.94);
+  text-decoration: none;
+  transition: color var(--transition-speed, 0.3s);
+}
+
+.blogs-link:hover {
+  color: rgba(100, 181, 246, 0.95);
+}
+
+.blogs-link:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+  border-radius: 10px;
+}
+
+.blogs-summary {
+  margin: 0.6rem 0 0;
+  color: rgba(255, 255, 255, 0.78);
+  line-height: 1.7;
+}
+
+.blogs-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.85rem;
+}
+
+.blogs-actions {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.blogs-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem 0.95rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.92);
+  text-decoration: none;
+  font-weight: 800;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.blogs-button:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+.blogs-button:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.blogs-button--primary {
+  background: rgba(100, 181, 246, 0.18);
+  border-color: rgba(100, 181, 246, 0.28);
+}
+
+/* -----------------------
+   “More posts” section
+------------------------ */
+.blogs-section-head {
+  margin-top: 0.25rem;
+}
+
+.blogs-section-title {
+  margin: 0;
+  font-size: 1.5rem;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.blogs-section-subtext {
+  margin: 0.35rem 0 0;
+  color: rgba(255, 255, 255, 0.68);
+  max-width: 75ch;
+}
+
+.blogs-grid {
+  display: grid; /* CHANGED */
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); /* CHANGED */
+  gap: 1rem; /* CHANGED */
+}
+
+.blogs-card {
+  background: rgba(0, 0, 0, 0.28); /* CHANGED */
+  border: 1px solid rgba(255, 255, 255, 0.08); /* CHANGED */
+  border-radius: 18px; /* CHANGED */
+  padding: 1.25rem; /* CHANGED */
+  backdrop-filter: blur(10px);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.22);
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.blogs-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+/* -----------------------
+   Footer CTA
+------------------------ */
+.blogs-footer-cta {
+  margin-top: 0.25rem;
+  background: rgba(0, 0, 0, 0.34);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: 1.25rem;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.22);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.blogs-footer-title {
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.blogs-footer-subtext {
+  margin-top: 0.25rem;
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.blogs-footer-actions {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+/* -----------------------
+   Reduced motion support
+------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  .blogs-button,
+  .blogs-card {
+    transition: none;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+
+  .blogs-button:hover,
+  .blogs-card:hover {
+    transform: none;
   }
 }
 
-/* Mobile styles */
+/* -----------------------
+   Mobile Responsive
+------------------------ */
+@media screen and (max-width: 900px) {
+  .blogs-top-grid {
+    grid-template-columns: 1fr; /* CHANGED: stack proof + featured */
+  }
+}
+
 @media screen and (max-width: 768px) {
   .technical-blogs {
-    max-width: 100%;
-    margin: 50px auto 30px;
-    padding: 1rem;
+    padding: 2.5rem 1rem;
   }
-  
-  .technical-blogs h2 {
-    font-size: 2rem;
-    margin-bottom: 0.75rem;
+
+  .blogs-hero {
+    padding: 1.25rem;
   }
-  
-  .technical-blogs p.intro {
-    font-size: 1rem;
-    margin-bottom: 2rem;
+
+  .blogs-title {
+    font-size: 1.85rem;
   }
-  
-  .blog-entry {
-    padding: 1rem 0;
+
+  .blogs-featured,
+  .blogs-proof-card,
+  .blogs-card,
+  .blogs-footer-cta {
+    padding: 1.1rem;
   }
-  
-  .blog-title {
-    font-size: 1.5rem;
+
+  .blogs-footer-cta {
+    justify-content: flex-start;
   }
-  
-  .blog-entry p {
-    font-size: 0.9rem;
-  }
-  
-  .blog-date {
-    font-size: 0.8rem;
+
+  .blogs-button {
+    width: 100%;
   }
 }
