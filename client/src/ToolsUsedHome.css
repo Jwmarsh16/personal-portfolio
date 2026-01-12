@@ -43,6 +43,15 @@
   box-shadow: 0 14px 34px rgba(0, 0, 0, 0.35);
 }
 
+/* Tabs wrapper (for mobile scroll affordance) */
+.tools-tabs-wrap {
+  position: relative; /* CHANGED: anchors arrow overlays */
+}
+
+.tools-tabs-arrow {
+  display: none; /* CHANGED: arrows are a mobile-only affordance */
+}
+
 /* Tabs */
 .tools-tabs {
   display: flex;
@@ -52,6 +61,7 @@
 }
 
 .category-button {
+  box-sizing: border-box; /* CHANGED: prevents tiny overflow on small screens */
   background: rgba(255, 255, 255, 0.04);
   color: rgba(255, 255, 255, 0.9);
   padding: 0.6rem 0.9rem;
@@ -93,12 +103,34 @@
   margin-bottom: 0.9rem;
 }
 
+.tools-panel-title-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-width: 0;
+}
+
 .tools-panel-title {
   margin: 0;
   font-size: 1.1rem;
   font-weight: 900;
   color: rgba(255, 255, 255, 0.92);
   letter-spacing: 0.2px;
+}
+
+.tools-panel-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 26px;
+  padding: 0 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 0.85rem;
+  font-weight: 800;
 }
 
 .tools-panel-subtitle {
@@ -109,6 +141,8 @@
 
 /* Pills */
 .tools-list {
+  width: 100%; /* CHANGED: ensures the grid never exceeds its parent */
+  margin: 0; /* CHANGED: removes default spacing surprises */
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
@@ -116,12 +150,9 @@
 }
 
 .tool-pill {
+  box-sizing: border-box; /* CHANGED: fixes “leaks out of the box a little” */
+  max-width: 100%; /* CHANGED: hard guard */
   background: rgba(0, 0, 0, 0.28);
-
-  /* CHANGED: harden text visibility (some global rule is overriding on hover) */
-  color: rgba(255, 255, 255, 0.92) !important;
-  -webkit-text-fill-color: rgba(255, 255, 255, 0.92) !important;
-
   border-radius: 999px;
   padding: 0.55rem 0.85rem;
   font-size: 0.95rem;
@@ -137,10 +168,18 @@
     background-color var(--transition-speed),
     box-shadow var(--transition-speed);
 
-  /* CHANGED: prevent weird blend/filter interactions from other styles */
-  opacity: 1;
-  filter: none;
-  mix-blend-mode: normal;
+  color: rgba(255, 255, 255, 0.92) !important;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0.92) !important;
+}
+
+.tool-pill:hover {
+  background: rgba(0, 0, 0, 0.34);
+  transform: translateY(-1px);
+  border-color: rgba(100, 181, 246, 0.22);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.3);
+
+  color: rgba(255, 255, 255, 0.92) !important;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0.92) !important;
 }
 
 .tool-icon {
@@ -152,33 +191,11 @@
   color: rgba(148, 245, 255, 0.95);
 }
 
-/* If you have the wrapper span from our JSX update, this locks it in */
 .tool-name {
-  color: inherit !important; /* CHANGED: ensure label stays visible */
-  -webkit-text-fill-color: currentColor !important; /* CHANGED */
+  color: inherit !important;
+  -webkit-text-fill-color: currentColor !important;
+  opacity: 1 !important;
   font-weight: 700;
-  opacity: 1;
-}
-
-/* CHANGED: explicitly re-assert text color on hover (beats conflicting CSS) */
-.tool-pill:hover {
-  background: rgba(0, 0, 0, 0.34);
-  transform: translateY(-1px);
-  border-color: rgba(100, 181, 246, 0.22);
-  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.3);
-
-  color: rgba(255, 255, 255, 0.92) !important;
-  -webkit-text-fill-color: rgba(255, 255, 255, 0.92) !important;
-}
-
-.tool-pill:hover .tool-name {
-  color: rgba(255, 255, 255, 0.92) !important; /* CHANGED */
-  -webkit-text-fill-color: rgba(255, 255, 255, 0.92) !important; /* CHANGED */
-}
-
-/* Keep icon accent on hover */
-.tool-pill:hover .tool-icon {
-  color: rgba(148, 245, 255, 0.95);
 }
 
 /* Mobile */
@@ -201,9 +218,102 @@
     font-size: 1rem;
   }
 
+  .tools-panel-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .tools-panel-subtitle {
+    font-size: 0.95rem;
+  }
+
+  /* CHANGED: horizontal scroll tabs + arrow affordance */
+  .tools-tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity; /* CHANGED: gentle snapping for native feel */
+    scroll-padding: 0 2.25rem; /* CHANGED: snap respects arrow/padding gutter */
+    padding: 0.2rem 2.25rem 0.35rem; /* CHANGED: space for arrows so labels don’t sit under them */
+    gap: 0.5rem;
+    margin-bottom: 0.95rem;
+  }
+
+  .tools-tabs::-webkit-scrollbar {
+    height: 0;
+  }
+
   .category-button {
-    flex: 1;
-    min-width: 160px;
+    flex: 0 0 auto;
+    white-space: nowrap;
+    scroll-snap-align: start; /* CHANGED: snap each tab cleanly into view */
+  }
+
+  .tools-tabs-arrow {
+    display: inline-flex; /* CHANGED: visible only on mobile */
+    align-items: center;
     justify-content: center;
+
+    position: absolute;
+    top: 0;
+    bottom: 0;
+
+    width: 34px;
+    border-radius: 12px;
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: rgba(255, 255, 255, 0.72);
+
+    opacity: 1; /* CHANGED: base visible state */
+    transition: opacity var(--transition-speed); /* CHANGED: smooth hide/show */
+
+    pointer-events: none; /* CHANGED: doesn’t block scrolling/clicks */
+  }
+
+  .tools-tabs-arrow--hidden {
+    opacity: 0; /* CHANGED: hide arrows at ends / when not scrollable */
+  }
+
+  .tools-tabs-arrow--left {
+    left: 0;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.75), transparent);
+  }
+
+  .tools-tabs-arrow--right {
+    right: 0;
+    background: linear-gradient(270deg, rgba(0, 0, 0, 0.75), transparent);
+  }
+
+  /* CHANGED: pills become a tighter grid so they don’t feel oversized on mobile */
+  .tools-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.6rem; /* CHANGED: tighter spacing to prevent “crowding/overflow” feel */
+  }
+
+  .tool-pill {
+    width: 100%;
+    justify-content: flex-start;
+    padding: 0.5rem 0.65rem; /* CHANGED: slightly smaller so it fits cleanly */
+    font-size: 0.9rem;
+    min-width: 0; /* CHANGED: helps wrapping inside grid cells */
+  }
+
+  .tool-icon {
+    font-size: 1.05rem;
+  }
+
+  .tool-name {
+    white-space: normal;
+    line-height: 1.2;
+    min-width: 0; /* CHANGED: prevents long labels from pushing the pill wider */
+    word-break: break-word; /* CHANGED: last-resort wrap for very long tokens */
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .tools-list {
+    grid-template-columns: 1fr;
   }
 }
