@@ -1,179 +1,400 @@
-import React, { useState } from 'react';
-import './FantasyFootballResearchHub.css';
+// client/src/project-details/Portfolio.jsx
+import React, { useMemo, useState } from 'react' // CHANGED: useMemo for stable derived lists
+import './Portfolio.css' // CHANGED: decouple from FFRH CSS; use Portfolio-specific styles
 import {
-  FaArrowUp, FaReact, FaCloudDownloadAlt, FaLaptopCode, FaTerminal, FaCodeBranch, FaPaintBrush, FaRocket, FaCloud, FaPalette
-} from 'react-icons/fa';
-import {
-  SiVite, SiJavascript, SiReactrouter, SiCss3
-} from 'react-icons/si';
+  FaArrowLeft, // CHANGED: standardized back-to-projects control
+  FaArrowUp,
+  FaChevronLeft, // CHANGED: standardized slideshow controls
+  FaChevronRight, // CHANGED: standardized slideshow controls
+  FaExternalLinkAlt,
+  FaGithub
+} from 'react-icons/fa' // CHANGED: remove icon bloat; keep only template icons
+import { useNavigate } from 'react-router-dom' // CHANGED: cross-route back to Home/projects
+import { scrollToSection } from '../utils/scrollToSection' // CHANGED: navigate home then scroll
 
 function Portfolio() {
-  const images = [
-    '/images/portfolio-1.png',
-    '/images/portfolio-2.png',
-    '/images/portfolio-3.png',
-    '/images/portfolio-4.png',
-    '/images/portfolio-5.png'
-  ];
+  const navigate = useNavigate() // CHANGED: used for cross-route “back to projects”
 
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [expandedCategory, setExpandedCategory] = useState(null);
-  const [visibleTooltips, setVisibleTooltips] = useState({});
+  const images = useMemo(
+    () => [
+      '/images/portfolio-1.png',
+      '/images/portfolio-2.png',
+      '/images/portfolio-3.png',
+      '/images/portfolio-4.png',
+      '/images/portfolio-5.png'
+    ],
+    []
+  ) // CHANGED: memoize array to avoid re-allocations
+
+  const liveUrl = '' // CHANGED: set when you want to link to the live portfolio
+  const codeUrl = '' // CHANGED: set when you want to link to the GitHub repo
+
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  const [expandedCategory, setExpandedCategory] = useState('Core') // CHANGED: default open category (template)
+  const [activeTooltip, setActiveTooltip] = useState(null)
 
   const nextImage = () => {
-    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-  };
+    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length)
+  }
 
   const prevImage = () => {
-    setCurrentImageIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
-  };
+    setCurrentImageIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length)
+  }
 
   const goToImage = (index) => {
-    setCurrentImageIndex(index);
-  };
+    setCurrentImageIndex(index)
+  }
 
   const toggleCategory = (category) => {
-    setExpandedCategory(expandedCategory === category ? null : category);
-  };
+    setExpandedCategory(expandedCategory === category ? null : category)
+    setActiveTooltip(null) // CHANGED: close any open tooltip when switching categories
+  }
 
-  const toggleTooltip = (index) => {
-    setVisibleTooltips((prev) => ({ ...prev, [index]: !prev[index] }));
-  };
+  const toggleTooltip = (id) => {
+    setActiveTooltip(activeTooltip === id ? null : id)
+  }
 
-  const techStack = {
-    Frontend: [
-      { name: 'React', icon: <FaReact />, color: '#61DAFB', description: 'Component-based library for building UI' },
-      { name: 'Vite', icon: <SiVite />, color: '#9999FF', description: 'Fast frontend tooling and hot reloading' },
-      { name: 'JavaScript', icon: <SiJavascript />, color: '#F7DF1E', description: 'Dynamic scripting for interactivity' },
-      { name: 'React Router', icon: <SiReactrouter />, color: '#E84D3D', description: 'Client-side routing for SPA navigation' },
-      { name: 'EmailJS', icon: <FaCloudDownloadAlt />, color: '#D44638', description: 'Used to send form submissions via email' },
-      { name: 'React Icons', icon: <FaPalette />, color: '#A8DADC', description: 'Library of UI icons used across the app' }
+  const handleBackToProjects = () => {
+    navigate('/') // CHANGED: projects live on Home
+    window.setTimeout(() => scrollToSection('projects', { focus: true }), 120) // CHANGED: scroll after route mounts
+  }
+
+  const techStack = useMemo(
+    () => ({
+      Core: [
+        {
+          name: 'React (Vite)',
+          description: 'SPA built with React and Vite for fast iteration and optimized builds.'
+        },
+        {
+          name: 'React Router',
+          description: 'Client-side routing for Home/About/Blogs/Resume and case-study routes.'
+        },
+        {
+          name: 'Plain CSS (modular files)',
+          description: 'One CSS file per section/component with shared global tokens.'
+        }
+      ],
+      'UX + Interaction': [
+        {
+          name: 'Scroll-to-section navigation',
+          description:
+            'Cross-route anchor scroll helper that accounts for sticky header height.'
+        },
+        {
+          name: 'Interactive skills marquee',
+          description:
+            'Horizontal auto-scroll rows with pause/play, drag-to-scroll, and resize handling.'
+        },
+        {
+          name: 'Reduced motion support',
+          description:
+            'Decorative animations and auto-scroll respect prefers-reduced-motion.'
+        }
+      ],
+      'Contact + Conversion': [
+        {
+          name: 'EmailJS',
+          description:
+            'Contact form delivery with success/error status UI and spam honeypot.'
+        },
+        {
+          name: 'Direct email + copy UX',
+          description:
+            'Quick contact options via mailto plus clipboard copy affordance.'
+        }
+      ],
+      'Quality + Deploy': [
+        {
+          name: 'Accessibility patterns',
+          description:
+            'Focus-visible rings, keyboard-friendly controls, and ARIA where appropriate.'
+        },
+        {
+          name: 'Render',
+          description:
+            'Deployed as a production portfolio site with build-time configuration.'
+        },
+        {
+          name: 'GitHub',
+          description:
+            'Version control and portfolio-grade history for iterative improvements.'
+        }
+      ]
+    }),
+    []
+  ) // CHANGED: align stack presentation to template (no icon/pill bloat)
+
+  const signatureHighlights = useMemo(
+    () => [
+      {
+        title: 'Case-study layout and routing',
+        detail:
+          'Project pages are structured like product case studies with consistent sections and navigation.'
+      },
+      {
+        title: 'Polished interaction design',
+        detail:
+          'Skills marquee controls, tabbed sections, and smooth anchor navigation built for UX clarity.'
+      },
+      {
+        title: 'Accessible, reduced-motion friendly',
+        detail:
+          'Keyboard focus states and prefers-reduced-motion support keep the site usable and professional.'
+      }
     ],
-    Styling: [
-      { name: 'CSS3', icon: <SiCss3 />, color: '#264DE4', description: 'Custom modular stylesheets for layout and effects' },
-      { name: 'Custom Animations', icon: <FaPaintBrush />, color: '#DA70D6', description: 'CSS keyframes and transitions for interactivity' },
-      { name: 'Dark/Neon Theme', icon: <FaRocket />, color: '#00FFC3', description: 'Styled using glowing highlights and glassmorphism' }
-    ],
-    Deployment: [
-      { name: 'Render', icon: <FaCloud />, color: '#00BFFF', description: 'Cloud deployment for static frontend hosting' }
-    ],
-    Development: [
-      { name: 'VS Code', icon: <FaLaptopCode />, color: '#7CAEFF', description: 'Code editor for project development' },
-      { name: 'Git', icon: <FaCodeBranch />, color: '#F1502F', description: 'Version control system used for local commits' },
-      { name: 'GitHub', icon: <FaCodeBranch />, color: '#CCCCCC', description: 'Remote repo for project collaboration and deployment' }
-    ]
-  };
+    []
+  ) // CHANGED: concise “headline” strengths for this project page
 
   return (
     <div className="project-detail-container">
-      <div className="project-detail-card">
-        <h1 className="project-title">Portfolio Website</h1>
-        <p className="brief-description">
-          A personal portfolio website showcasing my projects, skills, and background — built using React and Vite with a fully responsive and interactive design.
-        </p>
+      <div className="project-detail-card ffrh-card">
+        {/* HERO */}
+        <header className="ffrh-hero">
+          <button
+            type="button"
+            className="ffrh-back"
+            onClick={handleBackToProjects}
+            aria-label="Back to projects"
+          >
+            <FaArrowLeft aria-hidden="true" /> Back to projects
+          </button>
 
-        <div className="slideshow-wrapper">
-          <button className="prev-button" onClick={prevImage}>&lt;</button>
-          <img
-            src={images[currentImageIndex]}
-            alt={`Screenshot ${currentImageIndex + 1}`}
-            className="slideshow-image"
-          />
-          <button className="next-button" onClick={nextImage}>&gt;</button>
-        </div>
+          <p className="ffrh-kicker">Case study</p>
 
-        <div className="slide-indicators">
-          {images.map((_, index) => (
-            <span
-              key={index}
-              className={`indicator-dot ${index === currentImageIndex ? 'active' : ''}`}
-              onClick={() => goToImage(index)}
-            ></span>
-          ))}
-        </div>
+          <h1 className="ffrh-title">Portfolio Website</h1>
 
-        <div className="info-grid">
-          <div className="info-box">
-            <div className="section-header"><h2>Project Overview</h2></div>
-            <p>
-              This portfolio serves as a centralized hub for showcasing my work, technical skills, and development journey. Designed with a clean and modern aesthetic, it enables hiring managers and collaborators to explore my projects, resume, and contact info in an engaging format.
-            </p>
+          <p className="ffrh-subtitle">
+            A case-study style portfolio that highlights my projects, AI-focused strengths,
+            and developer story—built with React and Vite with a premium glassy dark UI.
+          </p>
+
+          <div className="ffrh-hero-actions" aria-label="Project links">
+            {liveUrl && (
+              <a
+                className="ffrh-btn ffrh-btn--primary"
+                href={liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Live <FaExternalLinkAlt aria-hidden="true" />
+              </a>
+            )}
+
+            {codeUrl && (
+              <a className="ffrh-btn" href={codeUrl} target="_blank" rel="noopener noreferrer">
+                Code <FaGithub aria-hidden="true" />
+              </a>
+            )}
+
+            {!liveUrl && !codeUrl && (
+              <p className="ffrh-muted">Live and code links coming soon.</p> // CHANGED: keep template layout without broken links
+            )}
           </div>
 
-          <div className="info-box">
-            <div className="section-header"><h2>Purpose and Objectives</h2></div>
-            <p>
-              The main goal was to create a professional, visually engaging platform to represent myself as a developer. It functions as both a personal brand and a living resume — evolving with each new project and skill I add to my toolkit.
-            </p>
+          <div className="ffrh-chips" aria-label="At-a-glance stack">
+            <span className="chip chip--primary">React</span>
+            <span className="chip chip--primary">Vite</span>
+            <span className="chip chip--soft">React Router</span>
+            <span className="chip chip--soft">CSS</span>
+            <span className="chip chip--soft">EmailJS</span>
+            <span className="chip chip--soft">Render</span>
           </div>
+        </header>
 
-          <div className="info-box">
-            <div className="tech-stack-container">
-              <h2>Tech Stack</h2>
-              <p>Click each category below to view the technologies used:</p>
-              <div className="tech-categories">
-                {Object.entries(techStack).map(([category, tools]) => (
-                  <div className="tech-category" key={category}>
-                    <h3 onClick={() => toggleCategory(category)} style={{ cursor: 'pointer' }}>{category}</h3>
-                    {expandedCategory === category && (
-                      <div className="tech-items">
-                        {tools.map((tool, index) => (
-                          <div
-                            className="tech-item-pill"
-                            key={index}
-                            onClick={() => toggleTooltip(`${category}-${index}`)}
-                            style={{ color: tool.color || '#fff' }}
-                          >
-                            {tool.icon && <span>{tool.icon}</span>}<span>{tool.name}</span>
-                            {visibleTooltips[`${category}-${index}`] && tool.description && (
-                              <div className="tooltip">{tool.description}</div>
-                            )}
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
+        {/* TOP GRID: proof + highlights */}
+        <section className="ffrh-top-grid" aria-label="Project summary">
+          <aside className="ffrh-proof">
+            <div className="ffrh-proof-title">What this project proves</div>
+            <ul className="ffrh-proof-list">
+              <li>Product-style storytelling and scannable case-study structure</li>
+              <li>Interactive UI patterns with performance and UX in mind</li>
+              <li>Accessibility and reduced-motion support baked into the experience</li>
+            </ul>
+          </aside>
+
+          <div className="ffrh-highlights">
+            <div className="ffrh-proof-title">Signature highlights</div>
+            <div className="ffrh-highlight-cards">
+              {signatureHighlights.map((h) => (
+                <div key={h.title} className="ffrh-highlight-card">
+                  <div className="ffrh-highlight-title">{h.title}</div>
+                  <div className="ffrh-highlight-detail">{h.detail}</div>
+                </div>
+              ))}
             </div>
           </div>
+        </section>
 
-          <div className="info-box">
-            <div className="section-header"><h2>Key Features</h2></div>
-            <p>
-              - Horizontally scrolling skills section with interactive controls<br />
-              - Tabbed About Me section and dedicated resume page<br />
-              - Starry night background with shooting stars<br />
-              - EmailJS-powered contact form with success feedback<br />
-              - Project detail pages with animated slideshows<br />
-              - Fully mobile-responsive layout and performance optimization via Vite
+        {/* GALLERY */}
+        <section className="ffrh-section" aria-label="Screenshots">
+          <div className="ffrh-section-head">
+            <h2 className="ffrh-h2">Screenshots</h2>
+            <p className="ffrh-muted">A quick tour of the layout, sections, and interactions.</p>
+          </div>
+
+          <div className="ffrh-slideshow" aria-label="Screenshot carousel">
+            <button
+              type="button"
+              className="ffrh-slide-btn ffrh-slide-btn--left"
+              onClick={prevImage}
+              aria-label="Previous screenshot"
+            >
+              <FaChevronLeft aria-hidden="true" />
+            </button>
+
+            <img
+              src={images[currentImageIndex]}
+              alt={`Portfolio screenshot ${currentImageIndex + 1}`}
+              className="ffrh-slide-image"
+              loading="lazy"
+            />
+
+            <button
+              type="button"
+              className="ffrh-slide-btn ffrh-slide-btn--right"
+              onClick={nextImage}
+              aria-label="Next screenshot"
+            >
+              <FaChevronRight aria-hidden="true" />
+            </button>
+          </div>
+
+          <div className="ffrh-indicators" aria-label="Select screenshot">
+            {images.map((_, index) => (
+              <button
+                key={index}
+                type="button"
+                className={`ffrh-indicator ${index === currentImageIndex ? 'is-active' : ''}`}
+                onClick={() => goToImage(index)}
+                aria-label={`Go to screenshot ${index + 1}`}
+                aria-pressed={index === currentImageIndex}
+              />
+            ))}
+          </div>
+        </section>
+
+        {/* CASE STUDY BODY */}
+        <section className="ffrh-section" aria-label="Case study details">
+          <div className="ffrh-section-head">
+            <h2 className="ffrh-h2">Overview</h2>
+            <p className="ffrh-muted">
+              Why I built it, what it does, and the engineering decisions behind it.
             </p>
           </div>
 
-          <div className="info-box">
-            <div className="section-header"><h2>My Role and Contributions</h2></div>
-            <p>
-              I designed and developed the entire application from scratch — planning the structure, implementing all UI/UX components, and integrating animations, routing, and interactivity. I maintained a consistent design system using global CSS variables and modular styling, ensuring clarity and performance across devices.
+          <div className="ffrh-grid">
+            <article className="ffrh-panel">
+              <h3 className="ffrh-h3">Problem</h3>
+              <p>
+                Portfolios often read like a “cool homepage” instead of a product site. Hiring
+                teams need clarity fast: role, proof, and where to click next.
+              </p>
+            </article>
+
+            <article className="ffrh-panel">
+              <h3 className="ffrh-h3">Solution</h3>
+              <p>
+                A case-study style portfolio that makes the 15-second story obvious: what I’m
+                targeting, what I shipped, and how to explore projects and contact me.
+              </p>
+            </article>
+
+            <article className="ffrh-panel">
+              <h3 className="ffrh-h3">Key features</h3>
+              <ul className="ffrh-list">
+                <li>Project grid with dedicated case-study pages</li>
+                <li>Cross-route anchor scrolling (sticky header offset + focus support)</li>
+                <li>Skills marquee with controls (auto-scroll + drag + reduced motion)</li>
+                <li>Tabbed About section and dedicated Resume route</li>
+                <li>EmailJS contact form with UX feedback + spam honeypot</li>
+              </ul>
+            </article>
+
+            <article className="ffrh-panel">
+              <h3 className="ffrh-h3">My role</h3>
+              <p>
+                Sole developer. I designed the information architecture, built reusable UI
+                patterns, implemented routing and cross-route navigation, and delivered a
+                polished, responsive experience with modular CSS.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        {/* TECH STACK (accordion) */}
+        <section className="ffrh-section" aria-label="Tech stack">
+          <div className="ffrh-section-head">
+            <h2 className="ffrh-h2">Tech stack</h2>
+            <p className="ffrh-muted">
+              Click a category to see the tools and the “why” behind each choice.
             </p>
           </div>
 
-          <div className="info-box">
-            <div className="section-header"><h2>Impact and Value</h2></div>
-            <p>
-              This site is the cornerstone of my online presence and has helped me gain visibility, receive job interviews, and share my development work with confidence. It demonstrates my ability to build polished, engaging front-end applications that align with modern best practices.
-            </p>
-          </div>
-        </div>
+          <div className="ffrh-accordion" aria-label="Tech stack categories">
+            {Object.entries(techStack).map(([category, tools]) => {
+              const isOpen = expandedCategory === category
+              return (
+                <div key={category} className="ffrh-accordion-item">
+                  <button
+                    type="button"
+                    className="ffrh-accordion-trigger"
+                    onClick={() => toggleCategory(category)}
+                    aria-expanded={isOpen}
+                  >
+                    <span className="ffrh-accordion-title">{category}</span>
+                    <span className="ffrh-accordion-icon" aria-hidden="true">
+                      {isOpen ? '−' : '+'}
+                    </span>
+                  </button>
 
+                  {isOpen && (
+                    <div className="ffrh-accordion-panel">
+                      <div className="ffrh-pill-row">
+                        {tools.map((tool) => {
+                          const tooltipId = `${category}:${tool.name}`
+                          const tooltipOpen = activeTooltip === tooltipId
+
+                          return (
+                            <div key={tool.name} className="ffrh-pill-wrap">
+                              <button
+                                type="button"
+                                className="ffrh-pill"
+                                onClick={() => toggleTooltip(tooltipId)}
+                                aria-expanded={tooltipOpen}
+                                aria-label={`${tool.name} details`}
+                              >
+                                {tool.name}
+                              </button>
+
+                              {tooltipOpen && (
+                                <div className="ffrh-tooltip" role="note">
+                                  {tool.description}
+                                </div>
+                              )}
+                            </div>
+                          )
+                        })}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )
+            })}
+          </div>
+        </section>
+
+        {/* BACK TO TOP */}
         <button
           className="back-to-top"
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          aria-label="Back to top"
         >
-          <FaArrowUp />
+          <FaArrowUp aria-hidden="true" />
         </button>
       </div>
     </div>
-  );
+  )
 }
 
-export default Portfolio;
+export default Portfolio
