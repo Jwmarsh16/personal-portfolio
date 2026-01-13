@@ -1,6 +1,6 @@
-// client/src/components/SkillsIntro.jsx
-import React from 'react'
-import { Link } from 'react-router-dom' // CHANGED: SPA navigation for Resume
+// Path: client/src/components/SkillsIntro.jsx
+import React, { useState } from 'react' // CHANGED: add useState for graceful image fallback
+import { Link } from 'react-router-dom'
 import Skills from './Skills'
 import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa'
 import '../SkillsIntro.css'
@@ -8,10 +8,12 @@ import { scrollToSection } from '../utils/scrollToSection'
 
 function SkillsIntro() {
   const signatureHighlights = [
-    'SSE streaming chat UX', // CHANGED: headline strength
-    'Pinned memory + context strategy', // CHANGED: headline strength
-    'RAG (Embeddings + FAISS)' // CHANGED: headline strength
-  ] // CHANGED
+    'SSE streaming chat UX',
+    'Pinned memory + context strategy',
+    'RAG (Embeddings + FAISS)'
+  ]
+
+  const [showHeadshot, setShowHeadshot] = useState(true) // CHANGED: hide headshot if image fails to load
 
   return (
     <div className="skills-intro-wrapper">
@@ -22,20 +24,35 @@ function SkillsIntro() {
             Open to AI + full-stack roles
           </div>
 
-          <h1 className="hero-name">
-            Jonathan <span className="name-highlight">Marshall</span>
-          </h1>
+          {/* CHANGED: add a real headshot in the hero for recruiter trust + clarity */}
+          <div className="hero-headline-row">
+            <div className="hero-title-block">
+              <h1 className="hero-name">
+                Jonathan <span className="name-highlight">Marshall</span>
+              </h1>
 
-          <p className="hero-role">AI-focused Full Stack Developer</p>
+              <p className="hero-role">AI-focused Full Stack Developer</p>
+            </div>
+
+            {showHeadshot && (
+              <div className="hero-headshot-wrap" aria-label="Headshot">
+                <img
+                  src="/images/main.jpg" // CHANGED: uses existing file in your /public/images (adjust if needed)
+                  alt="Jonathan Marshall"
+                  className="hero-headshot"
+                  onError={() => setShowHeadshot(false)} // CHANGED: prevents broken-image icon in UI
+                />
+              </div>
+            )}
+          </div>
 
           <p className="hero-summary">
-            I build production-style web apps with{' '}
-            <span className="highlight">React</span>,{' '}
+            I build production-style web apps with <span className="highlight">React</span>,{' '}
             <span className="highlight">Flask</span>, and{' '}
             <span className="highlight">PostgreSQL</span>—with hands-on experience
             shipping LLM features like <span className="highlight">SSE streaming</span>,{' '}
             <span className="highlight">pinned memory + context strategy</span>, and{' '}
-            <span className="highlight">RAG (embeddings + FAISS)</span>. {/* CHANGED: tighten to signature strengths */}
+            <span className="highlight">RAG (embeddings + FAISS)</span>.
           </p>
 
           <div className="hero-ctas">
@@ -55,23 +72,18 @@ function SkillsIntro() {
               Contact
             </button>
 
-            <Link
-              to="/resume"
-              className="hero-cta hero-cta--ghost"
-              aria-label="View resume"
-            >
+            <Link to="/resume" className="hero-cta hero-cta--ghost" aria-label="View resume">
               Resume
             </Link>
           </div>
 
-          {/* CHANGED: add signature strengths directly under CTAs for case-study scanability */}
           <div className="hero-signature" aria-label="Signature strengths">
-            <div className="hero-signature-label">Signature strengths</div> {/* CHANGED */}
+            <div className="hero-signature-label">Signature strengths</div>
             <div className="hero-signature-chips">
               {signatureHighlights.map((h) => (
                 <span key={h} className="chip chip--primary">
                   {h}
-                </span> // CHANGED: re-use global chip styles for consistent design language
+                </span>
               ))}
             </div>
           </div>

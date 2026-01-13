@@ -70,7 +70,14 @@ function Header() {
           onClick={() => setMenuOpen(false)}
           aria-label="Go to home"
         >
-          Jonathan Marshall
+          <img
+            src="/images/jonathan.jpg" // CHANGED: add header avatar (place file in client/public/images/)
+            alt="Jonathan Marshall" // CHANGED: accessible label for the headshot
+            className="brand-avatar" // CHANGED: scoped styling hook
+            loading="eager" // CHANGED: tiny image; keep the header feeling instant
+            decoding="async" // CHANGED: hint to decode off main thread when possible
+          />
+          <span className="brand-name">Jonathan Marshall</span> {/* CHANGED: keep text styling stable */}
         </Link>
 
         <button

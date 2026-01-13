@@ -1,4 +1,4 @@
-/* client/src/SkillsIntro.css */
+/* Path: client/src/SkillsIntro.css */
 
 .skills-intro-wrapper {
   width: 100%;
@@ -17,8 +17,8 @@
 }
 
 .hero-copy {
-  background: rgba(0, 0, 0, 0.42); /* CHANGED: pro surface */
-  border: 1px solid rgba(255, 255, 255, 0.08); /* CHANGED: premium border */
+  background: rgba(0, 0, 0, 0.42);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 18px;
   padding: 1.6rem 1.6rem 1.35rem;
   backdrop-filter: blur(10px);
@@ -32,7 +32,7 @@
   padding: 0.35rem 0.65rem;
   border-radius: 999px;
   border: 1px solid rgba(100, 181, 246, 0.22);
-  background: rgba(100, 181, 246, 0.10);
+  background: rgba(100, 181, 246, 0.1);
   color: rgba(255, 255, 255, 0.86);
   font-weight: 650;
   font-size: 0.95rem;
@@ -46,12 +46,44 @@
   box-shadow: 0 0 12px rgba(0, 255, 195, 0.35);
 }
 
+/* CHANGED: headline row with headshot */
+.hero-headline-row {
+  display: flex; /* CHANGED */
+  align-items: flex-start; /* CHANGED */
+  justify-content: space-between; /* CHANGED */
+  gap: 1rem; /* CHANGED */
+  margin-top: 0.9rem; /* CHANGED: replaces old hero-name top margin */
+}
+
+.hero-title-block {
+  min-width: 0; /* CHANGED: prevents overflow in tight widths */
+}
+
+.hero-headshot-wrap {
+  width: 128px; /* CHANGED: “bigger picture” but still tasteful */
+  height: 128px; /* CHANGED */
+  border-radius: 18px; /* CHANGED: matches your card language */
+  overflow: hidden; /* CHANGED */
+  border: 1px solid rgba(255, 255, 255, 0.12); /* CHANGED */
+  background: rgba(255, 255, 255, 0.04); /* CHANGED */
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.28); /* CHANGED */
+  flex: 0 0 auto; /* CHANGED */
+}
+
+.hero-headshot {
+  width: 100%; /* CHANGED */
+  height: 100%; /* CHANGED */
+  object-fit: cover; /* CHANGED: avoids distortion */
+  object-position: center; /* CHANGED */
+  display: block; /* CHANGED */
+}
+
 .hero-name {
-  margin: 0.9rem 0 0.25rem;
+  margin: 0; /* CHANGED: margin handled by headline row */
   font-size: 3rem;
   line-height: 1.05;
   color: rgba(255, 255, 255, 0.94);
-  font-family: 'Orbitron', var(--heading-font); /* CHANGED: use your stronger hero font */
+  font-family: 'Orbitron', var(--heading-font);
   letter-spacing: 0.2px;
 }
 
@@ -61,7 +93,7 @@
 }
 
 .hero-role {
-  margin: 0;
+  margin: 0.25rem 0 0; /* CHANGED: subtle spacing under name */
   font-size: 1.25rem;
   color: rgba(255, 255, 255, 0.78);
   font-weight: 650;
@@ -127,26 +159,26 @@
   border-color: rgba(255, 255, 255, 0.12);
 }
 
-/* CHANGED: signature strengths row */
+/* Signature strengths row */
 .hero-signature {
-  margin-top: 0.9rem; /* CHANGED */
-  display: flex; /* CHANGED */
-  flex-direction: column; /* CHANGED */
-  gap: 0.55rem; /* CHANGED */
+  margin-top: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
 }
 
 .hero-signature-label {
-  font-size: 0.92rem; /* CHANGED */
-  color: rgba(255, 255, 255, 0.68); /* CHANGED */
-  text-transform: uppercase; /* CHANGED */
-  letter-spacing: 0.12em; /* CHANGED */
-  font-weight: 800; /* CHANGED */
+  font-size: 0.92rem;
+  color: rgba(255, 255, 255, 0.68);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 800;
 }
 
 .hero-signature-chips {
-  display: flex; /* CHANGED */
-  flex-wrap: wrap; /* CHANGED */
-  gap: 0.5rem; /* CHANGED */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 /* Social links */
@@ -197,8 +229,6 @@
   margin-top: 1.1rem;
 }
 
-/* CHANGED: chip styles moved to Global.css to avoid collisions */
-
 /* Proof column */
 .hero-proof {
   display: flex;
@@ -207,7 +237,7 @@
 }
 
 .proof-card {
-  background: rgba(0, 0, 0, 0.34); /* CHANGED: slightly lighter than hero */
+  background: rgba(0, 0, 0, 0.34);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 18px;
   padding: 1.25rem 1.25rem 1.1rem;
@@ -246,17 +276,15 @@
   font-size: 0.95rem;
 }
 
-/* Skills marquee wrapper */
 .skills-wrapper {
   width: 100%;
   margin-top: 2rem;
   padding: 0;
 }
 
-/* Mobile styles */
 @media screen and (max-width: 900px) {
   .hero-container {
-    grid-template-columns: 1fr; /* CHANGED: stack on smaller screens */
+    grid-template-columns: 1fr;
   }
 }
 
@@ -267,6 +295,17 @@
 
   .hero-copy {
     padding: 1.25rem 1.15rem 1.1rem;
+  }
+
+  .hero-headline-row {
+    flex-direction: column; /* CHANGED: stack name + headshot on mobile */
+    align-items: flex-start; /* CHANGED */
+  }
+
+  .hero-headshot-wrap {
+    width: 104px; /* CHANGED: slightly smaller for mobile */
+    height: 104px; /* CHANGED */
+    border-radius: 16px; /* CHANGED */
   }
 
   .hero-name {
@@ -282,10 +321,10 @@
   }
 
   .hero-cta {
-    width: 100%; /* CHANGED: full-width CTAs on mobile */
+    width: 100%;
   }
 
   .hero-signature {
-    margin-top: 0.75rem; /* CHANGED: tighter on mobile */
+    margin-top: 0.75rem;
   }
 }

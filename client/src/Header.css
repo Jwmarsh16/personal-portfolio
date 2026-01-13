@@ -29,10 +29,30 @@
   letter-spacing: 0.2px;
   font-size: 1.05rem;
   white-space: nowrap;
+
+  display: inline-flex; /* CHANGED: allow avatar + name to align */
+  align-items: center; /* CHANGED: vertical alignment */
+  gap: 0.6rem; /* CHANGED: clean spacing between avatar and text */
 }
 
 .brand:hover {
   opacity: 0.92;
+}
+
+.brand-avatar {
+  width: 50px; /* CHANGED: slightly larger for face clarity */
+  height: 50px; /* CHANGED: slightly larger for face clarity */
+  border-radius: 999px; /* CHANGED: circular avatar */
+  object-fit: cover; /* CHANGED: prevent distortion */
+  object-position: center 30%; /* CHANGED: bias crop upward so face fills frame better */
+  border: 1px solid rgba(255, 255, 255, 0.22); /* CHANGED: a bit stronger edge for definition */
+  background: rgba(255, 255, 255, 0.06); /* CHANGED: nicer during image load */
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.35); /* CHANGED: subtle depth */
+  filter: contrast(1.05) saturate(1.02); /* CHANGED: tiny boost to perceived sharpness */
+}
+
+.brand-name {
+  line-height: 1; /* CHANGED: keeps baseline tight with avatar */
 }
 
 .nav-bar {
@@ -146,5 +166,12 @@
     width: 100%;
     padding: 0.7rem 0.85rem; /* CHANGED: finger-friendly tap targets */
     border-radius: 12px;
+  }
+}
+
+@media (max-width: 420px) {
+  .brand-avatar {
+    width: 36px; /* CHANGED: keep header from feeling cramped on small screens */
+    height: 36px; /* CHANGED: keep header from feeling cramped on small screens */
   }
 }

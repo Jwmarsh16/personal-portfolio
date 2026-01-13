@@ -1,10 +1,41 @@
-// client/src/components/Projects.jsx
+// Path: client/src/components/Projects.jsx
 import React from 'react'
 import { Link } from 'react-router-dom'
 import '../Projects.css'
 
 function Projects() {
   const projects = [
+    // CHANGED: Ask-Flask is now featured (replaces Event Manager + Portfolio cards)
+    {
+      title: 'Ask-Flask',
+      description:
+        'A production-style AI chat app with SSE streaming, server-backed sessions, pinned memory, and a mini RAG module (FAISS + PII redaction).',
+      technologies: [
+        'React',
+        'Vite',
+        'Flask',
+        'PostgreSQL',
+        'OpenAI API',
+        'SSE',
+        'SQLAlchemy',
+        'Pydantic v2',
+        'FAISS'
+      ],
+      tools: [
+        'Flask-Limiter',
+        'Flask-Talisman',
+        'Alembic',
+        'Pytest',
+        'Vitest',
+        'GitHub Actions',
+        'PrismJS',
+        'react-markdown'
+      ],
+      languages: ['Python', 'JavaScript', 'SQL', 'CSS'],
+      link: 'https://ask-flask.onrender.com/',
+      github: 'https://github.com/Jwmarsh16/ask-flask',
+      preview: '/images/ask-flask1.png' // CHANGED: uses existing image in /public/images
+    },
     {
       title: 'Fantasy Football Research Hub',
       description:
@@ -25,36 +56,17 @@ function Projects() {
       github: 'https://github.com/Jwmarsh16/fantasy-football-research-project',
       preview: '/images/fantasy-football.png'
     },
+    // CHANGED: Algorithm Visualizer is now featured (replaces Event Manager + Portfolio cards)
     {
-      title: 'Event Manager Application',
+      title: 'Algorithm Visualizer',
       description:
-        'A fullstack application for managing events, featuring group management, CRUD operations, and user authentication using Flask, React, and Redux.',
-      technologies: [
-        'Flask',
-        'React',
-        'Vite',
-        'Redux Toolkit',
-        'Flask JWT Extended',
-        'Flask-CORS',
-        'Flask RESTful',
-        'PostgreSQL'
-      ],
-      tools: ['JWT Cookies', 'Bcrypt', 'React-Redux', 'SQLAlchemy'],
-      languages: ['Python', 'JavaScript', 'CSS'],
-      link: 'https://event-manager-dtae.onrender.com',
-      github: 'https://github.com/Jwmarsh16/event-manager',
-      preview: '/images/event-manager-project.png'
-    },
-    {
-      title: 'Portfolio Website',
-      description:
-        'A personal portfolio website showcasing my projects and skills, built with React and Vite.',
-      technologies: ['React', 'Vite'],
-      tools: ['CSS Modules'],
+        'An interactive pathfinding visualizer that lets users build a grid, place walls, and watch algorithms like A* and Dijkstra run step-by-step.',
+      technologies: ['React', 'Vite', 'Pathfinding', 'A*', 'Dijkstra', 'BFS/DFS'],
+      tools: ['Render', 'GitHub'],
       languages: ['JavaScript', 'CSS'],
-      link: 'https://personal-portfolio-qj2c.onrender.com',
-      github: 'https://github.com/Jwmarsh16/personal-portfolio',
-      preview: '/images/portfolio.png'
+      link: 'https://pathfinding-algorithm-asba.onrender.com',
+      github: 'https://github.com/Jwmarsh16/pathfinding-algorithm',
+      preview: '/images/algorithm-visualizer1.png' // CHANGED: uses existing image in /public/images
     }
   ]
 
@@ -78,14 +90,13 @@ function Projects() {
           <h2>Featured Projects</h2>
           <p className="projects-subtitle">
             Case-study style write-ups with live demos and source code.
-            {/* CHANGED: adds a professional “why this section matters” line */}
           </p>
         </div>
 
         <div className="projects-list">
           {projects.map((project, index) => {
             const slug = createSlug(project.title)
-            const primaryTech = project.technologies.slice(0, 6) // CHANGED: show top tech as chips (reduces clutter)
+            const primaryTech = project.technologies.slice(0, 6)
 
             return (
               <article key={index} className="project-item wow-animate">
@@ -99,7 +110,7 @@ function Projects() {
                       src={project.preview}
                       alt={`${project.title} preview`}
                       className="project-image"
-                      loading="lazy" // CHANGED: improves performance on initial load
+                      loading="lazy"
                     />
                   </Link>
                 )}
@@ -112,14 +123,12 @@ function Projects() {
 
                   <div className="project-stack">
                     <div className="project-stack-label">Primary stack</div>
-                    {renderChips(primaryTech, 'primary')}{' '}
-                    {/* CHANGED: modern chip UI instead of long comma lists */}
+                    {renderChips(primaryTech, 'primary')}
                   </div>
 
                   <details className="project-more">
                     <summary className="project-more-summary">
                       View full tech details
-                      {/* CHANGED: keeps page scannable while preserving full info */}
                     </summary>
 
                     <div className="project-more-grid">
