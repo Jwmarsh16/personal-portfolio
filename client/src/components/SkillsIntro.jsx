@@ -1,6 +1,6 @@
 // Path: client/src/components/SkillsIntro.jsx
-import React, { useState } from 'react' // CHANGED: add useState for graceful image fallback
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react' // CHANGED: add useState for image fallback
+import { Link } from 'react-router-dom' // CHANGED: SPA navigation for Resume
 import Skills from './Skills'
 import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa'
 import '../SkillsIntro.css'
@@ -24,7 +24,7 @@ function SkillsIntro() {
             Open to AI + full-stack roles
           </div>
 
-          {/* CHANGED: add a real headshot in the hero for recruiter trust + clarity */}
+          {/* CHANGED: bigger headshot in hero for clarity + trust */}
           <div className="hero-headline-row">
             <div className="hero-title-block">
               <h1 className="hero-name">
@@ -37,22 +37,26 @@ function SkillsIntro() {
             {showHeadshot && (
               <div className="hero-headshot-wrap" aria-label="Headshot">
                 <img
-                  src="/images/main.jpg" // CHANGED: uses existing file in your /public/images (adjust if needed)
+                  src="/images/jonathan.jpg" // CHANGED: correct public path
                   alt="Jonathan Marshall"
                   className="hero-headshot"
-                  onError={() => setShowHeadshot(false)} // CHANGED: prevents broken-image icon in UI
+                  width="128" // CHANGED: reduce layout shift
+                  height="128" // CHANGED: reduce layout shift
+                  onError={() => setShowHeadshot(false)} // CHANGED: prevents broken-image icon
+                  decoding="async" // CHANGED
                 />
               </div>
             )}
           </div>
 
           <p className="hero-summary">
-            I build production-style web apps with <span className="highlight">React</span>,{' '}
+            I build production-style web apps with{' '}
+            <span className="highlight">React</span>,{' '}
             <span className="highlight">Flask</span>, and{' '}
             <span className="highlight">PostgreSQL</span>—with hands-on experience
             shipping LLM features like <span className="highlight">SSE streaming</span>,{' '}
             <span className="highlight">pinned memory + context strategy</span>, and{' '}
-            <span className="highlight">RAG (embeddings + FAISS)</span>.
+            <span className="highlight">RAG (embeddings + FAISS)</span>. {/* CHANGED: tighten to signature strengths */}
           </p>
 
           <div className="hero-ctas">

@@ -1,4 +1,4 @@
-/* client/src/Header.css */
+/* Path: client/src/Header.css */
 .header {
   position: sticky; /* CHANGED: pro feel; stays visible without floating mid-page */
   top: 0; /* CHANGED: anchor to top */
@@ -30,29 +30,30 @@
   font-size: 1.05rem;
   white-space: nowrap;
 
-  display: inline-flex; /* CHANGED: allow avatar + name to align */
-  align-items: center; /* CHANGED: vertical alignment */
-  gap: 0.6rem; /* CHANGED: clean spacing between avatar and text */
+  display: inline-flex; /* CHANGED: allow avatar + name */
+  align-items: center; /* CHANGED */
+  gap: 0.6rem; /* CHANGED */
 }
 
 .brand:hover {
   opacity: 0.92;
 }
 
+/* CHANGED: avatar next to brand name */
 .brand-avatar {
-  width: 50px; /* CHANGED: slightly larger for face clarity */
-  height: 50px; /* CHANGED: slightly larger for face clarity */
-  border-radius: 999px; /* CHANGED: circular avatar */
-  object-fit: cover; /* CHANGED: prevent distortion */
-  object-position: center 30%; /* CHANGED: bias crop upward so face fills frame better */
-  border: 1px solid rgba(255, 255, 255, 0.22); /* CHANGED: a bit stronger edge for definition */
-  background: rgba(255, 255, 255, 0.06); /* CHANGED: nicer during image load */
-  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.35); /* CHANGED: subtle depth */
-  filter: contrast(1.05) saturate(1.02); /* CHANGED: tiny boost to perceived sharpness */
+  width: 34px; /* CHANGED */
+  height: 34px; /* CHANGED */
+  border-radius: 999px; /* CHANGED */
+  object-fit: cover; /* CHANGED */
+  object-position: center; /* CHANGED */
+  border: 1px solid rgba(255, 255, 255, 0.14); /* CHANGED */
+  background: rgba(255, 255, 255, 0.04); /* CHANGED */
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35); /* CHANGED */
+  flex: 0 0 auto; /* CHANGED */
 }
 
 .brand-name {
-  line-height: 1; /* CHANGED: keeps baseline tight with avatar */
+  display: inline-block; /* CHANGED */
 }
 
 .nav-bar {
@@ -166,12 +167,5 @@
     width: 100%;
     padding: 0.7rem 0.85rem; /* CHANGED: finger-friendly tap targets */
     border-radius: 12px;
-  }
-}
-
-@media (max-width: 420px) {
-  .brand-avatar {
-    width: 36px; /* CHANGED: keep header from feeling cramped on small screens */
-    height: 36px; /* CHANGED: keep header from feeling cramped on small screens */
   }
 }

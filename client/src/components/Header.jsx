@@ -1,5 +1,5 @@
-// client/src/components/Header.jsx
-import React, { useEffect, useRef, useState } from 'react' // CHANGED: add useRef for outside-click close
+// Path: client/src/components/Header.jsx
+import React, { useEffect, useRef, useState } from 'react' // CHANGED: add useState for avatar fallback
 import { useLocation, useNavigate, Link } from 'react-router-dom'
 import '../Header.css'
 import { scrollToSection } from '../utils/scrollToSection'
@@ -7,6 +7,7 @@ import { FaBars } from 'react-icons/fa'
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [showAvatar, setShowAvatar] = useState(true) // CHANGED: hide avatar if image fails to load
   const location = useLocation()
   const navigate = useNavigate()
 
@@ -70,14 +71,20 @@ function Header() {
           onClick={() => setMenuOpen(false)}
           aria-label="Go to home"
         >
-          <img
-            src="/images/jonathan.jpg" // CHANGED: add header avatar (place file in client/public/images/)
-            alt="Jonathan Marshall" // CHANGED: accessible label for the headshot
-            className="brand-avatar" // CHANGED: scoped styling hook
-            loading="eager" // CHANGED: tiny image; keep the header feeling instant
-            decoding="async" // CHANGED: hint to decode off main thread when possible
-          />
-          <span className="brand-name">Jonathan Marshall</span> {/* CHANGED: keep text styling stable */}
+          {/* CHANGED: small avatar next to name (adds credibility + polish) */}
+          {showAvatar && (
+            <img
+              src="/images/jonathan.jpg" // CHANGED: correct public path
+              alt=""
+              aria-hidden="true"
+              className="brand-avatar"
+              width="34" // CHANGED: reduce layout shift
+              height="34" // CHANGED: reduce layout shift
+              onError={() => setShowAvatar(false)} // CHANGED: hide if missing/broken
+              decoding="async" // CHANGED: small perf win
+            />
+          )}
+          <span className="brand-name">Jonathan Marshall</span> {/* CHANGED */}
         </Link>
 
         <button
