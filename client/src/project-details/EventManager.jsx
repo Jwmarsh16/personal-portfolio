@@ -1,10 +1,20 @@
 // client/src/project-details/EventManager.jsx
 import React, { useMemo, useState } from 'react'
-import './EventManager.css' // CHANGED: use EventManager-specific styles (was importing FFRH CSS)
-import { FaArrowUp, FaAws, FaCloud, FaCloudDownloadAlt, FaCookie, FaCogs, FaCubes, FaDatabase, FaEdit, FaGithub, FaHtml5, FaKey, FaLaptopCode, FaLock, FaPython, FaReact, FaTasks, FaTerminal } from 'react-icons/fa'
-import { SiAxios, SiFlask, SiFormik, SiJavascript, SiPostgresql, SiPostman, SiRedux, SiSqlalchemy, SiVite } from 'react-icons/si'
+import './EventManager.css' // CHANGED: standardize styling to match FFRH template (local copy)
+import {
+  FaArrowLeft, // CHANGED: standardized back-to-projects control
+  FaArrowUp,
+  FaChevronLeft, // CHANGED: standardized slideshow controls
+  FaChevronRight, // CHANGED: standardized slideshow controls
+  FaExternalLinkAlt,
+  FaGithub
+} from 'react-icons/fa' // CHANGED: remove icon bloat; keep only template icons
+import { useNavigate } from 'react-router-dom' // CHANGED: cross-route back to Home/projects
+import { scrollToSection } from '../utils/scrollToSection' // CHANGED: navigate home then scroll to #projects
 
 function EventManager() {
+  const navigate = useNavigate() // CHANGED: used for cross-route “back to projects”
+
   const images = useMemo(
     () => [
       '/images/event-manager1.png',
@@ -15,444 +25,369 @@ function EventManager() {
       '/images/event-manager6.png'
     ],
     []
-  )
+  ) // CHANGED: memoize array to avoid re-allocations
+
+  const liveUrl = '' // CHANGED: set when you have a live URL
+  const codeUrl = '' // CHANGED: set when you have a GitHub URL
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
-  const [expandedCategory, setExpandedCategory] = useState(null)
+  const [expandedCategory, setExpandedCategory] = useState('Core') // CHANGED: default open category (template)
   const [activeTooltip, setActiveTooltip] = useState(null)
 
-  const nextImage = () => setCurrentImageIndex((prev) => (prev + 1) % images.length)
-  const prevImage = () => setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length)
-  const goToImage = (index) => setCurrentImageIndex(index)
+  const nextImage = () => {
+    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length)
+  }
+
+  const prevImage = () => {
+    setCurrentImageIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length)
+  }
+
+  const goToImage = (index) => {
+    setCurrentImageIndex(index)
+  }
 
   const toggleCategory = (category) => {
     setExpandedCategory(expandedCategory === category ? null : category)
+    setActiveTooltip(null) // CHANGED: close any open tooltip when switching categories (template)
   }
 
-  const toggleTooltip = (key) => {
-    setActiveTooltip(activeTooltip === key ? null : key) // CHANGED: stable per-pill key (prevents cross-category collisions)
+  const toggleTooltip = (id) => {
+    setActiveTooltip(activeTooltip === id ? null : id)
   }
 
-  // NOTE: add these when you want buttons to appear (kept empty so nothing breaks in prod). // CHANGED
-  const links = useMemo(
-    () => ({
-      live: '', // CHANGED: add live URL when ready
-      github: '' // CHANGED: add GitHub URL when ready
-    }),
-    []
-  )
+  const handleBackToProjects = () => {
+    navigate('/') // CHANGED: projects live on Home
+    window.setTimeout(() => scrollToSection('projects', { focus: true }), 120) // CHANGED: scroll after route mounts
+  }
 
   const techStack = useMemo(
     () => ({
-      Languages: [
+      Core: [
         {
-          name: 'Python',
-          icon: <FaPython aria-hidden="true" />,
-          color: '#4B8BBE',
-          description: 'Backend development and API logic via Flask'
+          name: 'React (Vite)',
+          description: 'Component-based UI with fast dev server and optimized builds.'
         },
         {
-          name: 'JavaScript',
-          icon: <SiJavascript aria-hidden="true" />,
-          color: '#F7DF1E',
-          description: 'Interactive UI logic and data fetching'
+          name: 'Redux Toolkit',
+          description: 'Predictable state management for user/session and RSVP-driven UI state.'
         },
-        {
-          name: 'SQL',
-          icon: <FaDatabase aria-hidden="true" />,
-          color: '#4479A1',
-          description: 'Data modeling and queries in PostgreSQL'
-        },
-        {
-          name: 'HTML & CSS',
-          icon: <FaHtml5 aria-hidden="true" />,
-          color: '#E34F26',
-          description: 'UI structure and responsive styling'
-        }
-      ],
-      'Frameworks & Libraries': [
         {
           name: 'Flask',
-          icon: <SiFlask aria-hidden="true" />,
-          color: '#CCCCCC',
-          description: 'Python backend framework for routing and REST APIs'
+          description: 'REST API backend for auth, events, groups, invites, and RSVP actions.'
         },
-        {
-          name: 'React',
-          icon: <FaReact aria-hidden="true" />,
-          color: '#61DAFB',
-          description: 'Component-based frontend framework'
-        },
-        {
-          name: 'Redux',
-          icon: <SiRedux aria-hidden="true" />,
-          color: '#764ABC',
-          description: 'State management (Redux Toolkit patterns)'
-        },
-        {
-          name: 'Vite',
-          icon: <SiVite aria-hidden="true" />,
-          color: '#646CFF',
-          description: 'Fast frontend bundler for local dev and builds'
-        },
-        {
-          name: 'SQLAlchemy',
-          icon: <SiSqlalchemy aria-hidden="true" />,
-          color: '#D32F2F',
-          description: 'ORM for model definitions and relationships'
-        },
-        {
-          name: 'Formik',
-          icon: <SiFormik aria-hidden="true" />,
-          color: '#685ED6',
-          description: 'Form state management and client-side validation'
-        },
-        {
-          name: 'Axios',
-          icon: <SiAxios aria-hidden="true" />,
-          color: '#7A42F4',
-          description: 'HTTP client for calling backend APIs'
-        }
-      ],
-      'Tools & Platforms': [
-        {
-          name: 'Git & GitHub',
-          icon: <FaGithub aria-hidden="true" />,
-          color: '#CCCCCC',
-          description: 'Version control and collaboration'
-        },
-        {
-          name: 'Postman',
-          icon: <SiPostman aria-hidden="true" />,
-          color: '#FF6C37',
-          description: 'Testing and debugging REST endpoints'
-        },
-        {
-          name: 'VS Code',
-          icon: <FaLaptopCode aria-hidden="true" />,
-          color: '#7CAEFF',
-          description: 'Primary development environment'
-        }
-      ],
-      'Operating Systems': [
-        {
-          name: 'Linux',
-          icon: <FaTerminal aria-hidden="true" />,
-          color: '#BBBBBB',
-          description: 'Development and deployment environment'
-        }
-      ],
-      'Cloud & DevOps': [
-        {
-          name: 'AWS S3',
-          icon: <FaAws aria-hidden="true" />,
-          color: '#FFB347',
-          description: 'File storage (assets/uploads) via secure flows'
-        },
-        {
-          name: 'Render',
-          icon: <FaCloud aria-hidden="true" />,
-          color: '#00BFFF',
-          description: 'Cloud platform used for deployment'
-        },
-        {
-          name: 'CI/CD Pipelines',
-          icon: <FaCogs aria-hidden="true" />,
-          color: '#FFD700',
-          description: 'Automated deploys on push'
-        }
-      ],
-      Databases: [
         {
           name: 'PostgreSQL',
-          icon: <SiPostgresql aria-hidden="true" />,
-          color: '#336791',
-          description: 'Relational DB for users, events, groups, RSVPs'
+          description: 'Relational persistence for users, events, groups, and RSVP records.'
         }
       ],
-      'Security & Authentication': [
+      'Data + Models': [
         {
-          name: 'JWT',
-          icon: <FaKey aria-hidden="true" />,
-          color: '#EE4B2B',
-          description: 'Token-based authentication for session control'
+          name: 'SQLAlchemy',
+          description: 'ORM models + relationships for event/group membership and RSVP state.'
         },
         {
-          name: 'HTTP-Only Cookies',
-          icon: <FaCookie aria-hidden="true" />,
-          color: '#DEB887',
-          description: 'Protects tokens from JavaScript access'
-        },
-        {
-          name: 'Bcrypt',
-          icon: <FaLock aria-hidden="true" />,
-          color: '#BBBBBB',
-          description: 'Password hashing before persistence'
+          name: 'Relational workflow modeling',
+          description:
+            'Designed entities and relationships so RSVP state stays consistent and queryable.'
         }
       ],
-      'Development Practices': [
+      'Auth + Security': [
         {
-          name: 'OOP',
-          icon: <FaCubes aria-hidden="true" />,
-          color: '#FF69B4',
-          description: 'Encapsulated, modular backend logic'
+          name: 'JWT (HTTP-only cookies)',
+          description:
+            'Session auth via secure cookies to reduce token exposure and keep flows predictable.'
         },
         {
-          name: 'REST APIs',
-          icon: <FaCloud aria-hidden="true" />,
-          color: '#66CCCC',
-          description: 'RESTful endpoints for client-server interaction'
+          name: 'bcrypt',
+          description: 'Password hashing before persistence.'
+        }
+      ],
+      'Cloud + Deploy': [
+        {
+          name: 'Render',
+          description:
+            'Deployment with environment-based configuration for production and local dev.'
+        }
+      ],
+      'Quality + Tooling': [
+        {
+          name: 'Postman',
+          description: 'API testing and workflow verification during development.'
         },
         {
-          name: 'CRUD Ops',
-          icon: <FaEdit aria-hidden="true" />,
-          color: '#FFD700',
-          description: 'Create, Read, Update, Delete across core entities'
-        },
-        {
-          name: 'Agile Methodology',
-          icon: <FaTasks aria-hidden="true" />,
-          color: '#4682B4',
-          description: 'Iterative development and scope slicing'
+          name: 'Git + GitHub',
+          description: 'Version control and portfolio-grade project history.'
         }
       ]
     }),
     []
-  )
+  ) // CHANGED: align stack presentation to template (no icon/pill bloat)
+
+  const signatureHighlights = useMemo(
+    () => [
+      {
+        title: 'Invite + RSVP workflow',
+        detail:
+          'End-to-end flow for hosting events, inviting groups, and tracking RSVP state in one place.'
+      },
+      {
+        title: 'Relational data model',
+        detail:
+          'Users, events, groups, and RSVP status modeled for correctness and easy querying.'
+      },
+      {
+        title: 'Secure session handling',
+        detail:
+          'JWT + HTTP-only cookies for predictable access control and reduced browser token exposure.'
+      }
+    ],
+    []
+  ) // CHANGED: concise “headline” strengths for this project page (template)
 
   return (
     <div className="project-detail-container">
-      <div className="project-detail-card">
-        {/* --- Hero --- */}
-        <header className="project-hero">
-          <h1 className="project-title">Event Manager Application</h1>
+      <div className="project-detail-card ffrh-card">
+        {/* HERO */}
+        <header className="ffrh-hero">
+          <button
+            type="button"
+            className="ffrh-back"
+            onClick={handleBackToProjects}
+            aria-label="Back to projects"
+          >
+            <FaArrowLeft aria-hidden="true" /> Back to projects
+          </button>
 
-          <p className="brief-description">
-            A full-stack web app for creating events, inviting groups, and tracking RSVPs with
+          <p className="ffrh-kicker">Case study</p>
+
+          <h1 className="ffrh-title">Event Manager Application</h1>
+
+          <p className="ffrh-subtitle">
+            A full-stack app for creating events, inviting groups, and tracking RSVPs with
             secure authentication and workflow-first UX.
           </p>
 
-          {/* CHANGED: case-study “headline” highlights (tight + scannable) */}
-          <div className="project-highlights" aria-label="Project highlights">
-            <div className="highlight-card">
-              <div className="highlight-label">Signature highlight</div>
-              <div className="highlight-value">Group invites + RSVP workflow</div>
-              <div className="highlight-muted">
-                Host-driven flows that keep attendee state accurate and visible.
-              </div>
-            </div>
+          <div className="ffrh-hero-actions" aria-label="Project links">
+            {liveUrl && (
+              <a
+                className="ffrh-btn ffrh-btn--primary"
+                href={liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Live <FaExternalLinkAlt aria-hidden="true" />
+              </a>
+            )}
 
-            <div className="highlight-card">
-              <div className="highlight-label">Signature highlight</div>
-              <div className="highlight-value">Secure auth (JWT + cookies)</div>
-              <div className="highlight-muted">
-                Session safety and predictable server-side access control.
-              </div>
-            </div>
+            {codeUrl && (
+              <a className="ffrh-btn" href={codeUrl} target="_blank" rel="noopener noreferrer">
+                Code <FaGithub aria-hidden="true" />
+              </a>
+            )}
+
+            {!liveUrl && !codeUrl && (
+              <p className="ffrh-muted">Live and code links coming soon.</p> // CHANGED: keep template layout without broken links
+            )}
           </div>
 
-          <div className="project-badges" aria-label="Primary technologies">
+          <div className="ffrh-chips" aria-label="At-a-glance stack">
             <span className="chip chip--primary">React</span>
             <span className="chip chip--primary">Flask</span>
             <span className="chip chip--primary">PostgreSQL</span>
-            <span className="chip chip--soft">Redux</span>
-            <span className="chip chip--soft">JWT</span>
+            <span className="chip chip--soft">Redux Toolkit</span>
+            <span className="chip chip--soft">JWT Cookies</span>
             <span className="chip chip--soft">Render</span>
           </div>
-
-          {/* CHANGED: optional CTAs (only render when URLs exist) */}
-          {(links.live || links.github) && (
-            <div className="project-links" aria-label="Project links">
-              {links.live && (
-                <a
-                  className="project-cta project-cta--primary"
-                  href={links.live}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  View live
-                </a>
-              )}
-
-              {links.github && (
-                <a
-                  className="project-cta project-cta--secondary"
-                  href={links.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  View code
-                </a>
-              )}
-            </div>
-          )}
         </header>
 
-        {/* --- Slideshow --- */}
-        <div className="slideshow-wrapper" aria-label="Project screenshots">
-          <button
-            type="button"
-            className="prev-button"
-            onClick={prevImage}
-            aria-label="Previous screenshot"
-          >
-            &lt;
-          </button>
-
-          <img
-            src={images[currentImageIndex]}
-            alt={`Screenshot ${currentImageIndex + 1} of Event Manager`}
-            className="slideshow-image"
-          />
-
-          <button
-            type="button"
-            className="next-button"
-            onClick={nextImage}
-            aria-label="Next screenshot"
-          >
-            &gt;
-          </button>
-        </div>
-
-        <div className="slide-indicators" role="tablist" aria-label="Screenshot selector">
-          {images.map((_, index) => (
-            <button
-              key={index}
-              type="button"
-              className={`indicator-dot ${index === currentImageIndex ? 'active' : ''}`}
-              onClick={() => goToImage(index)}
-              aria-label={`Go to screenshot ${index + 1}`}
-              aria-selected={index === currentImageIndex}
-              role="tab"
-            />
-          ))}
-        </div>
-
-        {/* --- Case study sections --- */}
-        <div className="info-grid">
-          <div className="info-box">
-            <div className="section-header">
-              <h2>Problem</h2>
-            </div>
-            <p>
-              Coordinating an event gets messy fast: invites live across text threads, RSVP
-              states drift, and hosts lose a single source of truth for who is coming.
-            </p>
-          </div>
-
-          <div className="info-box">
-            <div className="section-header">
-              <h2>Solution</h2>
-            </div>
-            <p>
-              Event Manager centralizes the full workflow: create an event, invite a group,
-              and track RSVP state in one place with a responsive UI and server-backed
-              authorization rules.
-            </p>
-          </div>
-
-          <div className="info-box">
-            <div className="section-header">
-              <h2>What this project proves</h2>
-            </div>
-            <ul className="feature-list">
-              <li>Workflow-first UX with state that stays accurate end-to-end.</li>
-              <li>Relational modeling for real product behavior (users, events, RSVPs).</li>
-              <li>Secure session handling and predictable API access control.</li>
+        {/* TOP GRID: proof + highlights */}
+        <section className="ffrh-top-grid" aria-label="Project summary">
+          <aside className="ffrh-proof">
+            <div className="ffrh-proof-title">What this project proves</div>
+            <ul className="ffrh-proof-list">
+              <li>Workflow-first product thinking (invites, RSVP state, host visibility)</li>
+              <li>Relational modeling for real app behavior (users, events, groups, RSVPs)</li>
+              <li>Secure session/auth patterns with predictable API access control</li>
             </ul>
+          </aside>
+
+          <div className="ffrh-highlights">
+            <div className="ffrh-proof-title">Signature highlights</div>
+            <div className="ffrh-highlight-cards">
+              {signatureHighlights.map((h) => (
+                <div key={h.title} className="ffrh-highlight-card">
+                  <div className="ffrh-highlight-title">{h.title}</div>
+                  <div className="ffrh-highlight-detail">{h.detail}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* GALLERY */}
+        <section className="ffrh-section" aria-label="Screenshots">
+          <div className="ffrh-section-head">
+            <h2 className="ffrh-h2">Screenshots</h2>
+            <p className="ffrh-muted">A quick tour of the UI and core flows.</p>
           </div>
 
-          <div className="info-box">
-            <div className="tech-stack-container">
-              <h2>Tech Stack</h2>
-              <p>Click each category below to view the technologies used.</p>
+          <div className="ffrh-slideshow" aria-label="Screenshot carousel">
+            <button
+              type="button"
+              className="ffrh-slide-btn ffrh-slide-btn--left"
+              onClick={prevImage}
+              aria-label="Previous screenshot"
+            >
+              <FaChevronLeft aria-hidden="true" />
+            </button>
 
-              <div className="tech-categories">
-                {Object.entries(techStack).map(([category, tools]) => (
-                  <div className="tech-category" key={category}>
-                    <button
-                      type="button"
-                      className="tech-category-button"
-                      onClick={() => toggleCategory(category)}
-                      aria-expanded={expandedCategory === category}
-                    >
-                      {category}
-                    </button>
+            <img
+              src={images[currentImageIndex]}
+              alt={`Event Manager screenshot ${currentImageIndex + 1}`}
+              className="ffrh-slide-image"
+              loading="lazy"
+            />
 
-                    {expandedCategory === category && (
-                      <div className="tech-items" role="list">
-                        {tools.map((tool, index) => {
-                          const key = `${category}-${index}` // CHANGED: stable tooltip key
+            <button
+              type="button"
+              className="ffrh-slide-btn ffrh-slide-btn--right"
+              onClick={nextImage}
+              aria-label="Next screenshot"
+            >
+              <FaChevronRight aria-hidden="true" />
+            </button>
+          </div>
+
+          <div className="ffrh-indicators" aria-label="Select screenshot">
+            {images.map((_, index) => (
+              <button
+                key={index}
+                type="button"
+                className={`ffrh-indicator ${index === currentImageIndex ? 'is-active' : ''}`}
+                onClick={() => goToImage(index)}
+                aria-label={`Go to screenshot ${index + 1}`}
+                aria-pressed={index === currentImageIndex}
+              />
+            ))}
+          </div>
+        </section>
+
+        {/* CASE STUDY BODY */}
+        <section className="ffrh-section" aria-label="Case study details">
+          <div className="ffrh-section-head">
+            <h2 className="ffrh-h2">Overview</h2>
+            <p className="ffrh-muted">
+              Why I built it, what it does, and the engineering decisions behind it.
+            </p>
+          </div>
+
+          <div className="ffrh-grid">
+            <article className="ffrh-panel">
+              <h3 className="ffrh-h3">Problem</h3>
+              <p>
+                Coordinating an event gets messy fast: invites live across text threads, RSVP
+                states drift, and hosts lose a single source of truth for who is coming.
+              </p>
+            </article>
+
+            <article className="ffrh-panel">
+              <h3 className="ffrh-h3">Solution</h3>
+              <p>
+                Event Manager centralizes the workflow: create an event, invite a group, and
+                track RSVP state in one place with a responsive UI and server-backed
+                authorization rules.
+              </p>
+            </article>
+
+            <article className="ffrh-panel">
+              <h3 className="ffrh-h3">Key features</h3>
+              <ul className="ffrh-list">
+                <li>Create and edit events with time, location, and description</li>
+                <li>Invite users/groups and track RSVP status changes</li>
+                <li>Host-friendly views for confirmed/declined attendees</li>
+                <li>Secure auth flow (JWT via HTTP-only cookies)</li>
+                <li>Responsive layout for desktop and mobile</li>
+              </ul>
+            </article>
+
+            <article className="ffrh-panel">
+              <h3 className="ffrh-h3">My role</h3>
+              <p>
+                Sole developer. I designed the data model, built the Flask REST API, and
+                implemented a React UI that keeps RSVP state synchronized with the backend,
+                plus deployment configuration and environment-based settings.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        {/* TECH STACK (accordion) */}
+        <section className="ffrh-section" aria-label="Tech stack">
+          <div className="ffrh-section-head">
+            <h2 className="ffrh-h2">Tech stack</h2>
+            <p className="ffrh-muted">
+              Click a category to see the tools and the “why” behind each choice.
+            </p>
+          </div>
+
+          <div className="ffrh-accordion" aria-label="Tech stack categories">
+            {Object.entries(techStack).map(([category, tools]) => {
+              const isOpen = expandedCategory === category
+              return (
+                <div key={category} className="ffrh-accordion-item">
+                  <button
+                    type="button"
+                    className="ffrh-accordion-trigger"
+                    onClick={() => toggleCategory(category)}
+                    aria-expanded={isOpen}
+                  >
+                    <span className="ffrh-accordion-title">{category}</span>
+                    <span className="ffrh-accordion-icon" aria-hidden="true">
+                      {isOpen ? '−' : '+'}
+                    </span>
+                  </button>
+
+                  {isOpen && (
+                    <div className="ffrh-accordion-panel">
+                      <div className="ffrh-pill-row">
+                        {tools.map((tool) => {
+                          const tooltipId = `${category}:${tool.name}`
+                          const tooltipOpen = activeTooltip === tooltipId
+
                           return (
-                            <button
-                              type="button"
-                              className="tech-item-pill"
-                              key={key}
-                              style={{ color: tool.color || '#fff' }}
-                              onClick={() => toggleTooltip(key)}
-                              aria-label={`${tool.name}${tool.description ? ': details' : ''}`}
-                            >
-                              {tool.icon && <span className="tech-icon">{tool.icon}</span>}
-                              <span className="tech-name">{tool.name}</span>
+                            <div key={tool.name} className="ffrh-pill-wrap">
+                              <button
+                                type="button"
+                                className="ffrh-pill"
+                                onClick={() => toggleTooltip(tooltipId)}
+                                aria-expanded={tooltipOpen}
+                                aria-label={`${tool.name} details`}
+                              >
+                                {tool.name}
+                              </button>
 
-                              {activeTooltip === key && tool.description && (
-                                <span className="tooltip-popup" role="tooltip">
+                              {tooltipOpen && (
+                                <div className="ffrh-tooltip" role="note">
                                   {tool.description}
-                                </span>
+                                </div>
                               )}
-                            </button>
+                            </div>
                           )
                         })}
                       </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </div>
+                    </div>
+                  )}
+                </div>
+              )
+            })}
           </div>
+        </section>
 
-          <div className="info-box">
-            <div className="section-header">
-              <h2>Key Features</h2>
-            </div>
-            <ul className="feature-list">
-              <li>Create and edit events with location, time, and description.</li>
-              <li>Invite users and track RSVP status changes.</li>
-              <li>View confirmed and declined attendees from a single source of truth.</li>
-              <li>Secure auth flow with JWT + cookie-based session handling.</li>
-              <li>Responsive layout for desktop and mobile.</li>
-            </ul>
-          </div>
-
-          <div className="info-box">
-            <div className="section-header">
-              <h2>My Role</h2>
-            </div>
-            <p>
-              I built the project end-to-end: data model design in PostgreSQL, secure Flask
-              APIs, and a React UI that keeps RSVP state synchronized with the backend. I
-              also handled deployment configuration and environment-based settings.
-            </p>
-          </div>
-
-          <div className="info-box">
-            <div className="section-header">
-              <h2>Next Improvements</h2>
-            </div>
-            <ul className="feature-list">
-              <li>Calendar integrations (ICS export, Google Calendar add).</li>
-              <li>Invite tokens + email invite flows.</li>
-              <li>Audit-friendly activity log for hosts.</li>
-            </ul>
-          </div>
-        </div>
-
+        {/* BACK TO TOP */}
         <button
-          type="button"
           className="back-to-top"
-          aria-label="Back to top"
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          aria-label="Back to top"
         >
           <FaArrowUp aria-hidden="true" />
         </button>
