@@ -1,5 +1,5 @@
 // client/src/components/Footer.jsx
-import React from 'react'
+// CHANGED: Remove unused React default import; JSX needs no React binding.
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa'
 import '../Footer.css'

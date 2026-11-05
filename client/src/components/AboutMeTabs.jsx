@@ -1,5 +1,5 @@
 // client/src/components/AboutMeTabs.jsx
-import React, { useMemo, useState } from 'react'
+import { useMemo, useState } from 'react' // CHANGED: Remove unused React default import; keep named hooks.
 import '../AboutMeTabs.css'
 import { useNavigate } from 'react-router-dom'
 import { FaUser, FaBriefcase, FaGraduationCap, FaFileAlt } from 'react-icons/fa'

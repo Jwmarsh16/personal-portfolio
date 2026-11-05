@@ -1,5 +1,5 @@
-// client/src/components/Skills.jsx
-import React, { useEffect, useMemo, useRef, useState } from 'react'
+// /home/jwmarsh16/projects/personal-portfolio/client/src/components/Skills.jsx
+import { useEffect, useMemo, useRef, useState } from 'react' // CHANGED: remove unused React default import
 import '../Skills.css'
 import {
   FaPython,
@@ -144,32 +144,33 @@ function Skills() {
     if (middleTrackRef.current) middleTrackRef.current.style.transform = `translateX(${midX}px)`
   }
 
-  const measure = () => {
-    const containerWidth = containerRef.current?.clientWidth || window.innerWidth
-
-    const topW = topTrackRef.current ? topTrackRef.current.scrollWidth / 2 : 0
-    const midW = middleTrackRef.current ? middleTrackRef.current.scrollWidth / 2 : 0
-    const botW = bottomTrackRef.current ? bottomTrackRef.current.scrollWidth / 2 : 0
-
-    if (!topW || !midW || !botW) return
-
-    const commonContentWidth = Math.max(topW, midW, botW)
-    const cycleDistance = containerWidth + 2 * commonContentWidth
-
-    dimsRef.current = { containerWidth, commonContentWidth, cycleDistance }
-
-    if (offsetsRef.current.top == null) offsetsRef.current.top = containerWidth
-    if (offsetsRef.current.middle == null) offsetsRef.current.middle = -2 * commonContentWidth
-
-    applyTransforms(0)
-  }
-
   useEffect(() => {
     const media = window.matchMedia('(prefers-reduced-motion: reduce)')
     if (media.matches) setIsPaused(true)
   }, [])
 
   useEffect(() => {
+    // CHANGED: Keep measure inside its only consuming effect; preserve its logic.
+    const measure = () => {
+      const containerWidth = containerRef.current?.clientWidth || window.innerWidth
+
+      const topW = topTrackRef.current ? topTrackRef.current.scrollWidth / 2 : 0
+      const midW = middleTrackRef.current ? middleTrackRef.current.scrollWidth / 2 : 0
+      const botW = bottomTrackRef.current ? bottomTrackRef.current.scrollWidth / 2 : 0
+
+      if (!topW || !midW || !botW) return
+
+      const commonContentWidth = Math.max(topW, midW, botW)
+      const cycleDistance = containerWidth + 2 * commonContentWidth
+
+      dimsRef.current = { containerWidth, commonContentWidth, cycleDistance }
+
+      if (offsetsRef.current.top == null) offsetsRef.current.top = containerWidth
+      if (offsetsRef.current.middle == null) offsetsRef.current.middle = -2 * commonContentWidth
+
+      applyTransforms(0)
+    }
+
     measure()
 
     const onResize = () => measure()

@@ -1,5 +1,5 @@
 // client/src/project-details/EventManager.jsx
-import React, { useMemo, useState } from 'react'
+import { useMemo, useState } from 'react' // CHANGED: Remove unused React default import; keep named hooks.
 import './EventManager.css' // CHANGED: standardize styling to match FFRH template (local copy)
 import {
   FaArrowLeft, // CHANGED: standardized back-to-projects control

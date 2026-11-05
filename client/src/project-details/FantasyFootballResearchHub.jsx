@@ -1,5 +1,5 @@
 // client/src/project-details/FantasyFootballResearchHub.jsx
-import React, { useMemo, useState } from 'react' // CHANGED: useMemo for stable derived lists
+import { useMemo, useState } from 'react' // CHANGED: useMemo for stable derived lists; remove unused React default import.
 import './FantasyFootballResearchHub.css'
 import {
   FaArrowLeft,
