@@ -1,5 +1,5 @@
 // client/src/components/ShootingStars.jsx
-import React from 'react'
+// CHANGED: Remove unused React default import; JSX needs no React binding.
 
 function ShootingStars() {
   // CHANGED: extracted from App.jsx to keep routing/layout clean and maintainable

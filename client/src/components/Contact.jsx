@@ -1,5 +1,5 @@
-// client/src/components/Contact.jsx
-import React, { useEffect, useRef, useState } from 'react' // CHANGED: add useRef for one-time EmailJS init guard
+// /home/jwmarsh16/projects/personal-portfolio/client/src/components/Contact.jsx
+import { useEffect, useRef, useState } from 'react' // CHANGED: remove unused React default import
 import emailjs from 'emailjs-com'
 import '../Contact.css'
 
@@ -30,7 +30,7 @@ function Contact() {
 
     try {
       emailjs.init(EMAILJS_PUBLIC_KEY) // CHANGED: init once, uses env-first config
-    } catch (e) {
+    } catch { // CHANGED: omit unused error binding; preserve existing error handling
       // CHANGED: surface a friendly error if EmailJS fails to initialize
       setStatus({
         type: 'error',

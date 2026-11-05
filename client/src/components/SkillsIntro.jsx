@@ -1,5 +1,5 @@
 // Path: client/src/components/SkillsIntro.jsx
-import React, { useState } from 'react' // CHANGED: add useState for image fallback
+import { useState } from 'react' // CHANGED: add useState for image fallback; remove unused React default import.
 import { Link } from 'react-router-dom' // CHANGED: SPA navigation for Resume
 import Skills from './Skills'
 import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa'

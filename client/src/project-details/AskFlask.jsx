@@ -1,5 +1,5 @@
 // Path: client/src/project-details/AskFlask.jsx
-import React, { useMemo, useState } from 'react'
+import { useMemo, useState } from 'react' // CHANGED: Remove unused React default import; keep named hooks.
 import './FantasyFootballResearchHub.css' // CHANGED: reuse the shared project-detail template styles
 import {
   FaArrowLeft,

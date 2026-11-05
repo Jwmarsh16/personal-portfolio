@@ -1,5 +1,5 @@
 // client/src/project-details/Portfolio.jsx
-import React, { useMemo, useState } from 'react' // CHANGED: useMemo for stable derived lists
+import { useMemo, useState } from 'react' // CHANGED: useMemo for stable derived lists; remove unused React default import.
 import './Portfolio.css' // CHANGED: decouple from FFRH CSS; use Portfolio-specific styles
 import {
   FaArrowLeft, // CHANGED: standardized back-to-projects control

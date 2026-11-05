@@ -1,5 +1,5 @@
 // client/src/pages/Home.jsx
-import React from 'react'
+// CHANGED: Remove unused React default import; JSX needs no React binding.
 import SkillsIntro from '../components/SkillsIntro'
 import AboutMeTabs from '../components/AboutMeTabs'
 import Projects from '../components/Projects'

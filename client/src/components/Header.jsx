@@ -1,5 +1,5 @@
 // Path: client/src/components/Header.jsx
-import React, { useEffect, useRef, useState } from 'react' // CHANGED: add useState for avatar fallback
+import { useEffect, useRef, useState } from 'react' // CHANGED: add useState for avatar fallback; remove unused React default import.
 import { useLocation, useNavigate, Link } from 'react-router-dom'
 import '../Header.css'
 import { scrollToSection } from '../utils/scrollToSection'

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+// client/src/components/Menu.jsx
+import { useState } from 'react'; // CHANGED: Remove unused React default import; keep named hooks.
 import { Link } from 'react-router-dom';
 import '../Menu.css';
 

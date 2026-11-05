@@ -1,5 +1,5 @@
 // client/src/components/AboutMe.jsx
-import React, { useState } from 'react'
+import { useState } from 'react' // CHANGED: Remove unused React default import; keep named hooks.
 import { Link } from 'react-router-dom'
 import Skills from './Skills'
 import '../AboutMe.css'

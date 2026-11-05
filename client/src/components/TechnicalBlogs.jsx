@@ -1,5 +1,5 @@
 // client/src/components/TechnicalBlogs.jsx
-import React, { useMemo } from 'react' // CHANGED: useMemo for stable featured/rest lists
+import { useMemo } from 'react' // CHANGED: useMemo for stable featured/rest lists; remove unused React default import.
 import { Link, useNavigate } from 'react-router-dom' // CHANGED: add CTAs + contact jump behavior
 import '../TechnicalBlogs.css'
 import { scrollToSection } from '../utils/scrollToSection' // CHANGED: scroll after navigating home for Contact

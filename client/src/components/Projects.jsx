@@ -1,5 +1,5 @@
 // Path: client/src/components/Projects.jsx
-import React from 'react'
+// CHANGED: Remove unused React default import; JSX needs no React binding.
 import { Link } from 'react-router-dom'
 import '../Projects.css'
 

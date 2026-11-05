@@ -1,5 +1,5 @@
 // Path: client/src/App.jsx
-import React from 'react'
+// CHANGED: Remove unused React default import; JSX needs no React binding.
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Header from './components/Header'
 import TechnicalBlogs from './components/TechnicalBlogs'

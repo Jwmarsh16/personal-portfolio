@@ -1,4 +1,5 @@
-import React from 'react';
+// client/src/components/Resume.jsx
+// CHANGED: Remove unused React default import; JSX needs no React binding.
 import '../Resume.css';
 
 function Resume() {

@@ -1,5 +1,5 @@
 // client/src/components/ToolsUsedHome.jsx
-import React, { useEffect, useMemo, useRef, useState } from 'react' // CHANGED: add hooks for smart tab arrows
+import { useEffect, useMemo, useRef, useState } from 'react' // CHANGED: add hooks for smart tab arrows; remove unused React default import.
 import {
   FaPython,
   FaDatabase,
