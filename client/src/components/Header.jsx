@@ -4,8 +4,7 @@ import { FaBars, FaTimes } from 'react-icons/fa'
 import '../Header.css'
 
 const navigation = [
-  { label: 'Projects', to: '/#projects' },
-  { label: 'Skills', to: '/#skills' },
+  { label: 'Work', to: '/#projects' },
   { label: 'About', to: '/about' },
   { label: 'Resume', to: '/resume' },
   { label: 'Contact', to: '/#contact' }
@@ -48,7 +47,7 @@ function Header() {
   return (
     <header className="header">
       <div
-        className="header-inner"
+        className="header-inner page-width"
         ref={headerInnerRef}
         onBlur={(event) => {
           if (!event.currentTarget.contains(event.relatedTarget)) setMenuOpen(false)

@@ -1,0 +1,13 @@
+WEBVTT
+
+00:00.000 --> 00:02.400
+I ask for a launch plan and provide a location and budget.
+
+00:02.400 --> 00:09.000
+The reply appears in chunks as Flask streams it.
+
+00:09.000 --> 00:14.000
+I switch sessions, reload, and reopen the saved chat.
+
+00:14.000 --> 00:20.000
+The follow-up uses pinned context to recall Austin and the $250 budget.

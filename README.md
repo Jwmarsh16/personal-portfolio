@@ -21,11 +21,12 @@ Vite prints the development URL, usually `http://localhost:5173`. This repositor
 ```bash
 cd client
 npm run lint
+npm test
 npm run build
 npm run preview
 ```
 
-The build writes static files to `client/dist/`. Preview serves that build locally. The repository does not currently define an automated test suite. The verification workflow runs the existing lint and build scripts on pushes and pull requests.
+The build writes static files to `client/dist/`. Preview serves that build locally. The pathfinding tests check valid routes, shortest paths, and unreachable goals. The verification workflow runs lint, tests, and build on pushes and pull requests.
 
 For visual or navigation changes, also check:
 
@@ -54,7 +55,7 @@ The main routes are `/`, `/about`, `/resume`, `/blogs`, and `/project/<project-s
 
 ## Content and resume
 
-Keep project descriptions tied to the showcased code. State personal contributions and technical decisions without adding unverified usage or performance claims. The web resume reads `client/src/data/resume.json`; the downloadable copy is `client/public/resume.pdf`. Keep both aligned with the source Google Doc when the resume changes. Featured project cards and case studies share `client/src/data/projects.js` to keep descriptions and links consistent.
+Keep project descriptions tied to the showcased code. The Ask-Flask walkthrough uses a local recording with sample model replies. The embedded pathfinding comparison runs both algorithms in the browser against the same preset grid. State personal contributions and technical decisions without adding unverified usage or performance claims. The web resume reads `client/src/data/resume.json`; the downloadable copy is `client/public/resume.pdf`. Keep both aligned with the source Google Doc when the resume changes. Featured project cards and case studies share `client/src/data/projects.js` to keep descriptions and links consistent.
 
 Images in `client/public/images/` are referenced from `/images/...`. Prefer appropriately sized WebP assets for photos and screenshots. Keep `node_modules/` and `dist/` out of Git; install dependencies from `client/package-lock.json` using `npm ci`.
 

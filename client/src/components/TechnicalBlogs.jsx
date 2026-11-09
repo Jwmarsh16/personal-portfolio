@@ -65,11 +65,11 @@ const TechnicalBlogs = () => {
 
   return (
     <section className="technical-blogs" aria-label="Technical writing">
-      <div className="technical-blogs-container">
+      <div className="technical-blogs-container page-width">
 
         <header className="blogs-hero">
           <p className="blogs-kicker">Technical writing</p>
-          <h1 className="blogs-title">Learning notes &amp; technical writing</h1>
+          <h1 className="display-title">Learning notes &amp; technical writing</h1>
           <p className="blogs-intro">
             Posts from my software engineering studies, explaining the concepts
             I learned and how I approached unfamiliar tools.
@@ -124,7 +124,7 @@ const TechnicalBlogs = () => {
                 href={featuredBlog.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="blogs-button blogs-button--primary"
+                className="btn"
               >
                 Read on Medium
               </a>
@@ -134,7 +134,7 @@ const TechnicalBlogs = () => {
 
 
         <div className="blogs-section-head">
-          <h2 className="blogs-section-title">More posts</h2>
+          <h2 className="section-title">More posts</h2>
           <p className="blogs-section-subtext">
             Short, scannable writing on engineering fundamentals and emerging tech.
           </p>{' '}
@@ -178,7 +178,7 @@ const TechnicalBlogs = () => {
                   href={blog.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="blogs-button"
+                  className="text-link"
                 >
                   Read
                 </a>
@@ -197,13 +197,13 @@ const TechnicalBlogs = () => {
           </div>
 
           <div className="blogs-footer-actions">
-            <Link to="/#contact" className="blogs-button blogs-button--primary">
+            <Link to="/#contact" className="btn">
               Contact
             </Link>
-            <Link to="/resume" className="blogs-button">
+            <Link to="/resume" className="text-link">
               Resume
             </Link>
-            <Link to="/#projects" className="blogs-button">
+            <Link to="/#projects" className="text-link">
               View projects
             </Link>
           </div>

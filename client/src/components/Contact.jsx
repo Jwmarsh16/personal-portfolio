@@ -102,9 +102,10 @@ function Contact() {
 
   return (
     <section id="contact" className="contact" aria-label="Contact">
-      <div className="contact-container">
+      <div className="contact-container page-width">
         <div className="contact-header">
-          <h2>Contact</h2>
+          <p className="page-eyebrow">Contact</p>
+          <h2 className="section-title">Get in touch</h2>
           <p className="contact-subtitle">
             Want to chat about AI apps, full-stack work, or a role? Send a note.
             {/* CHANGED: recruiter-first framing */}
@@ -122,14 +123,14 @@ function Contact() {
               <div className="contact-aside-actions">
                 <button
                   type="button"
-                  className="contact-action contact-action--secondary"
+                  className="btn btn--quiet"
                   onClick={handleCopyEmail}
                 >
                   Copy email
                 </button>
 
                 <a
-                  className="contact-action contact-action--ghost"
+                  className="text-link"
                   href={`mailto:${DIRECT_EMAIL}`}
                 >
                   Open mail
@@ -137,7 +138,7 @@ function Contact() {
               </div>
 
               <p className="contact-aside-hint">
-                Prefer LinkedIn? Use the icon in the header/footer.
+                Prefer LinkedIn? You can find my profile in the footer.
                 {/* CHANGED: simple guidance without adding extra UI */}
               </p>
             </div>
@@ -161,7 +162,7 @@ function Contact() {
 
                 <button
                   type="button"
-                  className="contact-action contact-action--primary"
+                  className="btn"
                   onClick={resetForm}
                 >
                   Send another message
@@ -227,7 +228,7 @@ function Contact() {
 
                 <button
                   type="submit"
-                  className="contact-action contact-action--primary"
+                  className="btn"
                   disabled={isSending} // CHANGED: disable while sending
                   aria-busy={isSending} // CHANGED: accessibility
                 >

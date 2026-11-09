@@ -1,0 +1,95 @@
+.pathfinding-section {
+  --lab-text: #f8f8fc;
+  --lab-muted: #c6cce0;
+  --lab-floor: #303b59;
+  --lab-wall: #929bb4;
+  --lab-visited: #7795ee;
+  --lab-route: #f9cf8d;
+  padding: clamp(1rem, 4vw, 2.5rem);
+  border-radius: .75rem;
+  background: var(--screen);
+  color: var(--lab-text);
+}
+
+.pathfinding-section .page-eyebrow, .pathfinding-section .text-link { color: #b9c7ff; }
+.pathfinding-section :focus-visible { outline-color: #b9c7ff; }
+.pathfinding-section .btn { background: #e1e7ff; border-color: #e1e7ff; color: var(--screen); }
+.pathfinding-section .btn:hover { background: #fff; }
+
+.pathfinding-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: end;
+  gap: 1rem;
+  margin-bottom: 1.4rem;
+}
+
+.pathfinding-header .section-title { margin-block: .35rem .6rem; }
+.pathfinding-header p:not(.page-eyebrow) { color: var(--lab-muted); max-width: 58ch; }
+
+.pathfinding-boards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(.8rem, 2vw, 1.3rem);
+}
+
+.pathfinding-board {
+  display: grid;
+  gap: .45rem;
+  min-width: 0;
+  padding: clamp(.75rem, 2vw, 1.2rem);
+  border: 1px solid #53607d;
+  border-radius: .5rem;
+  background: #1a233a;
+}
+
+.pathfinding-board > p { color: var(--lab-muted); font-size: .89rem; }
+
+.pathfinding-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--columns), minmax(0, 1fr));
+  gap: clamp(1px, .3vw, 3px);
+  margin-block: .6rem;
+}
+
+.pathfinding-cell {
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  aspect-ratio: 1;
+  border-radius: 2px;
+  background: var(--lab-floor);
+  color: #11162b;
+  font-size: clamp(.59rem, 1.7vw, .85rem);
+  font-weight: 800;
+  line-height: 1;
+}
+
+.pathfinding-cell--start, .pathfinding-cell--goal { background: #f0f3ff; }
+.pathfinding-cell--goal { background: #a5b8ff; }
+.pathfinding-cell--wall { background: var(--lab-wall); }
+.pathfinding-cell--visited { --reveal-color: var(--lab-visited); background: var(--lab-visited); }
+.pathfinding-cell--route { --reveal-color: var(--lab-route); background: var(--lab-route); }
+
+.pathfinding-grid :is(.pathfinding-cell--visited, .pathfinding-cell--route) {
+  animation: reveal-path-cell .2s var(--reveal-delay) both;
+}
+
+@keyframes reveal-path-cell {
+  from { background: var(--lab-floor); }
+  to { background: var(--reveal-color); }
+}
+
+.pathfinding-metrics { display: flex; flex-wrap: wrap; gap: .45rem 1.5rem; margin: 0; }
+.pathfinding-metrics dt { color: var(--lab-muted); font-size: .8rem; }
+.pathfinding-metrics dd { margin: 0; font-size: 1.1rem; font-weight: 750; font-variant-numeric: tabular-nums; }
+
+.pathfinding-footer { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: .45rem 1rem; margin-top: .8rem; }
+.pathfinding-legend { display: flex; flex-wrap: wrap; gap: .35rem .75rem; padding: 0; margin: 0; list-style: none; }
+.pathfinding-legend li { display: flex; align-items: center; gap: .35rem; color: var(--lab-muted); font-size: .82rem; }
+.pathfinding-legend .pathfinding-cell { width: 1.1rem; font-size: .7rem; }
+
+@media (max-width: 40rem) {
+  .pathfinding-boards { grid-template-columns: minmax(0, 1fr); }
+}

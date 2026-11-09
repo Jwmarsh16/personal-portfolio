@@ -7,15 +7,15 @@ function Resume() {
     <article className="resume-container" aria-labelledby="resume-title">
       <header className="resume-header">
         <div>
-          <p className="resume-eyebrow">Resume · Updated {resume.updated}</p>
-          <h1 id="resume-title" className="resume-title">{resume.name}</h1>
+          <p className="page-eyebrow">Resume · Updated {resume.updated}</p>
+          <h1 id="resume-title" className="resume-title display-title">{resume.name}</h1>
           <p className="resume-role">{resume.role}</p>
           <p className="resume-subheading">
             {resume.location} · <a href={`mailto:${resume.email}`}>{resume.email}</a> ·{' '}
             <a href={`tel:${resume.phone.replaceAll('-', '')}`}>{resume.phone}</a>
           </p>
         </div>
-        <a className="resume-download" href="/resume.pdf" download="Jonathan-Marshall-Resume.pdf">
+        <a className="resume-download btn" href="/resume.pdf" download="Jonathan-Marshall-Resume.pdf">
           Download resume (PDF)
         </a>
       </header>
@@ -28,7 +28,7 @@ function Resume() {
       <p className="resume-summary">{resume.summary}</p>
 
       <section id="experience" className="resume-section" aria-labelledby="resume-experience">
-        <h2 id="resume-experience">Experience</h2>
+        <h2 className="section-title" id="resume-experience">Experience</h2>
         {resume.experience.map(job => (
           <div className="resume-entry" key={job.company}>
             <div className="resume-entry-heading">
@@ -36,14 +36,19 @@ function Resume() {
               <p className="resume-dates">{job.dates}</p>
             </div>
             <p className="resume-entry-subtitle">{job.company} · {job.location}</p>
-            {job.url && <a href={job.url} target="_blank" rel="noopener noreferrer">View {job.linkLabel}</a>}
+            {job.url && (
+              <div className="resume-project-links">
+                {job.caseStudy && <Link to={job.caseStudy}>Case study</Link>}
+                <a href={job.url} target="_blank" rel="noopener noreferrer">View {job.linkLabel}</a>
+              </div>
+            )}
             <ul>{job.bullets.map(bullet => <li key={bullet}>{bullet}</li>)}</ul>
           </div>
         ))}
       </section>
 
       <section className="resume-section" aria-labelledby="resume-projects">
-        <h2 id="resume-projects">Technical projects</h2>
+        <h2 className="section-title" id="resume-projects">Technical projects</h2>
         {resume.projects.map(project => (
           <div className="resume-entry" key={project.name}>
             <div className="resume-entry-heading">
@@ -62,7 +67,7 @@ function Resume() {
       </section>
 
       <section className="resume-section" aria-labelledby="resume-skills">
-        <h2 id="resume-skills">Technical skills</h2>
+        <h2 className="section-title" id="resume-skills">Technical skills</h2>
         <dl className="resume-skills">
           {resume.skills.map(skill => (
             <div key={skill.label}><dt>{skill.label}</dt><dd>{skill.items}</dd></div>
@@ -71,7 +76,7 @@ function Resume() {
       </section>
 
       <section className="resume-section" aria-labelledby="resume-education">
-        <h2 id="resume-education">Education</h2>
+        <h2 className="section-title" id="resume-education">Education</h2>
         {resume.education.map(education => (
           <div className="resume-entry" key={education.school}>
             <div className="resume-entry-heading">

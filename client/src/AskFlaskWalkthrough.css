@@ -1,0 +1,34 @@
+.walkthrough-player {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  border-radius: .5rem;
+  background: var(--screen);
+}
+
+.walkthrough-player :is(img, video) { width: 100%; height: 100%; object-fit: contain; }
+.walkthrough-player video:focus-visible { outline-offset: -4px; outline-color: #b8c5ff; }
+
+.walkthrough-play {
+  position: absolute;
+  bottom: clamp(.45rem, 2vw, .9rem);
+  left: clamp(.45rem, 2vw, .9rem);
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .45rem;
+  max-width: calc(100% - 1rem);
+  min-height: 44px;
+  padding: .35rem .65rem;
+  border: 1px solid #fff;
+  border-radius: .3rem;
+  background: #fff;
+  color: var(--screen);
+  font-size: .82rem;
+  font-weight: 750;
+  line-height: 1.2;
+  cursor: pointer;
+}
+
+.walkthrough-play:hover { background: var(--accent-soft); }
+.walkthrough-duration { color: var(--muted); font-variant-numeric: tabular-nums; }

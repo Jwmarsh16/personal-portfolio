@@ -1,12 +1,65 @@
 export const projects = [
   {
+    slug: '30-second-billboard',
+    title: '30 Second Billboard',
+    category: 'Paid client work · Ecopop',
+    description: 'A paid, rotating message board that shows the same post across devices for each 30-second slot.',
+    contribution: 'I built and deployed the React and Flask MVP, including synchronized rotation and Stripe Checkout.',
+    stack: ['React', 'Flask', 'PostgreSQL', 'Stripe', 'Render'],
+    liveUrl: 'https://www.30secondbillboard.com/',
+    liveLabel: 'View live site',
+    role: 'Contract software developer for Ecopop. I implemented the React interface, Flask backend, PostgreSQL storage and deployment on Render.',
+    decision: 'I verified Stripe webhook signatures and made fulfillment idempotent, so receiving the same payment event again would not insert the message twice.',
+    result: 'I shipped a working MVP with a synchronized 30-second rotation and a bounded queue of 30 messages. The oldest message leaves the queue when it fills.',
+    problem: 'A visitor needed to buy a place in the rotation, and every open billboard needed to display the same message as the slot changed.',
+    features: [
+      'Synchronized 30-second slots across devices',
+      'Stripe Checkout with promo codes',
+      'Signed webhooks and duplicate-safe fulfillment',
+      'A 30-message queue that removes the oldest entry first'
+    ],
+    flow: [
+      ['Checkout', 'The visitor drafts a message and pays through Stripe Checkout.'],
+      ['Verify the event', 'Flask checks the Stripe signature before handling fulfillment.'],
+      ['Record the message once', 'Repeat delivery of a successful event does not create a second post.'],
+      ['Rotate the queue', 'The new message joins the synchronized billboard rotation.']
+    ],
+    demoSteps: [
+      'Open the billboard and watch its countdown advance to the next 30-second slot.',
+      'Open Post to see how a visitor drafts a message before checkout.'
+    ],
+    demoNote: 'The display and draft form are public. Posting a message requires payment.',
+    screenshots: [
+      {
+        src: '/images/billboard-post.webp', width: 1363, height: 738,
+        alt: 'The live 30 Second Billboard posting screen with a message area and a countdown.',
+        caption: 'The public message drafting screen shows the posting steps alongside the countdown.'
+      }
+    ],
+    technicalNotes: [
+      {
+        title: 'Payment retries',
+        text: 'The webhook path verifies the Stripe signature before fulfillment. A repeated delivery of the same event produces the same result without inserting a duplicate message.'
+      },
+      {
+        title: 'A bounded queue',
+        text: 'The backend enforces a 30-message limit in both the rotation and fulfillment paths. It evicts the oldest message first so the queue stays predictable.'
+      }
+    ]
+  },
+  {
     slug: 'ask-flask',
     title: 'Ask-Flask',
+    category: 'AI application',
     description: 'An AI chat application with streaming responses, saved conversations and pinned session memory.',
     contribution: 'I built the React chat UI, Flask streaming API, database persistence and retrieval pipeline.',
     stack: ['React', 'Flask', 'PostgreSQL', 'OpenAI API', 'SSE', 'FAISS'],
     liveUrl: 'https://ask-flask.onrender.com/',
     codeUrl: 'https://github.com/Jwmarsh16/ask-flask',
+    evidence: [
+      { label: 'SSE streaming tests', url: 'https://github.com/Jwmarsh16/ask-flask/blob/3b6ff267452ab31cb67e64d19a4cd686e58ea7eb/server/tests/test_chat_api.py' },
+      { label: 'Session persistence tests', url: 'https://github.com/Jwmarsh16/ask-flask/blob/3b6ff267452ab31cb67e64d19a4cd686e58ea7eb/server/tests/test_chat_persistence.py' }
+    ],
     role: 'Sole developer. I designed the application, implemented the frontend and API, and configured tests, CI and deployment.',
     decision: 'I used server-sent events to stream responses and stored sessions and messages in a database. A pinned summary and a separate FAISS retrieval pipeline manage conversation context and document retrieval.',
     result: 'The implemented flow includes saved conversations, session renaming, JSON and Markdown exports, and visible feedback when a request limit is reached.',
@@ -25,9 +78,9 @@ export const projects = [
     demoNote: 'The hosted demo may take a moment to start. Chat depends on the configured API and request budget; if it is unavailable, the screenshots show the main flows.',
     screenshots: [
       {
-        src: '/images/ask-flask2.webp', width: 1600, height: 771,
-        alt: 'Ask-Flask conversation alongside saved sessions and a pinned-memory example.',
-        caption: 'Saved sessions and a conversation demonstrating pinned session memory.'
+        src: '/images/ask-flask-walkthrough.webp', width: 1280, height: 720,
+        alt: 'Ask-Flask chat with the sessions sidebar and a saved conversation.',
+        caption: 'Ask-Flask shows saved conversations alongside the chat workspace.'
       },
       {
         src: '/images/ask-flask3.webp', width: 1484, height: 911,
@@ -58,11 +111,16 @@ export const projects = [
   {
     slug: 'fantasy-football-research-hub',
     title: 'Fantasy Football Research Hub',
+    category: 'Full-stack capstone',
     description: 'A fantasy football research app that combines player discovery with personal rankings and community reviews.',
     contribution: 'I designed the relational data model and built the Flask API, React/Redux interface, authentication and S3 image flow.',
     stack: ['React', 'Redux Toolkit', 'Flask', 'PostgreSQL', 'SQLAlchemy', 'AWS S3'],
     liveUrl: 'https://fantasy-football-research-hub.onrender.com',
     codeUrl: 'https://github.com/Jwmarsh16/fantasy-football-research-project',
+    evidence: [
+      { label: 'Profile upload implementation', url: 'https://github.com/Jwmarsh16/fantasy-football-research-project/blob/d3bc031411bd0041dc6bc24f2ef05661e8fcaabf/server/resources/user.py' },
+      { label: 'S3 signing helper', url: 'https://github.com/Jwmarsh16/fantasy-football-research-project/blob/d3bc031411bd0041dc6bc24f2ef05661e8fcaabf/server/utils/s3.py' }
+    ],
     role: 'Sole developer. I built the data model, REST API, authentication, profile image handling and React/Redux interface.',
     decision: 'I modeled user/player ranking relationships in SQLAlchemy and used Redux Toolkit for shared UI state. Profile images upload through Flask to S3; the API generates signed URLs for image retrieval.',
     result: 'The app brings player filtering, personal rankings, written reviews and profile photos into one interface. The profile uses a virtualized review list to limit rendered rows.',
@@ -114,11 +172,16 @@ export const projects = [
   {
     slug: 'algorithm-visualizer',
     title: 'Algorithm Visualizer',
+    category: 'Interactive tool',
     description: 'An interactive pathfinding playground for exploring A*, Dijkstra, breadth-first search and depth-first search.',
     contribution: 'I implemented the algorithms, editable grid, playback controls and side-by-side comparison interface.',
     stack: ['React', 'Vite', 'JavaScript', 'CSS', 'Pathfinding'],
     liveUrl: 'https://pathfinding-algorithm-asba.onrender.com',
     codeUrl: 'https://github.com/Jwmarsh16/pathfinding-algorithm',
+    evidence: [
+      { label: 'A* implementation', url: 'https://github.com/Jwmarsh16/pathfinding-algorithm/blob/31a63ec4acb5e46291b4baa02a1b62544268bb8f/client/src/algorithms/astar.js' },
+      { label: 'Breadth-first search implementation', url: 'https://github.com/Jwmarsh16/pathfinding-algorithm/blob/31a63ec4acb5e46291b4baa02a1b62544268bb8f/client/src/algorithms/bfs.js' }
+    ],
     role: 'Sole developer. I implemented the algorithms, designed the grid states and built the controls for running and comparing searches.',
     decision: 'I represented traversal as visible grid states and exposed play, step and back controls. Comparison mode runs two selected algorithms against the same grid layout.',
     result: 'Users can build a layout, inspect visited nodes and resulting paths, and compare algorithms side by side. Maze generation adds more complex scenarios to explore.',

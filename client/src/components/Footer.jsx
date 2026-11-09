@@ -3,19 +3,18 @@ import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa'
 import '../Footer.css'
 
 const footerLinks = [
-  ['Projects', '/#projects'],
+  ['Work', '/#projects'],
   ['Skills', '/#skills'],
   ['About', '/about'],
   ['Resume', '/resume'],
   ['Contact', '/#contact'],
-  ['Tools', '/#tools'],
-  ['Blogs', '/blogs']
+  ['Writing', '/blogs']
 ]
 
 function Footer() {
   return (
     <footer className="site-footer">
-      <div className="site-footer-inner">
+      <div className="site-footer-inner page-width">
         <div className="footer-top">
           <Link to="/" className="footer-brand-link">Jonathan Marshall</Link>
 

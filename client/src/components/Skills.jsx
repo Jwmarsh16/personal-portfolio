@@ -1,42 +1,31 @@
+import { Link } from 'react-router-dom'
+import { FaArrowRight } from 'react-icons/fa'
 import '../Skills.css'
 
 const skillGroups = [
-  {
-    title: 'Frontend',
-    skills: ['JavaScript', 'React', 'Redux Toolkit', 'HTML & CSS']
-  },
-  {
-    title: 'Backend & data',
-    skills: ['Python', 'Flask', 'REST APIs', 'PostgreSQL', 'SQLAlchemy']
-  },
-  {
-    title: 'AI applications',
-    skills: ['OpenAI API', 'SSE streaming', 'Context management', 'FAISS retrieval']
-  },
-  {
-    title: 'Testing & delivery',
-    skills: ['Pytest', 'Vitest', 'GitHub Actions', 'Git', 'Render']
-  }
+  ['Frontend', 'React, JavaScript, Redux Toolkit, HTML, and CSS', '/project/fantasy-football-research-hub'],
+  ['Backend and data', 'Python, Flask, REST APIs, SQLAlchemy, and PostgreSQL', '/project/30-second-billboard'],
+  ['AI applications', 'OpenAI API, streamed responses, session context, and FAISS retrieval', '/project/ask-flask'],
+  ['Testing and delivery', 'Pytest, Vitest, GitHub Actions, Git, and Render', '/project/ask-flask#technical-heading']
 ]
 
 export default function Skills() {
   return (
-    <section id="skills" className="skills" aria-labelledby="skills-heading">
-      <div className="skills-container">
-        <div className="skills-header">
-          <h2 id="skills-heading">Skills I put to work</h2>
-          <p>The core tools behind my client work and featured projects.</p>
-        </div>
-        <div className="skills-grid">
-          {skillGroups.map((group) => (
-            <article className="skills-group" key={group.title}>
-              <h3>{group.title}</h3>
-              <ul>
-                {group.skills.map((skill) => <li key={skill}>{skill}</li>)}
-              </ul>
-            </article>
+    <section id="skills" className="skills page-width" aria-labelledby="skills-heading">
+      <div id="tools">
+        <p className="page-eyebrow">How I build</p>
+        <h2 className="section-title" id="skills-heading">Skills in practice</h2>
+        <ul className="skills-list">
+          {skillGroups.map(([title, skills, link]) => (
+            <li key={title}>
+              <h3>{title}</h3>
+              <p>{skills}</p>
+              <Link className="text-link" to={link} aria-label={'See ' + title.toLowerCase() + ' in practice'}>
+                See it in a project <FaArrowRight aria-hidden="true" />
+              </Link>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </section>
   )

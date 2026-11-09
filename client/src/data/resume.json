@@ -1,6 +1,6 @@
 {
   "name": "Jonathan Marshall",
-  "role": "Software Developer | Full Stack & AI",
+  "role": "Full-stack software developer",
   "location": "Austin, TX",
   "email": "JWMarsh16@gmail.com",
   "phone": "757-969-2803",
@@ -58,6 +58,7 @@
       "dates": "January 2026 – June 2026",
       "url": "https://www.30secondbillboard.com/",
       "linkLabel": "30 Second Billboard",
+      "caseStudy": "/project/30-second-billboard",
       "bullets": [
         "Built and deployed a paid client MVP on Render with React, Flask, and PostgreSQL, including a global 30-second message rotation synchronized across devices.",
         "Integrated Stripe Checkout with promo codes, webhook signature verification, and idempotent fulfillment to handle retries without duplicate inserts.",

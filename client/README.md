@@ -13,7 +13,8 @@ Before committing:
 
 ```bash
 npm run lint
+npm test
 npm run build
 ```
 
-Use `npm run preview` to inspect the production build locally. There is no test script defined yet.
+Use `npm run preview` to inspect the production build locally. The test script checks the embedded pathfinding comparison.
