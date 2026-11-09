@@ -38,7 +38,7 @@
   font-size: 2.25rem;
   line-height: 1.1;
   color: rgba(255, 255, 255, 0.94);
-  font-family: 'Orbitron', var(--heading-font, sans-serif);
+  font-family: 'Montserrat', var(--heading-font, sans-serif);
 }
 
 .blogs-intro {

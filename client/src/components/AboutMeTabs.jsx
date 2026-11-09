@@ -1,177 +1,152 @@
-// client/src/components/AboutMeTabs.jsx
-import { useMemo, useState } from 'react' // CHANGED: Remove unused React default import; keep named hooks.
-import '../AboutMeTabs.css'
-import { useNavigate } from 'react-router-dom'
+import { useRef, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { FaUser, FaBriefcase, FaGraduationCap, FaFileAlt } from 'react-icons/fa'
+import '../AboutMeTabs.css'
 
-function AboutMeTabs() {
-  const [activeTab, setActiveTab] = useState('Intro')
-  const navigate = useNavigate()
+const tabs = [
+  { id: 'intro', label: 'Intro', icon: FaUser },
+  { id: 'career', label: 'Career', icon: FaBriefcase },
+  { id: 'education', label: 'Education', icon: FaGraduationCap },
+  { id: 'resume', label: 'Resume', icon: FaFileAlt }
+]
 
-  const panelId = 'about-tabpanel' // CHANGED: stable id for aria-controls/labeling
-  const tabId = (tab) => `about-tab-${tab.toLowerCase()}` // CHANGED: deterministic tab ids
+export default function AboutMeTabs() {
+  const [activeTab, setActiveTab] = useState('intro')
+  const tabRefs = useRef({})
 
-  const tabMeta = useMemo(
-    () => ({
-      Intro: { label: 'Intro', icon: <FaUser className="about-tab-icon" /> }, // CHANGED: namespaced icon class
-      Career: { label: 'Career', icon: <FaBriefcase className="about-tab-icon" /> }, // CHANGED
-      Education: {
-        label: 'Education',
-        icon: <FaGraduationCap className="about-tab-icon" /> // CHANGED
-      },
-      Resume: { label: 'Resume', icon: <FaFileAlt className="about-tab-icon" /> } // CHANGED
-    }),
-    []
-  )
+  const handleTabKeyDown = (event, id) => {
+    const index = tabs.findIndex((tab) => tab.id === id)
+    let nextIndex
+    if (event.key === 'ArrowRight') nextIndex = (index + 1) % tabs.length
+    else if (event.key === 'ArrowLeft') nextIndex = (index - 1 + tabs.length) % tabs.length
+    else if (event.key === 'Home') nextIndex = 0
+    else if (event.key === 'End') nextIndex = tabs.length - 1
+    else return
 
-  const tabs = ['Intro', 'Career', 'Education', 'Resume']
-
-  const onTabClick = (tab) => {
-    if (tab === 'Resume') {
-      navigate('/resume')
-      return
-    }
-    setActiveTab(tab)
+    event.preventDefault()
+    const nextTab = tabs[nextIndex].id
+    setActiveTab(nextTab)
+    tabRefs.current[nextTab]?.focus()
   }
 
   const renderTabContent = () => {
     switch (activeTab) {
-      case 'Intro':
+      case 'intro':
         return (
           <div className="about-tab-content">
             <p>
-              I’m a <span className="about-highlight">full-stack software engineer</span> who
-              turns complex problems into clean, scalable solutions. I transitioned into
-              software after four years as a project manager in high-pressure nuclear
-              inspection environments—where adaptability, precision, and leadership were
-              non-negotiable.
+              I’m an Austin-based software developer and Flatiron School graduate.
+              I build full-stack applications with React, Flask, and PostgreSQL,
+              including paid client work and projects that explore practical AI features.
             </p>
             <p>
-              After graduating from <span className="about-highlight">Flatiron School</span>,
-              I’ve been building full-stack web apps with{' '}
-              <span className="about-highlight">React, Flask, PostgreSQL, and AWS S3</span>.
-              I care about readable code, thoughtful UX, and backend design that holds up
-              under real usage.
-            </p>
-            <p>
-              I’m a strong collaborator who communicates clearly, learns fast, and enjoys
-              owning problems end-to-end—whether that’s building REST APIs, improving
-              performance, or tightening deployment workflows.
-            </p>
-            <p>
-              I’m looking to join a mission-driven team where I can contribute quickly,
-              keep leveling up, and ship software that makes people’s lives better.
+              Before software, I spent four years managing nuclear inspection projects.
+              That work taught me to break down complex problems, communicate technical
+              decisions clearly, and keep a team moving under tight deadlines.
+              I bring the same care to the code and interfaces I build.
             </p>
           </div>
         )
-
-      case 'Career':
+      case 'career':
         return (
           <div className="about-tab-content">
+            <div className="job-entry">
+              <h3 className="job-title">Contract Software Developer</h3>
+              <p className="job-company">Ecopop, Inc. · Austin, TX</p>
+              <p className="job-dates">January – June 2026</p>
+              <ul className="job-details">
+                <li>Built and deployed a paid client MVP with React, Flask, and PostgreSQL.</li>
+                <li>Implemented Stripe Checkout, webhook signature verification, and retry-safe fulfillment.</li>
+              </ul>
+            </div>
             <div className="job-entry">
               <h3 className="job-title">Nuclear Project Manager</h3>
-              <p className="job-company">The Merrick Group — West Hazleton, PA</p>
-              <p className="job-dates">Feb 2020 – Apr 2024</p>
+              <p className="job-company">The Merrick Group · West Hazleton, PA</p>
+              <p className="job-dates">February 2020 – April 2024</p>
               <ul className="job-details">
-                <li>
-                  Led nuclear eddy current projects, translating complex inspection data
-                  into clear recommendations that improved reactor safety.
-                </li>
-                <li>
-                  Delivered under strict deadlines and high stakes constraints while
-                  maintaining quality and compliance.
-                </li>
-                <li>
-                  Coordinated cross-functional teams of 40+ engineers and technicians,
-                  aligning stakeholders and keeping work unblocked.
-                </li>
+                <li>Managed nuclear inspection projects from planning through technical reporting.</li>
+                <li>Coordinated teams of more than 40 engineers and technicians and translated findings into stakeholder decisions.</li>
               </ul>
             </div>
-
-            <div className="job-entry">
-              <h3 className="job-title">Nuclear Technician</h3>
-              <p className="job-company">BWXT — Lynchburg, VA</p>
-              <p className="job-dates">Sept 2012 – Jan 2020</p>
-              <ul className="job-details">
-                <li>
-                  Performed eddy current inspections on reactor components and steam
-                  generators, documenting and analyzing results.
-                </li>
-                <li>
-                  Collaborated closely with engineering teams to improve inspection
-                  accuracy and reduce downtime.
-                </li>
-              </ul>
-            </div>
+            <Link className="about-resume-link" to="/resume#experience">View full experience</Link>
           </div>
         )
-
-      case 'Education':
+      case 'education':
         return (
           <div className="about-tab-content">
             <div className="education-entry">
-              <h3 className="education-title">Flatiron School (Remote)</h3>
-              <p className="education-dates">April 2024 – September 2024</p>
-              <p className="education-details">
-                Full-stack Web Development, JavaScript and Python Program
-              </p>
+              <h3 className="education-title">Flatiron School</h3>
+              <p className="education-dates">April – September 2024</p>
+              <p>Full-stack Web Development, JavaScript and Python Program</p>
             </div>
-
             <div className="education-entry">
-              <h3 className="education-title">Virginia Wesleyan — Norfolk, VA</h3>
+              <h3 className="education-title">Google AI Essentials</h3>
+              <p className="education-dates">August – September 2025</p>
+              <p>Five-course specialization through Coursera and Google.</p>
+            </div>
+            <div className="education-entry">
+              <h3 className="education-title">Virginia Wesleyan</h3>
               <p className="education-dates">September 2011 – June 2012</p>
-              <p className="education-details">
-                Completed foundational Computer Science coursework before pursuing a
-                professional opportunity in the nuclear industry.
-              </p>
+              <p>Completed core Computer Science coursework.</p>
             </div>
           </div>
         )
-
+      case 'resume':
+        return (
+          <div className="about-tab-content">
+            <p>See my technical projects, paid client work, prior experience, and education in one place.</p>
+            <Link className="about-resume-link" to="/resume">View my resume</Link>
+          </div>
+        )
       default:
         return null
     }
   }
 
   return (
-    <section className="about-tabs-section" aria-label="About section">
+    <section className="about-tabs-section" aria-labelledby="about-heading">
       <div className="about-tabs-wrapper">
         <div className="code-image">
-          <img src="/images/portfolio-man.jpg" alt="Developer at a laptop" />
+          <img
+            src="/images/portfolio-man.webp"
+            alt="Illustration of a developer at a laptop"
+            width="500"
+            height="500"
+            loading="lazy"
+            decoding="async"
+          />
         </div>
-
         <div className="tab-column">
           <div className="tabs-title">
-            <h2>About</h2>
-            <p className="about-subtext">
-              Background, experience, and what I care about when building software.
-            </p>
+            <h2 id="about-heading">About me</h2>
+            <p className="about-subtext">Software experience built on a background in technical project leadership.</p>
           </div>
-
           <div className="about-tabs-container">
-            <div className="about-tabs" role="tablist" aria-label="About tabs">
-              {tabs.map((tab) => (
+            <div className="about-tabs" role="tablist" aria-label="About me">
+              {tabs.map(({ id, label, icon: Icon }) => (
                 <button
-                  key={tab}
-                  id={tabId(tab)} // CHANGED: a11y hook for aria-labelledby
+                  key={id}
+                  ref={(element) => { tabRefs.current[id] = element }}
+                  id={`about-tab-${id}`}
                   type="button"
-                  className={activeTab === tab ? 'active' : ''}
-                  onClick={() => onTabClick(tab)}
+                  className={activeTab === id ? 'active' : ''}
+                  onClick={() => setActiveTab(id)}
+                  onKeyDown={(event) => handleTabKeyDown(event, id)}
                   role="tab"
-                  aria-selected={activeTab === tab}
-                  aria-controls={panelId} // CHANGED: link tab → tabpanel
+                  tabIndex={activeTab === id ? 0 : -1}
+                  aria-selected={activeTab === id}
+                  aria-controls="about-tabpanel"
                 >
-                  {tabMeta[tab].icon} {tabMeta[tab].label}
+                  <Icon className="about-tab-icon" aria-hidden="true" /> {label}
                 </button>
               ))}
             </div>
-
             <div
-              key={activeTab} // CHANGED: re-triggers fade animation when tab changes
-              id={panelId} // CHANGED: referenced by aria-controls
-              className="about-tab-body fade-in"
+              id="about-tabpanel"
+              className="about-tab-body"
               role="tabpanel"
-              aria-labelledby={tabId(activeTab)} // CHANGED: link tabpanel → active tab
+              tabIndex={0}
+              aria-labelledby={`about-tab-${activeTab}`}
             >
               {renderTabContent()}
             </div>
@@ -181,5 +156,3 @@ function AboutMeTabs() {
     </section>
   )
 }
-
-export default AboutMeTabs

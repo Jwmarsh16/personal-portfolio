@@ -1,0 +1,127 @@
+{
+  "name": "Jonathan Marshall",
+  "role": "Software Developer | Full Stack & AI",
+  "location": "Austin, TX",
+  "email": "JWMarsh16@gmail.com",
+  "phone": "757-969-2803",
+  "summary": "Software developer building full-stack applications with React, Flask, PostgreSQL, and the OpenAI API. Built Ask-Flask with streaming responses, persistent sessions, session-pinned memory, and a RAG prototype using embeddings, FAISS, and PII redaction. Delivered a paid client MVP with Stripe Checkout, verified webhooks, and idempotent fulfillment. Previously managed nuclear inspection projects and cross-functional teams of more than 40 engineers and technicians.",
+  "updated": "November 2026",
+  "links": [
+    {
+      "label": "GitHub",
+      "url": "https://github.com/Jwmarsh16"
+    },
+    {
+      "label": "LinkedIn",
+      "url": "https://www.linkedin.com/in/jonathan-marshall-a2a833257/"
+    },
+    {
+      "label": "Technical writing",
+      "url": "https://medium.com/@khrscrfs"
+    }
+  ],
+  "skills": [
+    {
+      "label": "Languages",
+      "items": "Python, JavaScript (ES6+), SQL, HTML, CSS"
+    },
+    {
+      "label": "Frontend",
+      "items": "React, Redux Toolkit, Vite, React Router, react-markdown, remark-gfm, PrismJS"
+    },
+    {
+      "label": "Backend & APIs",
+      "items": "Flask, REST APIs, SQLAlchemy (ORM/Core), Pydantic v2, Gunicorn"
+    },
+    {
+      "label": "AI/LLM & RAG",
+      "items": "OpenAI API (Chat Completions, embeddings), Server-Sent Events (SSE), prompt design, context management, session-pinned memory, chunking, PII redaction, FAISS, retrieval (MMR-style), simple evals/agent endpoints"
+    },
+    {
+      "label": "Security/Observability",
+      "items": "JWT (HTTP-only cookies), CSRF, CORS, security headers (CSP, HSTS, XFO, Referrer Policy), Flask-Limiter, structured JSON logs, request IDs, latency metrics, uniform JSON error envelopes"
+    },
+    {
+      "label": "Data/Cloud",
+      "items": "PostgreSQL, SQLite, AWS S3 (presigned URLs), Render"
+    },
+    {
+      "label": "Testing/CI",
+      "items": "Pytest, Vitest (React Testing Library), GitHub Actions, Postman"
+    }
+  ],
+  "experience": [
+    {
+      "company": "Ecopop, Inc.",
+      "location": "Austin, TX",
+      "role": "Contract Software Developer",
+      "dates": "January 2026 – June 2026",
+      "url": "https://www.30secondbillboard.com/",
+      "linkLabel": "30 Second Billboard",
+      "bullets": [
+        "Built and deployed a paid client MVP on Render with React, Flask, and PostgreSQL, including a global 30-second message rotation synchronized across devices.",
+        "Integrated Stripe Checkout with promo codes, webhook signature verification, and idempotent fulfillment to handle retries without duplicate inserts.",
+        "Enforced a 30-message limit with deterministic FIFO eviction in the backend, including rotation and webhook fulfillment paths."
+      ]
+    },
+    {
+      "company": "The Merrick Group",
+      "location": "West Hazleton, PA",
+      "role": "Nuclear Project Manager",
+      "dates": "February 2020 – April 2024",
+      "bullets": [
+        "Led nuclear eddy current inspection projects from requirements through team coordination and data analysis, supporting reactor safety decisions.",
+        "Translated technical inspection findings into clear options, risks, and recommendations for nontechnical stakeholders.",
+        "Managed concurrent projects and cross-functional teams of more than 40 engineers and technicians, coordinating schedules, constraints, and quality standards."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Ask-Flask",
+      "description": "AI chat application",
+      "dates": "January 2026 – May 2026",
+      "caseStudy": "/project/ask-flask",
+      "code": "https://github.com/Jwmarsh16/ask-flask",
+      "live": "https://ask-flask.onrender.com/",
+      "bullets": [
+        "Built a React (Vite) + Flask AI chat app integrating the OpenAI API with token streaming via SSE and a non-stream JSON fallback endpoint.",
+        "Implemented persistent chat sessions and session-pinned memory, using summarization to maintain continuity while controlling context growth.",
+        "Built a RAG prototype with chunking, PII redaction, embeddings, FAISS, and MMR-style retrieval. Added rate limiting, security headers, structured logs, consistent errors, and Pytest/Vitest tests with coverage thresholds."
+      ]
+    },
+    {
+      "name": "Fantasy Football Research Hub",
+      "description": "Full-stack research and community application",
+      "dates": "October 2024 – July 2025",
+      "caseStudy": "/project/fantasy-football-research-hub",
+      "code": "https://github.com/Jwmarsh16/fantasy-football-research-project",
+      "live": "https://fantasy-football-research-hub.onrender.com",
+      "bullets": [
+        "Built a full-stack app with React/Vite, Redux Toolkit, Flask-RESTful APIs, and PostgreSQL/SQLite via SQLAlchemy ORM.",
+        "Implemented JWT authentication with HTTP-only cookies and CSRF protection, plus server-side AWS S3 profile uploads and signed image retrieval."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "school": "Google AI Essentials",
+      "location": "Remote",
+      "dates": "August 2025 – September 2025",
+      "detail": "Specialization (5 courses), Coursera × Google. AI fundamentals, prompting, responsible use, and productivity with AI tools.",
+      "credential": "https://coursera.org/share/8e525f9a6d0f6580adc48c3f059be514"
+    },
+    {
+      "school": "Flatiron School",
+      "location": "Remote",
+      "dates": "April 2024 – September 2024",
+      "detail": "Full-stack Web Development, JavaScript and Python Program"
+    },
+    {
+      "school": "Virginia Wesleyan",
+      "location": "Norfolk, VA",
+      "dates": "September 2011 – June 2012",
+      "detail": "Completed core Computer Science coursework"
+    }
+  ]
+}

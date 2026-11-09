@@ -1,7 +1,25 @@
+/* Include padding in declared widths so cards fit narrow screens. */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-padding-top: 6rem; }
+img { max-width: 100%; }
+button, input, textarea { font: inherit; }
+a { text-underline-offset: 0.2em; }
+:focus-visible { outline: 3px solid #84d8ff; outline-offset: 4px; }
+section[id] { scroll-margin-top: 6rem; }
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
 /* client/src/Global.css */
-/* Import Google Fonts for consistency */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@300;400;500&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Inter:wght@400;600&display=swap');
+
 
 :root {
   --primary-color: #0d47a1;
@@ -16,9 +34,9 @@
   --shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   --hover-shadow: 0 6px 12px rgba(0, 0, 0, 0.7);
 
-  /* CHANGED: add a couple global “pro UI” helpers (safe additions) */
-  --focus-ring: 0 0 0 3px rgba(100, 181, 246, 0.35); /* CHANGED: shared focus ring */
-  --bg-overlay-opacity: 0.72; /* CHANGED: single knob to tune background readability */
+
+  --focus-ring: 0 0 0 3px #84d8ff;
+  --bg-overlay-opacity: 0.72;
 }
 
 body {
@@ -29,11 +47,11 @@ body {
   line-height: 1.6;
   background: black;
   position: relative;
-  overflow-x: hidden;
-  color-scheme: dark; /* CHANGED: better native form controls in dark UI */
+  overflow-wrap: break-word;
+  color-scheme: dark;
 }
 
-/* CHANGED: ensure app content layers above decorative effects */
+
 .App {
   position: relative;
   z-index: 1;
@@ -47,13 +65,13 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background: url('/images/starry-night.jpg') center center / cover no-repeat fixed;
-  z-index: -2; /* CHANGED: move further back */
-  opacity: 0.28; /* CHANGED: make stars a subtle texture, not the main event */
-  filter: saturate(0.9) brightness(0.75); /* CHANGED: improves readability */
+  background: url('/images/starry-night.webp') center center / cover no-repeat fixed;
+  z-index: -2;
+  opacity: 0.28;
+  filter: saturate(0.9) brightness(0.75);
 }
 
-/* CHANGED: subtle overlay for readability without killing the theme */
+
 body::after {
   content: "";
   position: fixed;
@@ -116,10 +134,10 @@ body::after {
   animation-delay: var(--delay, 0s);
 }
 
-/* CHANGED: professional motion support */
+
 @media (prefers-reduced-motion: reduce) {
   .shooting-star-container {
-    display: none; /* CHANGED: disable decorative motion */
+    display: none;
   }
 }
 
@@ -132,7 +150,7 @@ h5,
 h6,
 p,
 a {
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.65); /* CHANGED: lighter, cleaner shadow */
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.65);
 }
 
 /* Utility container */
@@ -149,22 +167,22 @@ a {
   background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
   color: #fff;
   border: none;
-  border-radius: 6px; /* CHANGED: modern radius */
+  border-radius: 6px;
   text-decoration: none;
   transition: background var(--transition-speed), transform var(--transition-speed);
 }
 
 .btn:hover {
   background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
-  transform: translateY(-1px) scale(1.01); /* CHANGED: subtle interaction */
+  transform: translateY(-1px) scale(1.01);
 }
 
 .btn:focus-visible {
   outline: none;
-  box-shadow: var(--focus-ring); /* CHANGED: visible keyboard focus */
+  box-shadow: var(--focus-ring);
 }
 
-/* CHANGED: global chip styles (single source of truth) */
+
 .chip {
   display: inline-flex;
   align-items: center;
@@ -217,5 +235,14 @@ a {
 
   .shooting-star {
     height: 100px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

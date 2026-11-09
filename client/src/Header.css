@@ -1,171 +1,149 @@
-/* Path: client/src/Header.css */
 .header {
-  position: sticky; /* CHANGED: pro feel; stays visible without floating mid-page */
-  top: 0; /* CHANGED: anchor to top */
-  width: 100%; /* CHANGED: full-width bar */
+  position: sticky;
+  top: 0;
+  width: 100%;
   z-index: 1000;
-
-  background: rgba(0, 0, 0, 0.45); /* CHANGED: cleaner, more premium surface */
-  backdrop-filter: blur(10px); /* CHANGED: glassy but subtle */
-  -webkit-backdrop-filter: blur(10px); /* CHANGED: Safari support */
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08); /* CHANGED: gentle separation */
+  background: rgba(3, 10, 16, 0.94);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .header-inner {
-  max-width: 1200px; /* CHANGED: align with container rhythm */
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 0.85rem 1.25rem; /* CHANGED: consistent spacing */
+  padding: 0.85rem 1.25rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  position: relative; /* CHANGED: anchor mobile dropdown to this container */
+  position: relative;
 }
 
 .brand {
-  color: #00ffc3; /* CHANGED: keep your signature neon, but controlled */
+  color: #00ffc3;
   text-decoration: none;
   font-weight: 700;
-  letter-spacing: 0.2px;
   font-size: 1.05rem;
-  white-space: nowrap;
-
-  display: inline-flex; /* CHANGED: allow avatar + name */
-  align-items: center; /* CHANGED */
-  gap: 0.6rem; /* CHANGED */
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-width: 0;
 }
 
-.brand:hover {
-  opacity: 0.92;
-}
-
-/* CHANGED: avatar next to brand name */
 .brand-avatar {
-  width: 34px; /* CHANGED */
-  height: 34px; /* CHANGED */
-  border-radius: 999px; /* CHANGED */
-  object-fit: cover; /* CHANGED */
-  object-position: center; /* CHANGED */
-  border: 1px solid rgba(255, 255, 255, 0.14); /* CHANGED */
-  background: rgba(255, 255, 255, 0.04); /* CHANGED */
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35); /* CHANGED */
-  flex: 0 0 auto; /* CHANGED */
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  flex: 0 0 auto;
 }
 
 .brand-name {
-  display: inline-block; /* CHANGED */
+  overflow-wrap: anywhere;
 }
 
 .nav-bar {
   display: flex;
   align-items: center;
+  flex: 0 0 auto;
 }
 
 .nav-links {
   list-style: none;
-  display: flex; /* CHANGED: horizontal nav on desktop */
+  display: flex;
   align-items: center;
-  gap: 0.35rem; /* CHANGED: tighter + cleaner */
+  gap: 0.25rem;
   padding: 0;
   margin: 0;
 }
 
-/* Shared base styling for both Link (<a>) and <button> */
 .nav-link {
-  appearance: none; /* CHANGED: avoid nuking focus styles like all: unset */
-  background: transparent;
-  border: 1px solid transparent;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   color: rgba(255, 255, 255, 0.92);
-  font: inherit;
   font-weight: 600;
   padding: 0.5rem 0.75rem;
+  border: 1px solid transparent;
   border-radius: 10px;
-  cursor: pointer;
   text-decoration: none;
-  transition:
-    background-color var(--transition-speed),
-    border-color var(--transition-speed),
-    transform var(--transition-speed),
-    color var(--transition-speed);
+  transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
-.nav-link:hover {
-  background: rgba(255, 255, 255, 0.08); /* CHANGED: subtle hover */
-  border-color: rgba(255, 255, 255, 0.08);
-  transform: translateY(-1px); /* CHANGED: micro-interaction, not “pop” */
+.nav-link:hover,
+.nav-link[aria-current] {
+  background: rgba(100, 181, 246, 0.1);
+  border-color: rgba(100, 181, 246, 0.2);
 }
 
-.nav-link:focus-visible {
-  outline: none;
-  box-shadow: var(--focus-ring); /* CHANGED: keyboard accessibility */
+.brand:focus-visible,
+.nav-link:focus-visible,
+.hamburger:focus-visible {
+  outline: 2px solid #64b5f6;
+  outline-offset: 3px;
 }
 
-/* Hide hamburger by default on desktop */
 .hamburger {
   display: none;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  flex: 0 0 auto;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   background: rgba(255, 255, 255, 0.06);
-  color: rgba(255, 255, 255, 0.92);
+  color: #fff;
   border-radius: 10px;
-  padding: 0.55rem 0.7rem;
+  font-size: 1rem;
   cursor: pointer;
-  transition:
-    background-color var(--transition-speed),
-    border-color var(--transition-speed),
-    transform var(--transition-speed);
 }
 
-.hamburger:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.18);
-  transform: translateY(-1px);
-}
-
-.hamburger:focus-visible {
-  outline: none;
-  box-shadow: var(--focus-ring);
-}
-
-/* ----------------------
-   🔽 Mobile Responsive
-------------------------- */
-@media (max-width: 768px) {
+@media (max-width: 800px) {
   .header-inner {
-    padding: 0.75rem 1rem;
+    padding: 0.65rem 1rem;
+    gap: 0.5rem;
   }
 
   .hamburger {
-    display: inline-flex; /* CHANGED: show hamburger on mobile */
-    align-items: center;
-    justify-content: center;
+    display: inline-flex;
   }
 
   .nav-links {
-    display: none; /* CHANGED: closed by default on mobile */
-    position: absolute; /* CHANGED: dropdown panel */
-    top: calc(100% + 0.5rem); /* CHANGED: consistent spacing under header */
-    right: 0;
-    left: 0;
-
+    display: none;
+    position: absolute;
+    top: calc(100% + 0.25rem);
+    right: 0.75rem;
+    left: 0.75rem;
+    max-height: calc(100vh - 90px);
+    max-height: calc(100dvh - 90px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
     flex-direction: column;
     align-items: stretch;
-    gap: 0.35rem;
-
-    background: rgba(0, 0, 0, 0.72); /* CHANGED: readable dropdown */
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    gap: 0.25rem;
+    background: #07111b;
+    border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 14px;
-    padding: 0.6rem;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    padding: 0.5rem;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
   }
 
   .nav-links[data-open='true'] {
-    display: flex; /* CHANGED: open state */
+    display: flex;
   }
 
   .nav-link {
+    display: flex;
     width: 100%;
-    padding: 0.7rem 0.85rem; /* CHANGED: finger-friendly tap targets */
-    border-radius: 12px;
+    padding: 0.7rem 0.85rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .brand {
+    font-size: 0.95rem;
+    gap: 0.45rem;
   }
 }

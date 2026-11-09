@@ -1,5 +1,4 @@
-// client/src/components/ToolsUsedHome.jsx
-import { useEffect, useMemo, useRef, useState } from 'react' // CHANGED: add hooks for smart tab arrows; remove unused React default import.
+import { useEffect, useMemo, useRef, useState } from 'react'
 import {
   FaPython,
   FaDatabase,
@@ -69,9 +68,7 @@ function ToolsUsedHome() {
       databases: [{ name: 'PostgreSQL', icon: <SiPostgresql aria-hidden="true" /> }],
       security: [
         { name: 'JWT Authentication', icon: <FaKey aria-hidden="true" /> },
-        { name: 'OAuth', icon: <FaKey aria-hidden="true" /> },
         { name: 'HTTP-Only Cookies', icon: <FaLock aria-hidden="true" /> },
-        { name: 'SAST/DAST', icon: <FaUserShield aria-hidden="true" /> },
         { name: 'Input Validation', icon: <FaCheckCircle aria-hidden="true" /> }
       ],
       practices: [
@@ -107,54 +104,66 @@ function ToolsUsedHome() {
 
   const [activeTab, setActiveTab] = useState('languages')
 
-  const tabsRef = useRef(null) // CHANGED: read scroll state of the category tab row
-  const [showLeftArrow, setShowLeftArrow] = useState(false) // CHANGED: hide left arrow when fully left
-  const [showRightArrow, setShowRightArrow] = useState(false) // CHANGED: hide right arrow when fully right
+  const tabsRef = useRef(null)
+  const tabButtonRefs = useRef({})
+  const [showLeftArrow, setShowLeftArrow] = useState(false)
+  const [showRightArrow, setShowRightArrow] = useState(false)
 
   useEffect(() => {
     const el = tabsRef.current
     if (!el) return
 
     const updateArrows = () => {
-      const scrollable = el.scrollWidth - el.clientWidth > 1 // CHANGED: only show arrows when overflow exists
+      const scrollable = el.scrollWidth - el.clientWidth > 1
       if (!scrollable) {
-        setShowLeftArrow(false) // CHANGED: hide both when not scrollable
-        setShowRightArrow(false) // CHANGED: hide both when not scrollable
+        setShowLeftArrow(false)
+        setShowRightArrow(false)
         return
       }
 
       const maxScrollLeft = el.scrollWidth - el.clientWidth
-      setShowLeftArrow(el.scrollLeft > 1) // CHANGED: hide left arrow at the start
-      setShowRightArrow(el.scrollLeft < maxScrollLeft - 1) // CHANGED: hide right arrow at the end
+      setShowLeftArrow(el.scrollLeft > 1)
+      setShowRightArrow(el.scrollLeft < maxScrollLeft - 1)
     }
 
-    updateArrows() // CHANGED: set initial state after mount
+    updateArrows()
 
-    const onScroll = () => updateArrows() // CHANGED: keep arrow state in sync
-    el.addEventListener('scroll', onScroll, { passive: true }) // CHANGED: passive scroll listener for perf
+    const onScroll = () => updateArrows()
+    el.addEventListener('scroll', onScroll, { passive: true })
 
-    let ro = null // CHANGED: allow environments without ResizeObserver (defensive)
+    let ro = null
     if (typeof ResizeObserver !== 'undefined') {
-      ro = new ResizeObserver(() => updateArrows()) // CHANGED: respond to layout changes
+      ro = new ResizeObserver(() => updateArrows())
       ro.observe(el)
     }
 
-    window.addEventListener('resize', updateArrows, { passive: true }) // CHANGED: respond to viewport changes
+    window.addEventListener('resize', updateArrows, { passive: true })
 
     return () => {
       el.removeEventListener('scroll', onScroll)
-      if (ro) ro.disconnect() // CHANGED: guard when ResizeObserver is unavailable
+      if (ro) ro.disconnect()
       window.removeEventListener('resize', updateArrows)
     }
   }, [])
 
-  const activeLabel = categoryMeta[activeTab]?.label || 'Tools'
-  const activeSubtitle = categoryMeta[activeTab]?.subtitle || ''
-  const activeTools = tools[activeTab] || []
-  const activeCount = activeTools.length
+  const handleTabKeyDown = (event, key) => {
+    const index = tabs.indexOf(key)
+    let nextIndex
+    if (event.key === 'ArrowRight') nextIndex = (index + 1) % tabs.length
+    else if (event.key === 'ArrowLeft') nextIndex = (index - 1 + tabs.length) % tabs.length
+    else if (event.key === 'Home') nextIndex = 0
+    else if (event.key === 'End') nextIndex = tabs.length - 1
+    else return
+
+    event.preventDefault()
+    const nextTab = tabs[nextIndex]
+    setActiveTab(nextTab)
+    const button = tabButtonRefs.current[nextTab]
+    button?.focus({ preventScroll: true })
+    button?.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'auto' })
+  }
 
   return (
-    // NOTE: Home.jsx owns id="tools" so we do NOT set it here.
     <section className="tools-used-section" aria-label="Tools used">
       <div className="tools-used-container">
         <div className="tools-used-header">
@@ -167,7 +176,6 @@ function ToolsUsedHome() {
 
         <div className="tools-surface">
           <div className="tools-tabs-wrap">
-            {/* CHANGED: subtle arrows on mobile to signal horizontal scroll */}
             <span
               className={`tools-tabs-arrow tools-tabs-arrow--left ${showLeftArrow ? '' : 'tools-tabs-arrow--hidden'}`}
               aria-hidden="true"
@@ -182,7 +190,7 @@ function ToolsUsedHome() {
             </span>
 
             <div
-              ref={tabsRef} // CHANGED: needed to measure/track horizontal scroll
+              ref={tabsRef}
               className="tools-tabs"
               role="tablist"
               aria-label="Tool categories"
@@ -191,9 +199,12 @@ function ToolsUsedHome() {
                 <button
                   key={key}
                   id={`tools-tab-${key}`}
+                  ref={(element) => { tabButtonRefs.current[key] = element }}
                   type="button"
                   className={`category-button ${activeTab === key ? 'active' : ''}`}
                   role="tab"
+                  tabIndex={activeTab === key ? 0 : -1}
+                  onKeyDown={(event) => handleTabKeyDown(event, key)}
                   aria-selected={activeTab === key}
                   aria-controls={`tools-panel-${key}`}
                   onClick={() => setActiveTab(key)}
@@ -204,34 +215,35 @@ function ToolsUsedHome() {
             </div>
           </div>
 
-          <div
-            id={`tools-panel-${activeTab}`}
-            className="tools-panel"
-            role="tabpanel"
-            aria-labelledby={`tools-tab-${activeTab}`}
-          >
-            <div className="tools-panel-header">
-              <div className="tools-panel-title-wrap">
-                <h3 className="tools-panel-title">{activeLabel}</h3>
-                <span className="tools-panel-count" aria-label={`${activeCount} items`}>
-                  {activeCount}
-                </span>
-              </div>
-
-              <p className="tools-panel-subtitle">{activeSubtitle}</p>
-            </div>
-
-            <div className="tools-list" aria-label={`${activeLabel} list`}>
-              {activeTools.map((tool) => (
-                <span key={tool.name} className="tool-pill">
-                  <span className="tool-icon" aria-hidden="true">
-                    {tool.icon}
+          {tabs.map((key) => (
+            <div
+              key={key}
+              id={`tools-panel-${key}`}
+              className="tools-panel"
+              role="tabpanel"
+              tabIndex={0}
+              hidden={activeTab !== key}
+              aria-labelledby={`tools-tab-${key}`}
+            >
+              <div className="tools-panel-header">
+                <div className="tools-panel-title-wrap">
+                  <h3 className="tools-panel-title">{categoryMeta[key].label}</h3>
+                  <span className="tools-panel-count" aria-label={`${tools[key].length} items`}>
+                    {tools[key].length}
                   </span>
-                  <span className="tool-name">{tool.name}</span>
-                </span>
-              ))}
+                </div>
+                <p className="tools-panel-subtitle">{categoryMeta[key].subtitle}</p>
+              </div>
+              <ul className="tools-list" aria-label={`${categoryMeta[key].label} list`}>
+                {tools[key].map((tool) => (
+                  <li key={tool.name} className="tool-pill">
+                    <span className="tool-icon" aria-hidden="true">{tool.icon}</span>
+                    <span className="tool-name">{tool.name}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>

@@ -1,18 +1,17 @@
-/* client/src/Footer.css */
 .site-footer {
   margin-top: 3.5rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.08); /* CHANGED: subtler separator */
-  background: rgba(0, 0, 0, 0.35); /* CHANGED: premium footer surface */
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.35);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 }
 
 .site-footer-inner {
-  max-width: 1200px; /* CHANGED: align with page width */
+  max-width: 1200px;
   margin: 0 auto;
   padding: 1.75rem 1.25rem;
   color: rgba(255, 255, 255, 0.78);
-  text-align: left; /* CHANGED: more professional than centered everything */
+  text-align: left;
 }
 
 .footer-top {
@@ -24,6 +23,9 @@
 }
 
 .footer-brand-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   color: rgba(255, 255, 255, 0.92);
   text-decoration: none;
   font-weight: 800;
@@ -42,8 +44,8 @@
 
 .footer-icons a,
 .footer-icon-button {
-  width: 42px;
-  height: 42px;
+  width: 44px;
+  height: 44px;
   border-radius: 12px;
 
   display: inline-flex;
@@ -73,8 +75,8 @@
 
 .footer-icons a:focus-visible,
 .footer-icon-button:focus-visible {
-  outline: none;
-  box-shadow: var(--focus-ring);
+  outline: 2px solid #64b5f6;
+  outline-offset: 3px;
 }
 
 .footer-links {
@@ -85,6 +87,7 @@
 }
 
 .footer-link {
+  min-height: 44px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -111,8 +114,8 @@
 }
 
 .footer-link:focus-visible {
-  outline: none;
-  box-shadow: var(--focus-ring);
+  outline: 2px solid #64b5f6;
+  outline-offset: 3px;
 }
 
 .footer-copy {
@@ -121,7 +124,7 @@
   color: rgba(255, 255, 255, 0.62);
 }
 
-/* Mobile styles */
+
 @media screen and (max-width: 768px) {
   .site-footer-inner {
     padding: 1.5rem 1rem;
@@ -137,7 +140,12 @@
   }
 
   .footer-link {
-    width: 100%; /* CHANGED: cleaner tap targets on mobile */
+    width: 100%;
     justify-content: center;
   }
+}
+
+.footer-brand-link:focus-visible {
+  outline: 2px solid #64b5f6;
+  outline-offset: 3px;
 }

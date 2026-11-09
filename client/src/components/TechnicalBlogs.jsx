@@ -1,8 +1,7 @@
 // client/src/components/TechnicalBlogs.jsx
-import { useMemo } from 'react' // CHANGED: useMemo for stable featured/rest lists; remove unused React default import.
-import { Link, useNavigate } from 'react-router-dom' // CHANGED: add CTAs + contact jump behavior
+import { useMemo } from 'react'
+import { Link } from 'react-router-dom'
 import '../TechnicalBlogs.css'
-import { scrollToSection } from '../utils/scrollToSection' // CHANGED: scroll after navigating home for Contact
 
 const blogs = [
   {
@@ -12,9 +11,9 @@ const blogs = [
     summary:
       "In this blog, I’m going to explain some of the key trends, cool new technologies, and best practices that are shaping how software is developed today.",
     link: 'https://medium.com/@khrscrfs/the-future-of-software-engineering-trends-technologies-and-best-practices-c90124f89573',
-    tags: ['Industry', 'Trends'], // CHANGED: tags for case-study scanability
-    readTime: '6 min', // CHANGED: quick “proof” metadata
-    featured: true // CHANGED: featured spotlight
+    tags: ['Industry', 'Trends'],
+    readTime: '6 min',
+    featured: true
   },
   {
     date: 'Jul 31, 2024',
@@ -23,8 +22,8 @@ const blogs = [
     summary:
       'As a software engineering bootcamp student, I’ve had the opportunity to work with JavaScript, Python, React, and Flask. These are some of the tools that are essential in software engineering.',
     link: 'https://medium.com/@khrscrfs/exploring-key-industry-trends-innovative-technologies-and-best-practices-in-software-engineering-6486aaf11069',
-    tags: ['Industry', 'Tooling'], // CHANGED
-    readTime: '5 min' // CHANGED
+    tags: ['Industry', 'Tooling'],
+    readTime: '5 min'
   },
   {
     date: 'Jul 9, 2024',
@@ -32,8 +31,8 @@ const blogs = [
     summary:
       'After smartphones, AI may be the most life-altering technology ever created. We are only at the beginning of the AI era, and the capabilities of AI are mind-blowing.',
     link: 'https://medium.com/@khrscrfs/ai-in-se-404e547f8606',
-    tags: ['AI', 'Software Engineering'], // CHANGED
-    readTime: '4 min' // CHANGED
+    tags: ['AI', 'Software Engineering'],
+    readTime: '4 min'
   },
   {
     date: 'Jun 11, 2024',
@@ -41,8 +40,8 @@ const blogs = [
     summary:
       'Learning React? One key concept to understand is “State.” State helps make your components interactive. Let’s dive into what state is, why it matters, and how to use it in your React components.',
     link: 'https://medium.com/@khrscrfs/understanding-state-in-react-a-beginners-guide-5da6712eb4b7',
-    tags: ['React', 'Frontend'], // CHANGED
-    readTime: '7 min' // CHANGED
+    tags: ['React', 'Frontend'],
+    readTime: '7 min'
   },
   {
     date: 'May 17, 2024',
@@ -50,53 +49,47 @@ const blogs = [
     summary:
       'Starting a coding project or assignment can often feel like standing at the base of a mountain, unsure of where to begin the climb.',
     link: 'https://medium.com/@khrscrfs/good-strategies-for-taking-on-a-coding-project-when-you-feel-lost-4c070a013c5f',
-    tags: ['Process', 'Mindset'], // CHANGED
-    readTime: '5 min' // CHANGED
+    tags: ['Process', 'Mindset'],
+    readTime: '5 min'
   }
   // Add more blog entries here as needed
 ]
 
 const TechnicalBlogs = () => {
-  const navigate = useNavigate() // CHANGED: used for “go home then scroll” CTA
-
   const { featuredBlog, restBlogs } = useMemo(() => {
-    const featured = blogs.find((b) => b.featured) || blogs[0] // CHANGED: deterministic featured selection
-    const rest = blogs.filter((b) => b.link !== featured.link) // CHANGED: stable key-based filtering
+    const featured = blogs.find((b) => b.featured) || blogs[0]
+    const rest = blogs.filter((b) => b.link !== featured.link)
     return { featuredBlog: featured, restBlogs: rest }
   }, [])
 
-  const handleContactClick = () => {
-    navigate('/') // CHANGED: go home first (contact section is on Home)
-    window.setTimeout(() => scrollToSection('contact', { focus: true }), 120) // CHANGED: scroll after route mounts
-  }
 
   return (
     <section className="technical-blogs" aria-label="Technical writing">
       <div className="technical-blogs-container">
-        {/* CHANGED: case-study style hero */}
+
         <header className="blogs-hero">
-          <p className="blogs-kicker">Technical writing</p> {/* CHANGED */}
-          <h1 className="blogs-title">Engineering notes &amp; learnings</h1> {/* CHANGED */}
+          <p className="blogs-kicker">Technical writing</p>
+          <h1 className="blogs-title">Learning notes &amp; technical writing</h1>
           <p className="blogs-intro">
-            Clear explanations are part of how I ship. These posts show how I think
-            about building software, learning quickly, and communicating tradeoffs.
+            Posts from my software engineering studies, explaining the concepts
+            I learned and how I approached unfamiliar tools.
           </p>{' '}
-          {/* CHANGED */}
+
         </header>
 
-        {/* CHANGED: “proof” + featured spotlight */}
+
         <div className="blogs-top-grid">
           <aside className="blogs-proof-card" aria-label="What this writing demonstrates">
-            <div className="blogs-proof-title">What this writing demonstrates</div> {/* CHANGED */}
+            <div className="blogs-proof-title">What this writing demonstrates</div>
             <ul className="blogs-proof-list">
-              <li>Breaking complex topics into practical mental models</li> {/* CHANGED */}
-              <li>Engineering judgment, not just tutorials</li> {/* CHANGED */}
-              <li>Communication that helps teams move faster</li> {/* CHANGED */}
+              <li>Breaking complex topics into practical mental models</li>
+              <li>Explaining software fundamentals with examples</li>
+              <li>Writing clearly about what I learn</li>
             </ul>
           </aside>
 
           <article className="blogs-featured" aria-label="Featured post">
-            <div className="blogs-featured-label">Featured</div> {/* CHANGED */}
+            <div className="blogs-featured-label">Featured</div>
             <div className="blogs-meta">
               <span className="blogs-date">{featuredBlog.date}</span>
               <span className="blogs-meta-sep" aria-hidden="true">
@@ -122,7 +115,7 @@ const TechnicalBlogs = () => {
               {featuredBlog.tags?.map((tag) => (
                 <span key={tag} className="chip chip--primary">
                   {tag}
-                </span> // CHANGED: reuse global chip styles
+                </span>
               ))}
             </div>
 
@@ -139,13 +132,13 @@ const TechnicalBlogs = () => {
           </article>
         </div>
 
-        {/* CHANGED: posts grid (case-study cards) */}
+
         <div className="blogs-section-head">
-          <h2 className="blogs-section-title">More posts</h2> {/* CHANGED */}
+          <h2 className="blogs-section-title">More posts</h2>
           <p className="blogs-section-subtext">
             Short, scannable writing on engineering fundamentals and emerging tech.
           </p>{' '}
-          {/* CHANGED */}
+
         </div>
 
         <div className="blogs-grid" aria-label="Blog posts">
@@ -176,7 +169,7 @@ const TechnicalBlogs = () => {
                 {blog.tags?.map((tag) => (
                   <span key={tag} className="chip chip--soft">
                     {tag}
-                  </span> // CHANGED: softer chips for non-featured tags
+                  </span>
                 ))}
               </div>
 
@@ -194,27 +187,23 @@ const TechnicalBlogs = () => {
           ))}
         </div>
 
-        {/* CHANGED: bottom CTAs (case-study finish) */}
+
         <footer className="blogs-footer-cta" aria-label="Next actions">
           <div className="blogs-footer-copy">
-            <div className="blogs-footer-title">Want the shipped work behind these notes?</div> {/* CHANGED */}
+            <div className="blogs-footer-title">Want the shipped work behind these notes?</div>
             <div className="blogs-footer-subtext">
               Check out my projects, or reach out directly.
             </div>
           </div>
 
           <div className="blogs-footer-actions">
-            <button
-              type="button"
-              className="blogs-button blogs-button--primary"
-              onClick={handleContactClick}
-            >
+            <Link to="/#contact" className="blogs-button blogs-button--primary">
               Contact
-            </button>
+            </Link>
             <Link to="/resume" className="blogs-button">
               Resume
             </Link>
-            <Link to="/" className="blogs-button">
+            <Link to="/#projects" className="blogs-button">
               View projects
             </Link>
           </div>

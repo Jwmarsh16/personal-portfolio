@@ -1,187 +1,91 @@
-// Path: client/src/components/Projects.jsx
-// CHANGED: Remove unused React default import; JSX needs no React binding.
 import { Link } from 'react-router-dom'
+import { projects } from '../data/projects'
 import '../Projects.css'
 
 function Projects() {
-  const projects = [
-    // CHANGED: Ask-Flask is now featured (replaces Event Manager + Portfolio cards)
-    {
-      title: 'Ask-Flask',
-      description:
-        'A production-style AI chat app with SSE streaming, server-backed sessions, pinned memory, and a mini RAG module (FAISS + PII redaction).',
-      technologies: [
-        'React',
-        'Vite',
-        'Flask',
-        'PostgreSQL',
-        'OpenAI API',
-        'SSE',
-        'SQLAlchemy',
-        'Pydantic v2',
-        'FAISS'
-      ],
-      tools: [
-        'Flask-Limiter',
-        'Flask-Talisman',
-        'Alembic',
-        'Pytest',
-        'Vitest',
-        'GitHub Actions',
-        'PrismJS',
-        'react-markdown'
-      ],
-      languages: ['Python', 'JavaScript', 'SQL', 'CSS'],
-      link: 'https://ask-flask.onrender.com/',
-      github: 'https://github.com/Jwmarsh16/ask-flask',
-      preview: '/images/ask-flask1.png' // CHANGED: uses existing image in /public/images
-    },
-    {
-      title: 'Fantasy Football Research Hub',
-      description:
-        'A platform for researching fantasy football statistics, player performance, and trends, built using Flask and React.',
-      technologies: [
-        'Flask',
-        'React',
-        'Vite',
-        'Redux Toolkit',
-        'Flask-JWT-Extended',
-        'Flask-CORS',
-        'Flask RESTful',
-        'PostgreSQL'
-      ],
-      tools: ['JWT Cookies', 'Bcrypt', 'React-Redux', 'Axios', 'SQLAlchemy'],
-      languages: ['Python', 'JavaScript', 'CSS'],
-      link: 'https://fantasy-football-research-hub.onrender.com',
-      github: 'https://github.com/Jwmarsh16/fantasy-football-research-project',
-      preview: '/images/fantasy-football.png'
-    },
-    // CHANGED: Algorithm Visualizer is now featured (replaces Event Manager + Portfolio cards)
-    {
-      title: 'Algorithm Visualizer',
-      description:
-        'An interactive pathfinding visualizer that lets users build a grid, place walls, and watch algorithms like A* and Dijkstra run step-by-step.',
-      technologies: ['React', 'Vite', 'Pathfinding', 'A*', 'Dijkstra', 'BFS/DFS'],
-      tools: ['Render', 'GitHub'],
-      languages: ['JavaScript', 'CSS'],
-      link: 'https://pathfinding-algorithm-asba.onrender.com',
-      github: 'https://github.com/Jwmarsh16/pathfinding-algorithm',
-      preview: '/images/algorithm-visualizer1.png' // CHANGED: uses existing image in /public/images
-    }
-  ]
-
-  const createSlug = (title) =>
-    title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
-
-  const renderChips = (items, variant = 'default') => (
-    <div className="project-chips">
-      {items.map((item) => (
-        <span key={item} className={`chip chip--${variant}`}>
-          {item}
-        </span>
-      ))}
-    </div>
-  )
-
   return (
-    <section id="projects" className="projects">
+    <section id="projects" className="projects" aria-labelledby="projects-heading">
       <div className="projects-container">
         <div className="projects-header">
-          <h2>Featured Projects</h2>
+          <h2 id="projects-heading">Featured Projects</h2>
           <p className="projects-subtitle">
-            Case-study style write-ups with live demos and source code.
+            Three projects I built, with my contributions, engineering decisions and source code.
           </p>
         </div>
 
         <div className="projects-list">
-          {projects.map((project, index) => {
-            const slug = createSlug(project.title)
-            const primaryTech = project.technologies.slice(0, 6)
+          {projects.map((project) => (
+            <article key={project.slug} className="project-item">
+              <Link
+                to={`/project/${project.slug}`}
+                className="image-link"
+                aria-label={`Read the ${project.title} case study`}
+              >
+                <img
+                  src={project.screenshots[0].src}
+                  alt={project.screenshots[0].alt}
+                  width={project.screenshots[0].width}
+                  height={project.screenshots[0].height}
+                  className="project-image"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </Link>
 
-            return (
-              <article key={index} className="project-item wow-animate">
-                {project.preview && (
-                  <Link
-                    to={`/project/${slug}`}
-                    className="image-link"
-                    aria-label={`View details for ${project.title}`}
-                  >
-                    <img
-                      src={project.preview}
-                      alt={`${project.title} preview`}
-                      className="project-image"
-                      loading="lazy"
-                    />
-                  </Link>
-                )}
+              <div className="project-body">
+                <header className="project-top">
+                  <h3 className="project-title">
+                    <Link to={`/project/${project.slug}`}>{project.title}</Link>
+                  </h3>
+                  <p className="project-description">{project.description}</p>
+                </header>
 
-                <div className="project-body">
-                  <header className="project-top">
-                    <h3 className="project-title">{project.title}</h3>
-                    <p className="project-description">{project.description}</p>
-                  </header>
+                <p className="project-contribution">
+                  <strong>My contribution</strong>
+                  {project.contribution}
+                </p>
 
-                  <div className="project-stack">
-                    <div className="project-stack-label">Primary stack</div>
-                    {renderChips(primaryTech, 'primary')}
-                  </div>
-
-                  <details className="project-more">
-                    <summary className="project-more-summary">
-                      View full tech details
-                    </summary>
-
-                    <div className="project-more-grid">
-                      <div className="project-more-block">
-                        <div className="project-more-title">Technologies</div>
-                        {renderChips(project.technologies)}
-                      </div>
-
-                      <div className="project-more-block">
-                        <div className="project-more-title">Tools</div>
-                        {renderChips(project.tools, 'soft')}
-                      </div>
-
-                      <div className="project-more-block">
-                        <div className="project-more-title">Languages</div>
-                        {renderChips(project.languages, 'soft')}
-                      </div>
-                    </div>
-                  </details>
-
-                  <div className="project-actions">
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="project-action project-action--primary"
-                      aria-label={`Open live site for ${project.title}`}
-                    >
-                      Live
-                    </a>
-
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="project-action project-action--secondary"
-                      aria-label={`Open GitHub repository for ${project.title}`}
-                    >
-                      Code
-                    </a>
-
-                    <Link
-                      to={`/project/${slug}`}
-                      className="project-action project-action--ghost"
-                      aria-label={`Open case study for ${project.title}`}
-                    >
-                      Case study
-                    </Link>
+                <div className="project-stack" aria-label={`${project.title} primary stack`}>
+                  <div className="project-stack-label">Primary stack</div>
+                  <div className="project-chips">
+                    {project.stack.map((technology) => (
+                      <span key={technology} className="chip chip--primary">
+                        {technology}
+                      </span>
+                    ))}
                   </div>
                 </div>
-              </article>
-            )
-          })}
+
+                <div className="project-actions">
+                  <Link
+                    to={`/project/${project.slug}`}
+                    className="project-action project-action--primary"
+                    aria-label={`Read the ${project.title} case study`}
+                  >
+                    Case study
+                  </Link>
+                  <a
+                    href={project.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="project-action project-action--secondary"
+                    aria-label={`Try the ${project.title} live demo (opens in a new tab)`}
+                  >
+                    Live demo
+                  </a>
+                  <a
+                    href={project.codeUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="project-action project-action--ghost"
+                    aria-label={`View ${project.title} on GitHub (opens in a new tab)`}
+                  >
+                    GitHub
+                  </a>
+                </div>
+              </div>
+            </article>
+          ))}
         </div>
       </div>
     </section>

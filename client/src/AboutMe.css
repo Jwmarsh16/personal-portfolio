@@ -345,11 +345,11 @@
   text-align: left;
 }
 
-.tools-heading {
+.about-me .tools-heading {
   margin: 0;
 }
 
-.tools-subtext {
+.about-me .tools-subtext {
   margin: -0.25rem 0 1rem 0;
   color: rgba(255, 255, 255, 0.68);
   font-size: 1rem;
@@ -363,6 +363,7 @@
 }
 
 .tab-buttons button {
+  min-height: 44px;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.10);
   padding: 0.6rem 0.9rem;
@@ -392,13 +393,16 @@
   box-shadow: var(--focus-ring);
 }
 
-.tool-tags {
+.about-me .tool-tags {
+  list-style: none;
+  margin: 0;
+  padding: 0;
   display: flex;
   flex-wrap: wrap;
   gap: 0.55rem;
 }
 
-.tool-pill {
+.about-me .tool-pill {
   background: rgba(255, 255, 255, 0.04);
   color: rgba(255, 255, 255, 0.86);
   border: 1px solid rgba(255, 255, 255, 0.10);
@@ -412,7 +416,7 @@
     border-color var(--transition-speed);
 }
 
-.tool-pill:hover {
+.about-me .tool-pill:hover {
   transform: translateY(-1px);
   background: rgba(255, 255, 255, 0.06);
   border-color: rgba(255, 255, 255, 0.14);
@@ -429,14 +433,14 @@
   .about-card,
   .resume-link,
   .tab-buttons button,
-  .tool-pill {
+  .about-me .tool-pill {
     transition: none;
   }
 
   .about-card:hover,
   .resume-link:hover,
   .tab-buttons button:hover,
-  .tool-pill:hover {
+  .about-me .tool-pill:hover {
     transform: none;
   }
 }
@@ -486,4 +490,13 @@
   .resume-link {
     width: 100%;
   }
+}
+
+.about-tools-panel[hidden] {
+  display: none;
+}
+
+.about-tools-panel:focus-visible {
+  outline: 2px solid #8cf2dc;
+  outline-offset: 5px;
 }

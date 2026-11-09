@@ -1,18 +1,40 @@
-// client/src/components/AboutMe.jsx
-import { useState } from 'react' // CHANGED: Remove unused React default import; keep named hooks.
+import { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Skills from './Skills'
 import '../AboutMe.css'
 
+const toolTabs = [
+  { id: 'frontend', label: 'Frontend' },
+  { id: 'backend', label: 'Backend' },
+  { id: 'database', label: 'Data & Cloud' },
+  { id: 'others', label: 'Workflow' }
+]
+
 function AboutMe() {
   const [activeTab, setActiveTab] = useState('frontend')
+  const tabRefs = useRef({})
 
-  // CHANGED: pick 3 headline strengths that map to your most impressive AI product work
+  const handleTabKeyDown = (event, id) => {
+    const index = toolTabs.findIndex((tab) => tab.id === id)
+    let nextIndex
+    if (event.key === 'ArrowRight') nextIndex = (index + 1) % toolTabs.length
+    else if (event.key === 'ArrowLeft') nextIndex = (index - 1 + toolTabs.length) % toolTabs.length
+    else if (event.key === 'Home') nextIndex = 0
+    else if (event.key === 'End') nextIndex = toolTabs.length - 1
+    else return
+
+    event.preventDefault()
+    const nextTab = toolTabs[nextIndex].id
+    setActiveTab(nextTab)
+    tabRefs.current[nextTab]?.focus()
+  }
+
+
   const headlineHighlights = [
     'SSE streaming chat UX',
     'Pinned memory + context management',
     'RAG (Embeddings + FAISS)'
-  ] // CHANGED
+  ]
 
   const tools = {
     frontend: [
@@ -52,12 +74,20 @@ function AboutMe() {
   }
 
   const renderTools = (category) => (
-    <div className="tool-tags">
-      {tools[category].map((tool) => (
-        <span key={tool} className="tool-pill">
-          {tool}
-        </span>
-      ))}
+    <div
+      key={category}
+      className="about-tools-panel"
+      id={`about-tools-panel-${category}`}
+      role="tabpanel"
+      tabIndex={0}
+      hidden={activeTab !== category}
+      aria-labelledby={`about-tools-tab-${category}`}
+    >
+      <ul className="tool-tags">
+        {tools[category].map((tool) => (
+          <li key={tool} className="tool-pill">{tool}</li>
+        ))}
+      </ul>
     </div>
   )
 
@@ -70,8 +100,6 @@ function AboutMe() {
             <h2 className="about-role">AI Software Developer</h2>
             <p className="about-tagline">Builder. Problem-solver. Lifelong learner.</p>
           </div>
-
-          {/* CHANGED: tighten hero copy to read like a case study headline */}
           <p className="about-summary">
             I build production-style AI web apps with{' '}
             <span className="about-highlight">React, Flask, and PostgreSQL</span>.
@@ -82,15 +110,13 @@ function AboutMe() {
             extending assistants with{' '}
             <span className="about-highlight">RAG (embeddings + FAISS)</span>.
           </p>
-
-          {/* CHANGED: add scannable “headline highlights” chips in the hero */}
           <div className="about-signature" aria-label="Signature strengths">
-            <p className="about-signature-label">Signature strengths</p> {/* CHANGED */}
+            <p className="about-signature-label">Signature strengths</p>
             <div className="about-signature-chips">
               {headlineHighlights.map((h) => (
                 <span key={h} className="chip chip--primary">
                   {h}
-                </span> // CHANGED: uses global chip styles for a premium “case-study” look
+                </span>
               ))}
             </div>
           </div>
@@ -129,10 +155,13 @@ function AboutMe() {
             </div>
 
             <img
-              src="/images/my-journey.png"
+              src="/images/my-journey.webp"
               alt="My Journey"
               className="about-img"
+              width="1024"
+              height="1024"
               loading="lazy"
+              decoding="async"
             />
           </div>
 
@@ -151,8 +180,6 @@ function AboutMe() {
               prototypes.
             </p>
           </div>
-
-          {/* CHANGED: tighten “What I’ve Built” to emphasize the 2–3 headline strengths */}
           <div className="about-card">
             <h3>What I’ve Built</h3>
             <p>
@@ -160,7 +187,7 @@ function AboutMe() {
               production-feeling experience using{' '}
               <span className="about-highlight">SSE streaming</span>,{' '}
               <span className="about-highlight">pinned session memory</span>, and a{' '}
-              <span className="about-highlight">mini-RAG module (embeddings + FAISS)</span>.
+              <span className="about-highlight">RAG prototype (embeddings + FAISS)</span>.
               Built with <span className="about-highlight">React (Vite)</span>,{' '}
               <span className="about-highlight">Flask</span>, and{' '}
               <span className="about-highlight">SQLAlchemy</span> using the{' '}
@@ -170,7 +197,7 @@ function AboutMe() {
               <strong>Fantasy Football Research Hub</strong> – A full-stack platform for
               rankings, reviews, and player analysis. Built with{' '}
               <span className="about-highlight">React, Flask, PostgreSQL</span>, and{' '}
-              <span className="about-highlight">AWS S3</span>.
+              <span className="about-highlight">AWS S3</span> for backend profile-image uploads and signed image retrieval.
             </p>
             <p>
               <strong>Event Manager</strong> – A group-based event coordination tool with
@@ -185,40 +212,39 @@ function AboutMe() {
             </p>
 
             <div className="about-highlights-grid">
-              {/* CHANGED: make the first 3 highlight cards match your headline strengths */}
               <div className="about-highlight-card">
-                <h4 className="about-highlight-title">Streaming Chat UX (SSE)</h4> {/* CHANGED */}
+                <h4 className="about-highlight-title">Streaming Chat UX (SSE)</h4>
                 <ul className="about-highlight-list">
-                  <li>Token streaming for instant feedback and “alive” chat UI</li> {/* CHANGED */}
+                  <li>Token streaming for instant feedback and “alive” chat UI</li>
                   <li>Markdown + code blocks with Prism highlighting</li>
-                  <li>Unified error handling that works in stream and non-stream paths</li> {/* CHANGED */}
+                  <li>Unified error handling that works in stream and non-stream paths</li>
                 </ul>
               </div>
 
               <div className="about-highlight-card">
-                <h4 className="about-highlight-title">Pinned Memory + Context Strategy</h4> {/* CHANGED */}
+                <h4 className="about-highlight-title">Pinned Memory + Context Strategy</h4>
                 <ul className="about-highlight-list">
-                  <li>Durable session memory that stays compact and useful</li> {/* CHANGED */}
-                  <li>Context window management (what to keep, trim, summarize)</li> {/* CHANGED */}
-                  <li>Designing UX around long-running sessions, not one-off prompts</li> {/* CHANGED */}
+                  <li>Durable session memory that stays compact and useful</li>
+                  <li>Context window management (what to keep, trim, summarize)</li>
+                  <li>Designing UX around long-running sessions, not one-off prompts</li>
                 </ul>
               </div>
 
               <div className="about-highlight-card">
-                <h4 className="about-highlight-title">RAG (Embeddings + FAISS)</h4> {/* CHANGED */}
+                <h4 className="about-highlight-title">RAG (Embeddings + FAISS)</h4>
                 <ul className="about-highlight-list">
-                  <li>Text chunking + embeddings for retrieval</li> {/* CHANGED */}
-                  <li>FAISS index for fast similarity search</li> {/* CHANGED */}
-                  <li>Light evals and “why this answer” transparency patterns</li> {/* CHANGED */}
+                  <li>Text chunking + embeddings for retrieval</li>
+                  <li>FAISS index for fast similarity search</li>
+                  <li>Light evals and “why this answer” transparency patterns</li>
                 </ul>
               </div>
 
               <div className="about-highlight-card">
-                <h4 className="about-highlight-title">Production Mindset</h4> {/* CHANGED */}
+                <h4 className="about-highlight-title">Production Mindset</h4>
                 <ul className="about-highlight-list">
-                  <li>Security headers, auth patterns, and rate limiting</li> {/* CHANGED */}
-                  <li>Structured logs + request IDs for debugging</li> {/* CHANGED */}
-                  <li>CI checks and tests to protect shipped behavior</li> {/* CHANGED */}
+                  <li>Security headers, auth patterns, and rate limiting</li>
+                  <li>Structured logs + request IDs for debugging</li>
+                  <li>CI checks and tests to protect shipped behavior</li>
                 </ul>
               </div>
             </div>
@@ -280,45 +306,26 @@ function AboutMe() {
             <p className="tools-subtext">Tools and technologies I’ve used in shipped projects.</p>
 
             <div className="tab-buttons" role="tablist" aria-label="Tool categories">
-              <button
-                type="button"
-                className={activeTab === 'frontend' ? 'active' : ''}
-                onClick={() => setActiveTab('frontend')}
-                role="tab"
-                aria-selected={activeTab === 'frontend'}
-              >
-                Frontend
-              </button>
-              <button
-                type="button"
-                className={activeTab === 'backend' ? 'active' : ''}
-                onClick={() => setActiveTab('backend')}
-                role="tab"
-                aria-selected={activeTab === 'backend'}
-              >
-                Backend
-              </button>
-              <button
-                type="button"
-                className={activeTab === 'database' ? 'active' : ''}
-                onClick={() => setActiveTab('database')}
-                role="tab"
-                aria-selected={activeTab === 'database'}
-              >
-                Data & Cloud
-              </button>
-              <button
-                type="button"
-                className={activeTab === 'others' ? 'active' : ''}
-                onClick={() => setActiveTab('others')}
-                role="tab"
-                aria-selected={activeTab === 'others'}
-              >
-                Workflow
-              </button>
+              {toolTabs.map(({ id, label }) => (
+                <button
+                  key={id}
+                  ref={(element) => { tabRefs.current[id] = element }}
+                  id={`about-tools-tab-${id}`}
+                  type="button"
+                  className={activeTab === id ? 'active' : ''}
+                  onClick={() => setActiveTab(id)}
+                  onKeyDown={(event) => handleTabKeyDown(event, id)}
+                  role="tab"
+                  tabIndex={activeTab === id ? 0 : -1}
+                  aria-selected={activeTab === id}
+                  aria-controls={`about-tools-panel-${id}`}
+                >
+                  {label}
+                </button>
+              ))}
             </div>
 
-            {renderTools(activeTab)}
+            {toolTabs.map(({ id }) => renderTools(id))}
           </div>
 
           <div className="about-card">
@@ -350,10 +357,13 @@ function AboutMe() {
 
           <div className="about-split-card">
             <img
-              src="/images/beyond-tech.png"
+              src="/images/beyond-tech.webp"
               alt="Beyond Tech"
               className="about-img"
+              width="1024"
+              height="1024"
               loading="lazy"
+              decoding="async"
             />
 
             <div className="about-card">

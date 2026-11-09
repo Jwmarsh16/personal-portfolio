@@ -1,189 +1,100 @@
-// Path: client/src/components/Header.jsx
-import { useEffect, useRef, useState } from 'react' // CHANGED: add useState for avatar fallback; remove unused React default import.
-import { useLocation, useNavigate, Link } from 'react-router-dom'
+import { useEffect, useRef, useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
+import { FaBars, FaTimes } from 'react-icons/fa'
 import '../Header.css'
-import { scrollToSection } from '../utils/scrollToSection'
-import { FaBars } from 'react-icons/fa'
+
+const navigation = [
+  { label: 'Projects', to: '/#projects' },
+  { label: 'Skills', to: '/#skills' },
+  { label: 'About', to: '/about' },
+  { label: 'Resume', to: '/resume' },
+  { label: 'Contact', to: '/#contact' }
+]
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
-  const [showAvatar, setShowAvatar] = useState(true) // CHANGED: hide avatar if image fails to load
+  const [showAvatar, setShowAvatar] = useState(true)
   const location = useLocation()
-  const navigate = useNavigate()
-
-  const isHome = location.pathname === '/'
-
-  const headerInnerRef = useRef(null) // CHANGED: used to detect outside clicks on mobile menu
+  const headerInnerRef = useRef(null)
+  const menuButtonRef = useRef(null)
 
   useEffect(() => {
-    setMenuOpen(false) // CHANGED: close mobile menu on route change for cleaner UX
-  }, [location.pathname])
+    setMenuOpen(false)
+  }, [location.key])
 
   useEffect(() => {
-    if (!menuOpen) return // CHANGED: only listen when menu is open
+    if (!menuOpen) return
 
-    const onKeyDown = (e) => {
-      if (e.key === 'Escape') setMenuOpen(false) // CHANGED: ESC closes menu (accessibility)
+    const onKeyDown = (event) => {
+      if (event.key !== 'Escape') return
+      setMenuOpen(false)
+      menuButtonRef.current?.focus()
     }
 
-    // CHANGED: close menu when clicking outside the header area (mobile UX polish)
-    const onPointerDown = (e) => {
-      const root = headerInnerRef.current
-      if (!root) return
-      if (!root.contains(e.target)) setMenuOpen(false) // CHANGED: outside click closes menu
+    const onPointerDown = (event) => {
+      if (!headerInnerRef.current?.contains(event.target)) setMenuOpen(false)
     }
 
     window.addEventListener('keydown', onKeyDown)
     window.addEventListener('pointerdown', onPointerDown)
-
     return () => {
       window.removeEventListener('keydown', onKeyDown)
       window.removeEventListener('pointerdown', onPointerDown)
     }
   }, [menuOpen])
 
-  const handleNavClick = (sectionId) => {
-    setMenuOpen(false)
-
-    // CHANGED: focus the section after scroll for better a11y (uses your helper)
-    const scrollOptions = { focus: true } // CHANGED: centralize options for consistent behavior
-
-    if (isHome) {
-      scrollToSection(sectionId, scrollOptions) // CHANGED: pass focus option
-    } else {
-      navigate('/')
-      setTimeout(() => scrollToSection(sectionId, scrollOptions), 100) // CHANGED: pass focus option
-    }
-  }
-
-  const toggleMenu = () => {
-    setMenuOpen((v) => !v) // CHANGED: functional setState avoids stale state
-  }
+  const currentDestination = `${location.pathname}${location.hash}`
 
   return (
-    <header className={`header ${menuOpen ? 'open' : ''}`}>
-      <div className="header-inner" ref={headerInnerRef}>
-        {/* CHANGED: attach ref for outside-click detection */}
-
-        <Link
-          to="/"
-          className="brand"
-          onClick={() => setMenuOpen(false)}
-          aria-label="Go to home"
-        >
-          {/* CHANGED: small avatar next to name (adds credibility + polish) */}
+    <header className="header">
+      <div
+        className="header-inner"
+        ref={headerInnerRef}
+        onBlur={(event) => {
+          if (!event.currentTarget.contains(event.relatedTarget)) setMenuOpen(false)
+        }}
+      >
+        <Link to="/" className="brand" aria-label="Jonathan Marshall, home">
           {showAvatar && (
             <img
-              src="/images/jonathan.jpg" // CHANGED: correct public path
+              src="/images/jonathan.webp"
               alt=""
               aria-hidden="true"
               className="brand-avatar"
-              width="34" // CHANGED: reduce layout shift
-              height="34" // CHANGED: reduce layout shift
-              onError={() => setShowAvatar(false)} // CHANGED: hide if missing/broken
-              decoding="async" // CHANGED: small perf win
+              width="34"
+              height="34"
+              decoding="async"
+              onError={() => setShowAvatar(false)}
             />
           )}
-          <span className="brand-name">Jonathan Marshall</span> {/* CHANGED */}
+          <span className="brand-name">Jonathan Marshall</span>
         </Link>
 
-        <button
-          type="button"
-          className="hamburger"
-          onClick={toggleMenu}
-          aria-label="Toggle navigation menu"
-          aria-expanded={menuOpen}
-          aria-controls="primary-navigation"
-          aria-haspopup="menu" // CHANGED: more explicit semantics for assistive tech
-        >
-          <FaBars aria-hidden="true" />
-        </button>
-
         <nav className="nav-bar" aria-label="Primary">
-          <ul
-            id="primary-navigation"
-            className="nav-links"
-            data-open={menuOpen ? 'true' : 'false'}
+          <button
+            ref={menuButtonRef}
+            type="button"
+            className="hamburger"
+            onClick={() => setMenuOpen((open) => !open)}
+            aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+            aria-expanded={menuOpen}
+            aria-controls="primary-navigation"
           >
-            <li>
-              <Link
-                to="/"
-                className="nav-link"
-                onClick={() => setMenuOpen(false)}
-                aria-current={isHome ? 'page' : undefined} // CHANGED: indicate active route
-              >
-                Home
-              </Link>
-            </li>
-
-            {/* CHANGED: allow section navigation from ANY route (navigate home + scroll) */}
-            <li>
-              <button
-                type="button"
-                onClick={() => handleNavClick('skills')}
-                className="nav-link"
-              >
-                Skills
-              </button>
-            </li>
-            <li>
-              <button
-                type="button"
-                onClick={() => handleNavClick('projects')}
-                className="nav-link"
-              >
-                Projects
-              </button>
-            </li>
-            <li>
-              <button
-                type="button"
-                onClick={() => handleNavClick('tools')}
-                className="nav-link"
-              >
-                Tools Used
-              </button>
-            </li>
-            <li>
-              <button
-                type="button"
-                onClick={() => handleNavClick('contact')}
-                className="nav-link"
-              >
-                Contact
-              </button>
-            </li>
-
-            <li>
-              <Link
-                to="/about"
-                className="nav-link"
-                onClick={() => setMenuOpen(false)}
-                aria-current={location.pathname === '/about' ? 'page' : undefined} // CHANGED: active route
-              >
-                About
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/resume"
-                className="nav-link"
-                onClick={() => setMenuOpen(false)}
-                aria-current={location.pathname === '/resume' ? 'page' : undefined} // CHANGED: active route
-              >
-                Resume
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/blogs"
-                className="nav-link"
-                onClick={() => setMenuOpen(false)}
-                aria-current={location.pathname === '/blogs' ? 'page' : undefined} // CHANGED: active route
-              >
-                Blogs
-              </Link>
-            </li>
+            {menuOpen ? <FaTimes aria-hidden="true" /> : <FaBars aria-hidden="true" />}
+          </button>
+          <ul id="primary-navigation" className="nav-links" data-open={menuOpen}>
+            {navigation.map(({ label, to }) => (
+              <li key={to}>
+                <Link
+                  to={to}
+                  className="nav-link"
+                  onClick={() => setMenuOpen(false)}
+                  aria-current={currentDestination === to ? (to.includes('#') ? 'location' : 'page') : undefined}
+                >
+                  {label}
+                </Link>
+              </li>
+            ))}
           </ul>
         </nav>
       </div>

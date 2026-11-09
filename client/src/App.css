@@ -1,59 +1,40 @@
-/* client/src/App.css */
 #root {
-  width: 100%; /* CHANGED: remove Vite scaffold max-width constraint */
-  margin: 0; /* CHANGED */
-  padding: 0; /* CHANGED */
-  min-height: 100vh; /* CHANGED */
-  background: transparent;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
 }
 
 .App {
-  min-height: 100vh; /* CHANGED: footer can sit at bottom */
-  display: flex; /* CHANGED */
-  flex-direction: column; /* CHANGED */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-/* CHANGED: target any routed <main> (it's not a direct child of .App) */
 .App main {
   flex: 1;
+  min-width: 0;
 }
 
-/* (kept) legacy scaffold styles below in case you still use them somewhere */
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  transition: filter var(--transition-speed), transform var(--transition-speed);
-}
-
-.logo:hover {
-  filter: drop-shadow(0 0 2em var(--accent-color));
-  transform: rotate(5deg);
-}
-
-@keyframes logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-  background: transparent;
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 2000;
+  transform: translateY(-160%);
+  padding: 0.75rem 1rem;
   border-radius: 8px;
-  box-shadow: var(--shadow);
-  transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+  background: #e8ffff;
+  color: #081c24;
+  font-weight: 700;
+  text-shadow: none;
 }
 
-.card:hover {
-  transform: translateY(-5px) scale(1.02);
-  box-shadow: var(--hover-shadow);
+.skip-link:focus { transform: translateY(0); }
+.route-loading, .not-found {
+  width: min(100% - 2.5rem, 900px);
+  margin: 4rem auto;
 }
-
-.read-the-docs {
-  color: var(--text-color);
-}
+.not-found h1 { font-size: clamp(2rem, 5vw, 3rem); }
+.not-found p { color: #c5d3df; }
+.page-eyebrow { color: #00ffd1; letter-spacing: 0.15em; font-weight: 700; }

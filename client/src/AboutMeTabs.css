@@ -1,13 +1,13 @@
 /* client/src/AboutMeTabs.css */
 .about-tabs-section {
-  padding: 4rem 1.25rem; /* CHANGED: consistent section rhythm */
+  padding: 4rem 1.25rem;
 }
 
 .about-tabs-wrapper {
-  max-width: 1200px; /* CHANGED: align with header/container rhythm */
+  max-width: 1200px;
   margin: 0 auto;
-  display: grid; /* CHANGED: grid > margin hacks for pro layout */
-  grid-template-columns: minmax(260px, 420px) 1fr; /* CHANGED: stable 2-col layout */
+  display: grid;
+  grid-template-columns: minmax(220px, 360px) minmax(0, 1fr);
   gap: 2rem;
   align-items: start;
 }
@@ -16,33 +16,21 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  margin: 0; /* CHANGED: remove large offsets */
+  margin: 0;
 }
 
 .code-image img {
   width: 100%;
   max-width: 420px;
   height: auto;
-  border-radius: 16px; /* CHANGED: more modern radius */
-  border: 1px solid rgba(255, 255, 255, 0.10); /* CHANGED: subtle edge for glass UI */
-  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.45); /* CHANGED: premium depth */
-  animation: float 6s ease-in-out infinite;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.45);
 }
 
-@keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-  100% { transform: translateY(0px); }
-}
-
-/* CHANGED: respect reduced motion preferences */
-@media (prefers-reduced-motion: reduce) {
-  .code-image img {
-    animation: none; /* CHANGED */
-  }
-}
 
 .tab-column {
+  min-width: 0;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -51,11 +39,11 @@
 /* TITLE & SUBTEXT */
 .tabs-title {
   text-align: left;
-  margin: 0; /* CHANGED: remove translate/margin hacks */
+  margin: 0;
 }
 
 .tabs-title h2 {
-  font-size: 2rem; /* CHANGED: clearer hierarchy */
+  font-size: 2rem;
   color: rgba(255, 255, 255, 0.95);
   margin: 0 0 0.25rem 0;
 }
@@ -63,19 +51,19 @@
 .about-subtext {
   font-size: 1.05rem;
   color: rgba(255, 255, 255, 0.72);
-  max-width: 60ch; /* CHANGED: readable line length */
+  max-width: 60ch;
   margin: 0;
 }
 
 /* TABS CONTAINER (namespaced to avoid collisions) */
 .about-tabs-container {
-  background: rgba(255, 255, 255, 0.06); /* CHANGED: match global glass direction */
-  border: 1px solid rgba(255, 255, 255, 0.08); /* CHANGED */
-  border-radius: 16px; /* CHANGED */
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
   padding: 1.25rem;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35); /* CHANGED */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
 }
 
 /* Tabs row (namespaced) */
@@ -87,13 +75,14 @@
 }
 
 .about-tabs button {
-  background: rgba(255, 255, 255, 0.04); /* CHANGED */
-  border: 1px solid rgba(255, 255, 255, 0.10); /* CHANGED */
+  min-height: 44px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.10);
   padding: 0.6rem 0.9rem;
   color: rgba(255, 255, 255, 0.9);
   font-weight: 700;
   cursor: pointer;
-  border-radius: 12px; /* CHANGED */
+  border-radius: 12px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -106,20 +95,20 @@
 }
 
 .about-tabs button:hover {
-  background: rgba(255, 255, 255, 0.08); /* CHANGED */
-  border-color: rgba(255, 255, 255, 0.16); /* CHANGED */
-  transform: translateY(-1px); /* CHANGED */
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.16);
+  transform: translateY(-1px);
 }
 
 .about-tabs button.active {
-  background: rgba(100, 181, 246, 0.16); /* CHANGED: ties into global accent */
-  border-color: rgba(100, 181, 246, 0.35); /* CHANGED */
+  background: rgba(100, 181, 246, 0.16);
+  border-color: rgba(100, 181, 246, 0.35);
   color: rgba(255, 255, 255, 0.95);
 }
 
 .about-tabs button:focus-visible {
   outline: none;
-  box-shadow: var(--focus-ring); /* CHANGED: consistent focus ring */
+  box-shadow: var(--focus-ring);
 }
 
 .about-tab-body {
@@ -131,7 +120,7 @@
 .about-tab-content ul {
   margin: 0 0 0.9rem 0;
   line-height: 1.65;
-  color: rgba(255, 255, 255, 0.78); /* CHANGED: softer than pure white */
+  color: rgba(255, 255, 255, 0.78);
 }
 
 .about-tab-content ul {
@@ -141,8 +130,6 @@
 .about-tab-icon {
   font-size: 1rem;
 }
-
-/* CHANGED: avoid global .highlight collisions */
 .about-highlight {
   color: #00ffcc;
   font-weight: 700;
@@ -172,7 +159,7 @@
 
 .job-title,
 .education-title {
-  color: rgba(255, 255, 255, 0.92); /* CHANGED: cleaner hierarchy */
+  color: rgba(255, 255, 255, 0.92);
   font-size: 1.15rem;
   font-weight: 800;
   margin: 0 0 0.15rem 0;
@@ -213,34 +200,49 @@
 ------------------------- */
 @media screen and (max-width: 768px) {
   .about-tabs-section {
-    padding: 2.5rem 1rem; /* CHANGED */
+    padding: 2.5rem 1rem;
   }
 
   .about-tabs-wrapper {
-    grid-template-columns: 1fr; /* CHANGED: stack */
+    grid-template-columns: 1fr;
     gap: 1.25rem;
   }
 
   .code-image img {
-    max-width: 360px; /* CHANGED */
+    max-width: 360px;
   }
 
   .tabs-title h2 {
-    font-size: 1.7rem; /* CHANGED */
+    font-size: 1.7rem;
   }
 
   .about-subtext {
-    font-size: 1rem; /* CHANGED */
+    font-size: 1rem;
   }
 
   .about-tabs-container {
-    padding: 1rem; /* CHANGED */
+    padding: 1rem;
   }
 
   .about-tabs button {
-    flex: 1; /* CHANGED: nice wrap behavior */
-    min-width: 140px; /* CHANGED */
+    flex: 1 1 40%;
+    min-width: 0;
     padding: 0.55rem 0.75rem;
     font-size: 0.95rem;
   }
+}
+
+.about-resume-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: #85e8d1;
+  font-weight: 600;
+  text-underline-offset: 4px;
+}
+
+.about-resume-link:focus-visible,
+.about-tab-body:focus-visible {
+  outline: 2px solid #8cf2dc;
+  outline-offset: 4px;
 }
